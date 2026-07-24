@@ -964,6 +964,8 @@ async function submitGoalForm() {
 }
 
 function renderSavings() {
+  const currentGoal = savingsGoals.find(g => g.id === currentSavingsGoalId);
+  document.getElementById('goalDetailTitle').textContent = currentGoal ? (currentGoal.name || t('defaultGoalName')) : '';
   const goalSavings = savings.filter(sv => sv.goalId === currentSavingsGoalId);
   const balance = goalSavings.reduce((s, sv) => s + (sv.type === 'deposit' ? sv.amount : -sv.amount), 0);
   const balEl = document.getElementById('savingsBalance');
@@ -1450,6 +1452,10 @@ document.getElementById('deleteEntryBtn').addEventListener('click', () => {
 });
 document.getElementById('addSavingsGoalBtn').addEventListener('click', () => openGoalForm(null));
 document.getElementById('backToGoalsBtn').addEventListener('click', () => backToGoalsList());
+document.getElementById('editGoalBtn').addEventListener('click', () => {
+  const goal = savingsGoals.find(g => g.id === currentSavingsGoalId);
+  openGoalForm(goal);
+});
 document.getElementById('closeGoalForm').addEventListener('click', () => { editingGoalId = null; document.getElementById('goalFormOverlay').classList.remove('show'); });
 document.getElementById('goalFormOverlay').addEventListener('click', (e) => { if (e.target.id === 'goalFormOverlay') { editingGoalId = null; e.currentTarget.classList.remove('show'); } });
 document.getElementById('goalFormSubmitBtn').addEventListener('click', submitGoalForm);
