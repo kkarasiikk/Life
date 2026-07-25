@@ -39,7 +39,7 @@ const T = {
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
     emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу',
-    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію',
+    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
     chartIncome: 'Дохід', chartExpense: 'Витрати',
@@ -88,7 +88,7 @@ const T = {
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
     emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу',
-    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию',
+    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
     chartIncome: 'Доход', chartExpense: 'Расходы',
@@ -137,7 +137,7 @@ const T = {
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
     emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej',
-    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię',
+    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
@@ -186,7 +186,7 @@ const T = {
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
     emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below',
-    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category',
+    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
     chartIncome: 'Income', chartExpense: 'Expenses',
@@ -280,11 +280,48 @@ const CURRENCIES = {
 };
 const CURRENCY_CODES = ['UAH', 'USD', 'EUR', 'PLN'];
 
+// ---- Курси валют (НБУ, база — гривня) ----
+let exchangeRates = { UAH: 1 };
+let exchangeRatesDate = null;
+try {
+  const cachedRates = JSON.parse(localStorage.getItem('financeAppExchangeRates') || 'null');
+  if (cachedRates && cachedRates.rates) {
+    exchangeRates = cachedRates.rates;
+    exchangeRatesDate = cachedRates.date;
+  }
+} catch (e) { /* ignore corrupted cache */ }
+
+function convertAmount(amount, fromCur, toCur) {
+  const from = exchangeRates[fromCur] || 1;
+  const to = exchangeRates[toCur] || 1;
+  return amount * from / to;
+}
+
+async function loadExchangeRates() {
+  try {
+    const resp = await fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json');
+    if (!resp.ok) throw new Error('bad response');
+    const data = await resp.json();
+    const rates = { UAH: 1 };
+    data.forEach(item => {
+      if (CURRENCY_CODES.includes(item.cc) && item.rate) rates[item.cc] = item.rate;
+    });
+    exchangeRates = rates;
+    exchangeRatesDate = (data[0] && data[0].exchangedate) || todayISO();
+    localStorage.setItem('financeAppExchangeRates', JSON.stringify({ rates: exchangeRates, date: exchangeRatesDate }));
+  } catch (e) {
+    // офлайн або недоступний НБУ — залишаємось на кешованих курсах
+  }
+  if (currentTab === 'stats') render();
+}
+
 // ---- Стан ----
 let currentLang = (localStorage.getItem('financeAppLang')) || 'uk';
 let currentCurrency = (localStorage.getItem('financeAppCurrency')) || 'UAH';
 if (!LANGS.includes(currentLang)) currentLang = 'uk';
 if (!CURRENCY_CODES.includes(currentCurrency)) currentCurrency = 'UAH';
+let savingsTrendCurrency = localStorage.getItem('financeAppSavingsTrendCurrency') || currentCurrency;
+if (!CURRENCY_CODES.includes(savingsTrendCurrency)) savingsTrendCurrency = 'UAH';
 
 let transactions = [];
 let monthOffset = 0;
@@ -437,6 +474,7 @@ function applyStaticTranslations() {
   document.getElementById('savingsNoteInput').setAttribute('placeholder', t('notePlaceholder'));
   renderLangPicker();
   renderCurrencyPicker();
+  renderSavingsTrendCurrencySelect();
   renderCategoryManager();
   renderAuthLangRow();
   if (typeof currentTab !== 'undefined') updateHeaderSectionTitle();
@@ -466,6 +504,20 @@ function renderCurrencyPicker() {
   picker.querySelectorAll('.cat-choice').forEach(btn => {
     btn.addEventListener('click', () => setCurrency(btn.dataset.cur));
   });
+}
+
+function renderSavingsTrendCurrencySelect() {
+  const select = document.getElementById('savingsTrendCurrencySelect');
+  if (select.dataset.bound !== '1') {
+    select.innerHTML = CURRENCY_CODES.map(c => `<option value="${c}">${c} ${CURRENCIES[c].symbol}</option>`).join('');
+    select.addEventListener('change', () => {
+      savingsTrendCurrency = select.value;
+      localStorage.setItem('financeAppSavingsTrendCurrency', savingsTrendCurrency);
+      render();
+    });
+    select.dataset.bound = '1';
+  }
+  select.value = savingsTrendCurrency;
 }
 
 function renderCategoryManager() {
@@ -646,6 +698,7 @@ auth.onAuthStateChanged((user) => {
     subscribeToPages(user.uid);
     subscribeToSavings(user.uid);
     subscribeToSavingsGoals(user.uid);
+    loadExchangeRates();
   } else {
     if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
     if (unsubscribeProfile) { unsubscribeProfile(); unsubscribeProfile = null; }
@@ -1364,7 +1417,7 @@ function renderStats(monthTx, ty, tm) {
     }
   });
 
-  // ---- Графік динаміки заощаджень (по лінії на кожну ціль) ----
+  // ---- Графік динаміки заощаджень (по лінії на кожну ціль, у вибраній валюті) ----
   const trendEmptyEl = document.getElementById('savingsTrendEmpty');
   const savingsCanvas = document.getElementById('savingsTrendChart');
   const legendEl = document.getElementById('savingsTrendLegend');
@@ -1385,45 +1438,43 @@ function renderStats(monthTx, ty, tm) {
       monthPoints.push({ y: d.getFullYear(), m: d.getMonth() });
     }
     const svWordMap = MONTHS_WORD[currentLang] || MONTHS_WORD.uk;
-    document.getElementById('savingsTrendSub').textContent = `${t('lastLabel')} ${savingsTrendPeriodMonths} ${svWordMap[savingsTrendPeriodMonths] || svWordMap[6]}`;
+    const periodText = `${t('lastLabel')} ${savingsTrendPeriodMonths} ${svWordMap[savingsTrendPeriodMonths] || svWordMap[6]}`;
+    const needsConversion = savings.some(sv => (sv.currency || currentCurrency) !== savingsTrendCurrency);
+    let subText = periodText;
+    if (exchangeRatesDate) subText += ` · ${t('rateAsOf')} ${exchangeRatesDate}`;
+    else if (needsConversion) subText += ` · ${t('rateUnavailable')}`;
+    document.getElementById('savingsTrendSub').textContent = subText;
     const sortedGoals = [...savingsGoals].sort((a, b) => {
       const ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
       const tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
       return ta - tb;
     });
     const datasets = [];
-    const goalMeta = [];
     let colorIdx = 0;
     sortedGoals.forEach(g => {
-      const goalTx = savings.filter(sv => sv.goalId === g.id).sort((a, b) => a.date.localeCompare(b.date));
-      const currencies = [...new Set(goalTx.map(sv => sv.currency || currentCurrency))].sort();
-      if (currencies.length === 0) return;
-      let firstColor = null;
-      currencies.forEach(cur => {
-        const color = CATEGORY_PALETTE[colorIdx % CATEGORY_PALETTE.length].text;
-        colorIdx++;
-        if (!firstColor) firstColor = color;
-        const curTx = goalTx.filter(sv => (sv.currency || currentCurrency) === cur);
-        const data = monthPoints.map(pt => {
-          const cutoff = new Date(pt.y, pt.m + 1, 0);
-          return curTx.filter(sv => new Date(sv.date) <= cutoff)
-            .reduce((s, sv) => s + (sv.type === 'deposit' ? sv.amount : -sv.amount), 0);
-        });
-        const label = currencies.length > 1 ? `${g.name || t('defaultGoalName')} (${cur})` : (g.name || t('defaultGoalName'));
-        datasets.push({ label, data, borderColor: color, backgroundColor: color, tension: 0.3, pointRadius: 3, fill: false, _currency: cur, _goalId: g.id });
+      const goalTx = savings.filter(sv => sv.goalId === g.id);
+      if (goalTx.length === 0) return;
+      const color = CATEGORY_PALETTE[colorIdx % CATEGORY_PALETTE.length].text;
+      colorIdx++;
+      const data = monthPoints.map(pt => {
+        const cutoff = new Date(pt.y, pt.m + 1, 0);
+        return goalTx.filter(sv => new Date(sv.date) <= cutoff).reduce((s, sv) => {
+          const converted = convertAmount(sv.amount, sv.currency || currentCurrency, savingsTrendCurrency);
+          return s + (sv.type === 'deposit' ? converted : -converted);
+        }, 0);
       });
-      goalMeta.push({ goalId: g.id, name: g.name || t('defaultGoalName'), color: firstColor });
+      datasets.push({ label: g.name || t('defaultGoalName'), data, borderColor: color, backgroundColor: color, tension: 0.3, pointRadius: 3, fill: false, _goalId: g.id });
     });
 
-    legendEl.innerHTML = goalMeta.map(gm => {
-      const hidden = hiddenSavingsTrendGoals.includes(gm.goalId);
+    legendEl.innerHTML = datasets.map(ds => {
+      const hidden = hiddenSavingsTrendGoals.includes(ds._goalId);
       return `<div class="legend-row-wrap${hidden ? ' hidden-cat' : ''}">
-        <button type="button" class="legend-toggle${hidden ? '' : ' checked'}" data-goal="${gm.goalId}" aria-label="${t('toggleCatAria')}">
+        <button type="button" class="legend-toggle${hidden ? '' : ' checked'}" data-goal="${ds._goalId}" aria-label="${t('toggleCatAria')}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
         </button>
         <div class="legend-row" style="cursor:default;">
-          <span class="legend-dot" style="background:${gm.color}"></span>
-          <span class="legend-name">${escapeHtml(gm.name)}</span>
+          <span class="legend-dot" style="background:${ds.borderColor}"></span>
+          <span class="legend-name">${escapeHtml(ds.label)}</span>
         </div>
       </div>`;
     }).join('');
@@ -1447,7 +1498,7 @@ function renderStats(monthTx, ty, tm) {
           maintainAspectRatio: false,
           plugins: {
             legend: { display: false },
-            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoneyCur(ctx.raw, ctx.dataset._currency)}` } }
+            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoneyCur(ctx.raw, savingsTrendCurrency)}` } }
           },
           scales: {
             x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 }, color: '#8A8478' } },

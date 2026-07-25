@@ -150,7 +150,11 @@
   .del-btn{background:none;border:none;cursor:pointer;color:var(--ink-muted);padding:4px;display:flex;}
   .card{background:var(--surface);border-radius:12px;border:1px solid var(--border);padding:18px;margin-bottom:16px;}
   .card-title{font-family:'Inter',sans-serif;font-size:15.5px;font-weight:600;margin-bottom:4px;}
-  .trend-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
+  .trend-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+  .trend-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+  .trend-currency-select{border:none;background:#F1EDE5;border-radius:8px;padding:6px 8px;
+    font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;
+    -webkit-appearance:none;appearance:none;}
   .period-picker{display:flex;background:#F1EDE5;border-radius:8px;padding:3px;gap:2px;flex-shrink:0;}
   .period-btn{border:none;background:transparent;cursor:pointer;padding:5px 10px;border-radius:6px;
     font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;color:var(--ink-muted);}
@@ -421,12 +425,15 @@
             <div class="card-title" id="savingsTrendTitle">Заощадження</div>
             <div class="card-sub" id="savingsTrendSub">Динаміка за 6 місяців</div>
           </div>
-          <div class="period-picker" id="savingsTrendPeriodPicker">
-            <button type="button" class="period-btn" data-months="3">3</button>
-            <button type="button" class="period-btn active" data-months="6">6</button>
-            <button type="button" class="period-btn" data-months="12">12</button>
-            <button type="button" class="period-btn" data-months="24">24</button>
-            <button type="button" class="period-btn" data-months="36">36</button>
+          <div class="trend-controls">
+            <select id="savingsTrendCurrencySelect" class="trend-currency-select"></select>
+            <div class="period-picker" id="savingsTrendPeriodPicker">
+              <button type="button" class="period-btn" data-months="3">3</button>
+              <button type="button" class="period-btn active" data-months="6">6</button>
+              <button type="button" class="period-btn" data-months="12">12</button>
+              <button type="button" class="period-btn" data-months="24">24</button>
+              <button type="button" class="period-btn" data-months="36">36</button>
+            </div>
           </div>
         </div>
         <div id="savingsTrendEmpty" class="empty" style="display:none;padding:30px 0;font-size:13.5px;">Ще немає заощаджень</div>
