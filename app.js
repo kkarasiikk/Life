@@ -45,7 +45,7 @@ const T = {
     chartIncome: 'Дохід', chartExpense: 'Витрати',
     fabExpense: 'Витрата', fabIncome: 'Дохід',
     newExpenseTitle: 'Нова витрата', newIncomeTitle: 'Новий дохід', editExpenseTitle: 'Редагувати витрату', editIncomeTitle: 'Редагувати дохід',
-    amountLabel: 'Сума, {symbol}', catLabel: 'Категорія', dateLabel: 'Дата',
+    amountLabel: 'Сума, {symbol}', amountLabelPlain: 'Сума', catLabel: 'Категорія', dateLabel: 'Дата',
     noteLabel: 'Нотатка (необовʼязково)', notePlaceholder: 'Напр. кава з другом',
     saveBtn: 'Зберегти запис', amountError: 'Введи суму більшу за нуль',
     saveError: 'Не вдалося зберегти. Перевір інтернет-з’єднання',
@@ -94,7 +94,7 @@ const T = {
     chartIncome: 'Доход', chartExpense: 'Расходы',
     fabExpense: 'Расход', fabIncome: 'Доход',
     newExpenseTitle: 'Новый расход', newIncomeTitle: 'Новый доход', editExpenseTitle: 'Редактировать расход', editIncomeTitle: 'Редактировать доход',
-    amountLabel: 'Сумма, {symbol}', catLabel: 'Категория', dateLabel: 'Дата',
+    amountLabel: 'Сумма, {symbol}', amountLabelPlain: 'Сумма', catLabel: 'Категория', dateLabel: 'Дата',
     noteLabel: 'Заметка (необязательно)', notePlaceholder: 'Напр. кофе с другом',
     saveBtn: 'Сохранить запись', amountError: 'Введи сумму больше нуля',
     saveError: 'Не удалось сохранить. Проверь интернет-соединение',
@@ -143,7 +143,7 @@ const T = {
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
     fabExpense: 'Wydatek', fabIncome: 'Przychód',
     newExpenseTitle: 'Nowy wydatek', newIncomeTitle: 'Nowy przychód', editExpenseTitle: 'Edytuj wydatek', editIncomeTitle: 'Edytuj przychód',
-    amountLabel: 'Kwota, {symbol}', catLabel: 'Kategoria', dateLabel: 'Data',
+    amountLabel: 'Kwota, {symbol}', amountLabelPlain: 'Kwota', catLabel: 'Kategoria', dateLabel: 'Data',
     noteLabel: 'Notatka (opcjonalnie)', notePlaceholder: 'Np. kawa ze znajomym',
     saveBtn: 'Zapisz wpis', amountError: 'Wpisz kwotę większą od zera',
     saveError: 'Nie udało się zapisać. Sprawdź połączenie z internetem',
@@ -192,7 +192,7 @@ const T = {
     chartIncome: 'Income', chartExpense: 'Expenses',
     fabExpense: 'Expense', fabIncome: 'Income',
     newExpenseTitle: 'New expense', newIncomeTitle: 'New income', editExpenseTitle: 'Edit expense', editIncomeTitle: 'Edit income',
-    amountLabel: 'Amount, {symbol}', catLabel: 'Category', dateLabel: 'Date',
+    amountLabel: 'Amount, {symbol}', amountLabelPlain: 'Amount', catLabel: 'Category', dateLabel: 'Date',
     noteLabel: 'Note (optional)', notePlaceholder: 'E.g. coffee with a friend',
     saveBtn: 'Save entry', amountError: 'Enter an amount greater than zero',
     saveError: 'Could not save. Check your internet connection',
@@ -310,6 +310,7 @@ let unsubscribePages = null;
 let savings = [];
 let unsubscribeSavings = null;
 let savingsFormType = 'deposit';
+let savingsFormCurrency = 'UAH';
 let editingSavingId = null;
 let savingsGoals = [];
 let unsubscribeSavingsGoals = null;
@@ -327,10 +328,25 @@ let authMode = 'login'; // 'login' | 'signup'
 
 // ---- Утиліти ----
 function formatMoney(n) {
+  return formatMoneyCur(n, currentCurrency);
+}
+function formatMoneyCur(n, curCode) {
   const sign = n < 0 ? '\u2212' : '';
-  const cur = CURRENCIES[currentCurrency] || CURRENCIES.UAH;
+  const cur = CURRENCIES[curCode] || CURRENCIES[currentCurrency] || CURRENCIES.UAH;
   const num = Math.abs(n).toLocaleString(LOCALE_MAP[currentLang] || 'uk-UA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   return cur.position === 'before' ? `${sign}${cur.symbol}${num}` : `${sign}${num} ${cur.symbol}`;
+}
+function renderBalanceBlock(el, balancesObj) {
+  const entries = Object.entries(balancesObj).sort((a, b) => a[0].localeCompare(b[0]));
+  if (entries.length <= 1) {
+    const cur = entries.length ? entries[0][0] : currentCurrency;
+    const val = entries.length ? entries[0][1] : 0;
+    el.className = 'balance' + (val < 0 ? ' neg' : '');
+    el.textContent = formatMoneyCur(val, cur);
+  } else {
+    el.className = 'balance balance-multi';
+    el.innerHTML = entries.map(([cur, val]) => `<div class="balance-multi-row${val < 0 ? ' neg' : ''}">${formatMoneyCur(val, cur)}</div>`).join('');
+  }
 }
 function todayISO() {
   const d = new Date();
@@ -410,7 +426,7 @@ function applyStaticTranslations() {
   document.getElementById('deleteGoalBtn').textContent = t('deleteGoalLabel');
   document.getElementById('fabDepositLabel').textContent = t('fabDepositLabel');
   document.getElementById('fabWithdrawLabel').textContent = t('fabWithdrawLabel');
-  document.getElementById('savingsAmountLabel').textContent = t('amountLabel', { symbol: cur.symbol });
+  document.getElementById('savingsAmountLabel').textContent = t('amountLabelPlain');
   document.getElementById('savingsDateLabel').textContent = t('dateLabel');
   document.getElementById('savingsNoteLabel').textContent = t('noteLabel');
   document.getElementById('savingsNoteInput').setAttribute('placeholder', t('notePlaceholder'));
@@ -885,14 +901,30 @@ function renderEntries(monthTx) {
 }
 
 function goalBalance(goalId) {
-  return savings.filter(sv => sv.goalId === goalId).reduce((s, sv) => s + (sv.type === 'deposit' ? sv.amount : -sv.amount), 0);
+  const res = {};
+  savings.filter(sv => sv.goalId === goalId).forEach(sv => {
+    const cur = sv.currency || currentCurrency;
+    res[cur] = (res[cur] || 0) + (sv.type === 'deposit' ? sv.amount : -sv.amount);
+  });
+  return res;
+}
+function totalSavingsBalance() {
+  const res = {};
+  savings.forEach(sv => {
+    const cur = sv.currency || currentCurrency;
+    res[cur] = (res[cur] || 0) + (sv.type === 'deposit' ? sv.amount : -sv.amount);
+  });
+  return res;
+}
+function lastUsedGoalCurrency(goalId) {
+  const goalSavings = savings.filter(sv => sv.goalId === goalId);
+  if (goalSavings.length === 0) return currentCurrency;
+  const latest = [...goalSavings].sort((a, b) => a.date.localeCompare(b.date) || String(a.id).localeCompare(String(b.id))).pop();
+  return latest.currency || currentCurrency;
 }
 
 function renderSavingsGoalsList() {
-  const total = savings.reduce((s, sv) => s + (sv.type === 'deposit' ? sv.amount : -sv.amount), 0);
-  const totalEl = document.getElementById('savingsTotalBalance');
-  totalEl.textContent = formatMoney(total);
-  totalEl.className = 'balance' + (total < 0 ? ' neg' : '');
+  renderBalanceBlock(document.getElementById('savingsTotalBalance'), totalSavingsBalance());
 
   const container = document.getElementById('savingsGoalsCards');
   const sorted = [...savingsGoals].sort((a, b) => {
@@ -901,10 +933,13 @@ function renderSavingsGoalsList() {
     return ta - tb;
   });
   container.innerHTML = sorted.map(g => {
-    const bal = goalBalance(g.id);
+    const balEntries = Object.entries(goalBalance(g.id)).sort((a, b) => a[0].localeCompare(b[0]));
+    const balHtml = balEntries.length <= 1
+      ? `<span class="goal-card-balance">${formatMoneyCur(balEntries.length ? balEntries[0][1] : 0, balEntries.length ? balEntries[0][0] : currentCurrency)}</span>`
+      : `<span class="goal-card-balances">${balEntries.map(([cur, val]) => `<span class="goal-card-balance">${formatMoneyCur(val, cur)}</span>`).join('')}</span>`;
     return `<button type="button" class="goal-card" data-id="${g.id}">
       <span class="goal-card-name">${escapeHtml(g.name || t('defaultGoalName'))}</span>
-      <span class="goal-card-balance">${formatMoney(bal)}</span>
+      ${balHtml}
     </button>`;
   }).join('');
   container.querySelectorAll('.goal-card').forEach(card => {
@@ -970,10 +1005,7 @@ function renderSavings() {
   const currentGoal = savingsGoals.find(g => g.id === currentSavingsGoalId);
   document.getElementById('goalDetailTitle').textContent = currentGoal ? (currentGoal.name || t('defaultGoalName')) : '';
   const goalSavings = savings.filter(sv => sv.goalId === currentSavingsGoalId);
-  const balance = goalSavings.reduce((s, sv) => s + (sv.type === 'deposit' ? sv.amount : -sv.amount), 0);
-  const balEl = document.getElementById('savingsBalance');
-  balEl.textContent = formatMoney(balance);
-  balEl.className = 'balance' + (balance < 0 ? ' neg' : '');
+  renderBalanceBlock(document.getElementById('savingsBalance'), goalBalance(currentSavingsGoalId));
 
   const container = document.getElementById('savingsList');
   if (goalSavings.length === 0) {
@@ -992,7 +1024,7 @@ function renderSavings() {
       <div class="entry">
         <span class="cat-tag" style="color:${sv.type === 'deposit' ? '#3E7C59' : '#B6584A'};background:${sv.type === 'deposit' ? '#EAF5EF' : '#FBEEEC'};">${sv.type === 'deposit' ? t('fabDepositLabel') : t('fabWithdrawLabel')}</span>
         <div class="entry-note">${escapeHtml(sv.note || '')}</div>
-        <div class="entry-amount ${sv.type === 'deposit' ? 'inc' : ''}">${sv.type === 'deposit' ? '+' : '\u2212'}${formatMoney(sv.amount).replace('\u2212', '')}</div>
+        <div class="entry-amount ${sv.type === 'deposit' ? 'inc' : ''}">${sv.type === 'deposit' ? '+' : '\u2212'}${formatMoneyCur(sv.amount, sv.currency || currentCurrency).replace('\u2212', '')}</div>
         <button class="del-btn entry-menu-btn" data-id="${sv.id}" aria-label="${t('entryMenuAria')}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
         </button>
@@ -1023,8 +1055,22 @@ function openSavingsForm(type, existing) {
   document.getElementById('savingsDateInput').value = existing ? existing.date : todayISO();
   document.getElementById('savingsDateInput').max = todayISO();
   document.getElementById('savingsFormError').style.display = 'none';
+  savingsFormCurrency = existing ? (existing.currency || currentCurrency) : lastUsedGoalCurrency(currentSavingsGoalId);
+  renderSavingsCurrencyPicker();
   document.getElementById('savingsFormOverlay').classList.add('show');
   setTimeout(() => document.getElementById('savingsAmountInput').focus(), 50);
+}
+
+function renderSavingsCurrencyPicker() {
+  const picker = document.getElementById('savingsCurrencyPicker');
+  picker.innerHTML = CURRENCY_CODES.map(c => `<button type="button" class="cat-choice${c === savingsFormCurrency ? ' selected' : ''}"
+    data-cur="${c}" style="${c === savingsFormCurrency ? 'background:var(--accent);' : ''}">${c} ${CURRENCIES[c].symbol}</button>`).join('');
+  picker.querySelectorAll('.cat-choice').forEach(btn => {
+    btn.addEventListener('click', () => {
+      savingsFormCurrency = btn.dataset.cur;
+      renderSavingsCurrencyPicker();
+    });
+  });
 }
 
 async function submitSavingsForm() {
@@ -1041,6 +1087,7 @@ async function submitSavingsForm() {
   const item = {
     type: savingsFormType,
     amount: Math.round(num * 100) / 100,
+    currency: savingsFormCurrency,
     note: document.getElementById('savingsNoteInput').value.trim(),
     date: document.getElementById('savingsDateInput').value || todayISO(),
     goalId: currentSavingsGoalId,
@@ -1295,15 +1342,23 @@ function renderStats(monthTx, ty, tm) {
       const tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
       return ta - tb;
     });
-    const datasets = sortedGoals.map((g, idx) => {
-      const color = CATEGORY_PALETTE[idx % CATEGORY_PALETTE.length].text;
+    const datasets = [];
+    let colorIdx = 0;
+    sortedGoals.forEach(g => {
       const goalTx = savings.filter(sv => sv.goalId === g.id).sort((a, b) => a.date.localeCompare(b.date));
-      const data = monthPoints.map(pt => {
-        const cutoff = new Date(pt.y, pt.m + 1, 0);
-        return goalTx.filter(sv => new Date(sv.date) <= cutoff)
-          .reduce((s, sv) => s + (sv.type === 'deposit' ? sv.amount : -sv.amount), 0);
+      const currencies = [...new Set(goalTx.map(sv => sv.currency || currentCurrency))].sort();
+      currencies.forEach(cur => {
+        const color = CATEGORY_PALETTE[colorIdx % CATEGORY_PALETTE.length].text;
+        colorIdx++;
+        const curTx = goalTx.filter(sv => (sv.currency || currentCurrency) === cur);
+        const data = monthPoints.map(pt => {
+          const cutoff = new Date(pt.y, pt.m + 1, 0);
+          return curTx.filter(sv => new Date(sv.date) <= cutoff)
+            .reduce((s, sv) => s + (sv.type === 'deposit' ? sv.amount : -sv.amount), 0);
+        });
+        const label = currencies.length > 1 ? `${g.name || t('defaultGoalName')} (${cur})` : (g.name || t('defaultGoalName'));
+        datasets.push({ label, data, borderColor: color, backgroundColor: color, tension: 0.3, pointRadius: 3, fill: false, _currency: cur });
       });
-      return { label: g.name || t('defaultGoalName'), data, borderColor: color, backgroundColor: color, tension: 0.3, pointRadius: 3, fill: false };
     });
     if (savingsTrendChart) savingsTrendChart.destroy();
     savingsTrendChart = new Chart(savingsCanvas, {
@@ -1313,7 +1368,7 @@ function renderStats(monthTx, ty, tm) {
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
-          tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.raw)}` } }
+          tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoneyCur(ctx.raw, ctx.dataset._currency)}` } }
         },
         scales: {
           x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 }, color: '#8A8478' } },

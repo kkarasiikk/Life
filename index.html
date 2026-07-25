@@ -110,6 +110,9 @@
   .logout-link{font-size:12px;color:var(--ink-muted);cursor:pointer;text-decoration:none;font-family:'Inter',sans-serif;background:none;border:none;}
   .balance{font-family:'Inter',sans-serif;font-weight:700;font-size:38px;line-height:1.15;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;}
   .balance.neg{color:var(--expense);}
+  .balance-multi{display:flex;flex-direction:column;gap:2px;}
+  .balance-multi-row{font-family:'Inter',sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;}
+  .balance-multi-row.neg{color:var(--expense);}
   .stat-row{display:flex;gap:10px;margin-top:18px;}
   .stat-card{flex:1;border-radius:12px;padding:12px 14px;}
   .stat-card.inc{background:var(--income-light);}
@@ -205,6 +208,8 @@
   .goal-card:hover{border-color:var(--accent);}
   .goal-card-name{font-size:14.5px;font-weight:600;color:var(--ink);}
   .goal-card-balance{font-size:16px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .goal-card-balances{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+  .goal-card-balances .goal-card-balance{font-size:14px;}
   .goal-add-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 0;
     border-radius:12px;border:1.5px dashed var(--border);background:transparent;color:var(--ink-muted);
     font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;}
@@ -493,6 +498,7 @@
     </div>
     <label class="field-label" id="savingsAmountLabel">Сума, ₴</label>
     <input class="amount-input" id="savingsAmountInput" type="text" inputmode="decimal" placeholder="0.00">
+    <div class="cat-picker" id="savingsCurrencyPicker" style="margin-top:-6px;"></div>
     <label class="field-label" id="savingsDateLabel">Дата</label>
     <input type="date" id="savingsDateInput">
     <label class="field-label" id="savingsNoteLabel">Нотатка (необовʼязково)</label>
