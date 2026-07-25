@@ -1590,6 +1590,7 @@ function selectTab(tabKey) {
   const isPage = tabKey.startsWith('page:');
   const isSavings = tabKey === 'savings';
   document.getElementById('balanceSummary').style.display = tabKey === 'entries' ? 'block' : 'none';
+  document.getElementById('header').classList.toggle('slim', tabKey !== 'entries');
   document.getElementById('entriesTab').style.display = tabKey === 'entries' ? 'block' : 'none';
   document.getElementById('statsTab').style.display = tabKey === 'stats' ? 'block' : 'none';
   document.getElementById('savingsTab').style.display = isSavings ? 'block' : 'none';
