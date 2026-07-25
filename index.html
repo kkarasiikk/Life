@@ -155,6 +155,7 @@
   .period-btn{border:none;background:transparent;cursor:pointer;padding:5px 10px;border-radius:6px;
     font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;color:var(--ink-muted);}
   .period-btn.active{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(20,20,24,.06);}
+  #savingsTrendPeriodPicker .period-btn{padding:5px 7px;}
   .card-sub{font-size:12.5px;color:var(--ink-muted);margin-bottom:8px;}
   .legend-row{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:2px;width:100%;
     background:none;border:none;cursor:pointer;padding:6px 6px;border-radius:8px;text-align:left;font-family:'Inter',sans-serif;}
@@ -163,6 +164,15 @@
   .legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
   .legend-name{flex:1;color:var(--ink-soft);}
   .legend-val{font-family:'Inter',sans-serif;font-weight:500;font-variant-numeric:tabular-nums;}
+  .legend-row-wrap{display:flex;align-items:center;gap:2px;}
+  .legend-row-wrap .legend-row{flex:1;min-width:0;width:auto;}
+  .legend-row-wrap.hidden-cat .legend-dot{filter:grayscale(1);opacity:.5;}
+  .legend-row-wrap.hidden-cat .legend-name,.legend-row-wrap.hidden-cat .legend-val{color:var(--ink-muted);opacity:.55;}
+  .legend-toggle{flex-shrink:0;width:20px;height:20px;border-radius:5px;border:1.5px solid var(--border);
+    background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;color:#fff;}
+  .legend-toggle svg{display:none;width:13px;height:13px;}
+  .legend-toggle.checked{background:var(--accent);border-color:var(--accent);}
+  .legend-toggle.checked svg{display:block;}
   .fab-row{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom));left:0;right:0;display:flex;justify-content:center;gap:10px;padding:0 20px;}
   .fab{display:flex;align-items:center;gap:6px;border-radius:24px;padding:11px 18px;font-size:13.5px;font-weight:600;
     cursor:pointer;font-family:'Inter',sans-serif;}
@@ -406,8 +416,19 @@
         <div style="height:220px;"><canvas id="barChart"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title" id="savingsTrendTitle">Заощадження</div>
-        <div class="card-sub" id="savingsTrendSub">Динаміка за 6 місяців</div>
+        <div class="trend-head">
+          <div>
+            <div class="card-title" id="savingsTrendTitle">Заощадження</div>
+            <div class="card-sub" id="savingsTrendSub">Динаміка за 6 місяців</div>
+          </div>
+          <div class="period-picker" id="savingsTrendPeriodPicker">
+            <button type="button" class="period-btn" data-months="3">3</button>
+            <button type="button" class="period-btn active" data-months="6">6</button>
+            <button type="button" class="period-btn" data-months="12">12</button>
+            <button type="button" class="period-btn" data-months="24">24</button>
+            <button type="button" class="period-btn" data-months="36">36</button>
+          </div>
+        </div>
         <div id="savingsTrendEmpty" class="empty" style="display:none;padding:30px 0;font-size:13.5px;">Ще немає заощаджень</div>
         <div style="height:220px;"><canvas id="savingsTrendChart"></canvas></div>
         <div id="savingsTrendLegend" style="margin-top:10px;"></div>

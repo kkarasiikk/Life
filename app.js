@@ -39,7 +39,7 @@ const T = {
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
     emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу',
-    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити',
+    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
     chartIncome: 'Дохід', chartExpense: 'Витрати',
@@ -88,7 +88,7 @@ const T = {
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
     emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу',
-    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить',
+    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
     chartIncome: 'Доход', chartExpense: 'Расходы',
@@ -137,7 +137,7 @@ const T = {
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
     emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej',
-    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń',
+    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
@@ -186,7 +186,7 @@ const T = {
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
     emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below',
-    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete',
+    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
     chartIncome: 'Income', chartExpense: 'Expenses',
@@ -290,11 +290,14 @@ let transactions = [];
 let monthOffset = 0;
 let currentTab = 'entries';
 let trendPeriodMonths = 6;
+let savingsTrendPeriodMonths = 6;
+let hiddenStatsCategories = [];
+try { hiddenStatsCategories = JSON.parse(localStorage.getItem('financeAppHiddenStatsCats') || '[]'); } catch (e) { hiddenStatsCategories = []; }
 const MONTHS_WORD = {
-  uk: { 3: 'місяці', 6: 'місяців', 12: 'місяців' },
-  ru: { 3: 'месяца', 6: 'месяцев', 12: 'месяцев' },
-  pl: { 3: 'miesiące', 6: 'miesięcy', 12: 'miesięcy' },
-  en: { 3: 'months', 6: 'months', 12: 'months' },
+  uk: { 3: 'місяці', 6: 'місяців', 12: 'місяців', 24: 'місяці', 36: 'місяців' },
+  ru: { 3: 'месяца', 6: 'месяцев', 12: 'месяцев', 24: 'месяца', 36: 'месяцев' },
+  pl: { 3: 'miesiące', 6: 'miesięcy', 12: 'miesięcy', 24: 'miesiące', 36: 'miesięcy' },
+  en: { 3: 'months', 6: 'months', 12: 'months', 24: 'months', 36: 'months' },
 };
 let formType = 'expense';
 let categoriesExpense = defaultCategories('expense');
@@ -1246,10 +1249,21 @@ function openCategoryTxModal(catId, monthTx, ty, tm) {
   document.getElementById('categoryTxOverlay').classList.add('show');
 }
 
+function toggleStatsCategory(id) {
+  if (hiddenStatsCategories.includes(id)) {
+    hiddenStatsCategories = hiddenStatsCategories.filter(c => c !== id);
+  } else {
+    hiddenStatsCategories = [...hiddenStatsCategories, id];
+  }
+  localStorage.setItem('financeAppHiddenStatsCats', JSON.stringify(hiddenStatsCategories));
+  render();
+}
+
 function renderStats(monthTx, ty, tm) {
   const map = {};
   monthTx.filter(tx => tx.type === 'expense').forEach(tx => { map[tx.category] = (map[tx.category] || 0) + tx.amount; });
   const entries = Object.entries(map).sort((a, b) => b[1] - a[1]);
+  const visibleEntries = entries.filter(([id]) => !hiddenStatsCategories.includes(id));
 
   const pieEmpty = document.getElementById('pieEmpty');
   const pieCanvas = document.getElementById('pieChart');
@@ -1257,34 +1271,55 @@ function renderStats(monthTx, ty, tm) {
     pieEmpty.style.display = 'block';
     pieCanvas.style.display = 'none';
     document.getElementById('pieLegend').innerHTML = '';
+    if (pieChart) { pieChart.destroy(); pieChart = null; }
   } else {
-    pieEmpty.style.display = 'none';
-    pieCanvas.style.display = 'block';
-    const ids = entries.map(e => e[0]);
-    const labels = ids.map(id => catDisplay('expense', id));
-    const values = entries.map(e => e[1]);
-    const colors = ids.map(id => catColor('expense', id));
-    if (pieChart) pieChart.destroy();
-    pieChart = new Chart(pieCanvas, {
-      type: 'doughnut',
-      data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: '#FFFFFF', borderWidth: 2 }] },
-      options: {
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${formatMoney(ctx.raw)}` } }
-        }
-      }
-    });
-    document.getElementById('pieLegend').innerHTML = ids.map((id, i) => `
-      <button type="button" class="legend-row" data-cat="${id}">
-        <span class="legend-dot" style="background:${catColor('expense', id)}"></span>
-        <span class="legend-name">${escapeHtml(catDisplay('expense', id))}</span>
-        <span class="legend-val">${formatMoney(entries[i][1])}</span>
-      </button>`).join('');
+    document.getElementById('pieLegend').innerHTML = entries.map(([id, val]) => {
+      const hidden = hiddenStatsCategories.includes(id);
+      return `<div class="legend-row-wrap${hidden ? ' hidden-cat' : ''}">
+        <button type="button" class="legend-toggle${hidden ? '' : ' checked'}" data-cat="${id}" aria-label="${t('toggleCatAria')}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+        <button type="button" class="legend-row" data-cat="${id}">
+          <span class="legend-dot" style="background:${catColor('expense', id)}"></span>
+          <span class="legend-name">${escapeHtml(catDisplay('expense', id))}</span>
+          <span class="legend-val">${formatMoney(val)}</span>
+        </button>
+      </div>`;
+    }).join('');
     document.getElementById('pieLegend').querySelectorAll('.legend-row').forEach(row => {
       row.addEventListener('click', () => openCategoryTxModal(row.dataset.cat, monthTx, ty, tm));
     });
+    document.getElementById('pieLegend').querySelectorAll('.legend-toggle').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleStatsCategory(btn.dataset.cat);
+      });
+    });
+
+    if (visibleEntries.length === 0) {
+      pieEmpty.style.display = 'block';
+      pieCanvas.style.display = 'none';
+      if (pieChart) { pieChart.destroy(); pieChart = null; }
+    } else {
+      pieEmpty.style.display = 'none';
+      pieCanvas.style.display = 'block';
+      const ids = visibleEntries.map(e => e[0]);
+      const labels = ids.map(id => catDisplay('expense', id));
+      const values = visibleEntries.map(e => e[1]);
+      const colors = ids.map(id => catColor('expense', id));
+      if (pieChart) pieChart.destroy();
+      pieChart = new Chart(pieCanvas, {
+        type: 'doughnut',
+        data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: '#FFFFFF', borderWidth: 2 }] },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${formatMoney(ctx.raw)}` } }
+          }
+        }
+      });
+    }
   }
 
   const now = new Date();
@@ -1329,7 +1364,7 @@ function renderStats(monthTx, ty, tm) {
   } else {
     trendEmptyEl.style.display = 'none';
     savingsCanvas.style.display = 'block';
-    const svMonths = 6;
+    const svMonths = savingsTrendPeriodMonths;
     const svLabels = [];
     const monthPoints = [];
     for (let i = svMonths - 1; i >= 0; i--) {
@@ -1337,6 +1372,8 @@ function renderStats(monthTx, ty, tm) {
       svLabels.push(nomMonths[d.getMonth()].slice(0, 3));
       monthPoints.push({ y: d.getFullYear(), m: d.getMonth() });
     }
+    const svWordMap = MONTHS_WORD[currentLang] || MONTHS_WORD.uk;
+    document.getElementById('savingsTrendSub').textContent = `${t('lastLabel')} ${savingsTrendPeriodMonths} ${svWordMap[savingsTrendPeriodMonths] || svWordMap[6]}`;
     const sortedGoals = [...savingsGoals].sort((a, b) => {
       const ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
       const tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
@@ -1516,6 +1553,13 @@ document.getElementById('trendPeriodPicker').addEventListener('click', (e) => {
   if (!btn) return;
   trendPeriodMonths = parseInt(btn.dataset.months, 10);
   document.querySelectorAll('#trendPeriodPicker .period-btn').forEach(b => b.classList.toggle('active', b === btn));
+  render();
+});
+document.getElementById('savingsTrendPeriodPicker').addEventListener('click', (e) => {
+  const btn = e.target.closest('.period-btn');
+  if (!btn) return;
+  savingsTrendPeriodMonths = parseInt(btn.dataset.months, 10);
+  document.querySelectorAll('#savingsTrendPeriodPicker .period-btn').forEach(b => b.classList.toggle('active', b === btn));
   render();
 });
 document.getElementById('prevMonthHeader').addEventListener('click', () => { monthOffset--; render(); });
