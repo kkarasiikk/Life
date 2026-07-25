@@ -293,6 +293,8 @@ let trendPeriodMonths = 6;
 let savingsTrendPeriodMonths = 6;
 let hiddenStatsCategories = [];
 try { hiddenStatsCategories = JSON.parse(localStorage.getItem('financeAppHiddenStatsCats') || '[]'); } catch (e) { hiddenStatsCategories = []; }
+let hiddenSavingsTrendGoals = [];
+try { hiddenSavingsTrendGoals = JSON.parse(localStorage.getItem('financeAppHiddenSavingsGoals') || '[]'); } catch (e) { hiddenSavingsTrendGoals = []; }
 const MONTHS_WORD = {
   uk: { 3: 'місяці', 6: 'місяців', 12: 'місяців', 24: 'місяці', 36: 'місяців' },
   ru: { 3: 'месяца', 6: 'месяцев', 12: 'месяцев', 24: 'месяца', 36: 'месяцев' },
@@ -1259,6 +1261,16 @@ function toggleStatsCategory(id) {
   render();
 }
 
+function toggleSavingsTrendGoal(goalId) {
+  if (hiddenSavingsTrendGoals.includes(goalId)) {
+    hiddenSavingsTrendGoals = hiddenSavingsTrendGoals.filter(id => id !== goalId);
+  } else {
+    hiddenSavingsTrendGoals = [...hiddenSavingsTrendGoals, goalId];
+  }
+  localStorage.setItem('financeAppHiddenSavingsGoals', JSON.stringify(hiddenSavingsTrendGoals));
+  render();
+}
+
 function renderStats(monthTx, ty, tm) {
   const map = {};
   monthTx.filter(tx => tx.type === 'expense').forEach(tx => { map[tx.category] = (map[tx.category] || 0) + tx.amount; });
@@ -1380,13 +1392,17 @@ function renderStats(monthTx, ty, tm) {
       return ta - tb;
     });
     const datasets = [];
+    const goalMeta = [];
     let colorIdx = 0;
     sortedGoals.forEach(g => {
       const goalTx = savings.filter(sv => sv.goalId === g.id).sort((a, b) => a.date.localeCompare(b.date));
       const currencies = [...new Set(goalTx.map(sv => sv.currency || currentCurrency))].sort();
+      if (currencies.length === 0) return;
+      let firstColor = null;
       currencies.forEach(cur => {
         const color = CATEGORY_PALETTE[colorIdx % CATEGORY_PALETTE.length].text;
         colorIdx++;
+        if (!firstColor) firstColor = color;
         const curTx = goalTx.filter(sv => (sv.currency || currentCurrency) === cur);
         const data = monthPoints.map(pt => {
           const cutoff = new Date(pt.y, pt.m + 1, 0);
@@ -1394,30 +1410,52 @@ function renderStats(monthTx, ty, tm) {
             .reduce((s, sv) => s + (sv.type === 'deposit' ? sv.amount : -sv.amount), 0);
         });
         const label = currencies.length > 1 ? `${g.name || t('defaultGoalName')} (${cur})` : (g.name || t('defaultGoalName'));
-        datasets.push({ label, data, borderColor: color, backgroundColor: color, tension: 0.3, pointRadius: 3, fill: false, _currency: cur });
+        datasets.push({ label, data, borderColor: color, backgroundColor: color, tension: 0.3, pointRadius: 3, fill: false, _currency: cur, _goalId: g.id });
       });
+      goalMeta.push({ goalId: g.id, name: g.name || t('defaultGoalName'), color: firstColor });
     });
-    if (savingsTrendChart) savingsTrendChart.destroy();
-    savingsTrendChart = new Chart(savingsCanvas, {
-      type: 'line',
-      data: { labels: svLabels, datasets },
-      options: {
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoneyCur(ctx.raw, ctx.dataset._currency)}` } }
-        },
-        scales: {
-          x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 }, color: '#8A8478' } },
-          y: { grid: { color: '#EDEAE3' }, ticks: { font: { family: 'Inter', size: 11 }, color: '#8A8478' } }
+
+    legendEl.innerHTML = goalMeta.map(gm => {
+      const hidden = hiddenSavingsTrendGoals.includes(gm.goalId);
+      return `<div class="legend-row-wrap${hidden ? ' hidden-cat' : ''}">
+        <button type="button" class="legend-toggle${hidden ? '' : ' checked'}" data-goal="${gm.goalId}" aria-label="${t('toggleCatAria')}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+        <div class="legend-row" style="cursor:default;">
+          <span class="legend-dot" style="background:${gm.color}"></span>
+          <span class="legend-name">${escapeHtml(gm.name)}</span>
+        </div>
+      </div>`;
+    }).join('');
+    legendEl.querySelectorAll('.legend-toggle').forEach(btn => {
+      btn.addEventListener('click', () => toggleSavingsTrendGoal(btn.dataset.goal));
+    });
+
+    const visibleDatasets = datasets.filter(ds => !hiddenSavingsTrendGoals.includes(ds._goalId));
+    if (visibleDatasets.length === 0) {
+      trendEmptyEl.style.display = 'block';
+      savingsCanvas.style.display = 'none';
+      if (savingsTrendChart) { savingsTrendChart.destroy(); savingsTrendChart = null; }
+    } else {
+      trendEmptyEl.style.display = 'none';
+      savingsCanvas.style.display = 'block';
+      if (savingsTrendChart) savingsTrendChart.destroy();
+      savingsTrendChart = new Chart(savingsCanvas, {
+        type: 'line',
+        data: { labels: svLabels, datasets: visibleDatasets },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoneyCur(ctx.raw, ctx.dataset._currency)}` } }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 }, color: '#8A8478' } },
+            y: { grid: { color: '#EDEAE3' }, ticks: { font: { family: 'Inter', size: 11 }, color: '#8A8478' } }
+          }
         }
-      }
-    });
-    legendEl.innerHTML = datasets.map(ds => `
-      <div class="legend-row" style="cursor:default;">
-        <span class="legend-dot" style="background:${ds.borderColor}"></span>
-        <span class="legend-name">${escapeHtml(ds.label)}</span>
-      </div>`).join('');
+      });
+    }
   }
 }
 
