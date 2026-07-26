@@ -471,7 +471,6 @@ function applyStaticTranslations() {
   document.getElementById('savingsAmountLabel').textContent = t('amountLabelPlain');
   document.getElementById('savingsDateLabel').textContent = t('dateLabel');
   document.getElementById('savingsNoteLabel').textContent = t('noteLabel');
-  document.getElementById('savingsNoteInput').setAttribute('placeholder', t('notePlaceholder'));
   renderLangPicker();
   renderCurrencyPicker();
   renderSavingsTrendCurrencySelect();
