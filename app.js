@@ -917,15 +917,15 @@ function render() {
   document.getElementById('nextMonth').disabled = monthOffset === 0;
   document.getElementById('nextMonthHeader').disabled = monthOffset === 0;
 
-  const balance = transactions.reduce((s, tx) => s + (tx.type === 'income' ? tx.amount : -tx.amount), 0);
-  const balEl = document.getElementById('balance');
-  balEl.textContent = formatMoney(balance);
-  balEl.className = 'balance' + (balance < 0 ? ' neg' : '');
-
   const monthTx = transactions.filter(tx => {
     const d = new Date(tx.date);
     return d.getFullYear() === ty && d.getMonth() === tm;
   }).sort((a, b) => b.date.localeCompare(a.date) || String(b.id).localeCompare(String(a.id)));
+
+  const balance = monthTx.reduce((s, tx) => s + (tx.type === 'income' ? tx.amount : -tx.amount), 0);
+  const balEl = document.getElementById('balance');
+  balEl.textContent = formatMoney(balance);
+  balEl.className = 'balance' + (balance < 0 ? ' neg' : '');
 
   const monthIncome = monthTx.filter(tx => tx.type === 'income').reduce((s, tx) => s + tx.amount, 0);
   const monthExpense = monthTx.filter(tx => tx.type === 'expense').reduce((s, tx) => s + tx.amount, 0);
