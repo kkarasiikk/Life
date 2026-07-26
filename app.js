@@ -10,7 +10,7 @@ const LOCALE_MAP = { uk: 'uk-UA', ru: 'ru-RU', pl: 'pl-PL', en: 'en-US' };
 
 const T = {
   uk: {
-    appTitle: 'My life',
+    appTitle: 'Life',
     authTitleLogin: 'Вхід', authTitleSignup: 'Реєстрація',
     authSub: 'Увійди, щоб дані синхронізувались між твоїми пристроями.',
     emailLabel: 'Email', passwordLabel: 'Пароль',
@@ -59,7 +59,7 @@ const T = {
     chooseFileBtn: 'Обрати файл',
   },
   ru: {
-    appTitle: 'My life',
+    appTitle: 'Life',
     authTitleLogin: 'Вход', authTitleSignup: 'Регистрация',
     authSub: 'Войди, чтобы данные синхронизировались между твоими устройствами.',
     emailLabel: 'Email', passwordLabel: 'Пароль',
@@ -108,7 +108,7 @@ const T = {
     chooseFileBtn: 'Выбрать файл',
   },
   pl: {
-    appTitle: 'My life',
+    appTitle: 'Life',
     authTitleLogin: 'Logowanie', authTitleSignup: 'Rejestracja',
     authSub: 'Zaloguj się, aby dane synchronizowały się między urządzeniami.',
     emailLabel: 'Email', passwordLabel: 'Hasło',
@@ -157,7 +157,7 @@ const T = {
     chooseFileBtn: 'Wybierz plik',
   },
   en: {
-    appTitle: 'My life',
+    appTitle: 'Life',
     authTitleLogin: 'Log in', authTitleSignup: 'Sign up',
     authSub: 'Log in so your data syncs across your devices.',
     emailLabel: 'Email', passwordLabel: 'Password',
