@@ -44,6 +44,10 @@
   .auth-options-row{display:flex;align-items:center;justify-content:space-between;margin:-6px 0 14px;gap:10px;}
   .remember-me{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-muted);cursor:pointer;user-select:none;}
   .remember-me input{width:15px;height:15px;accent-color:var(--accent);cursor:pointer;margin:0;}
+  .setting-toggle-row{display:flex;align-items:center;gap:10px;padding:13px 2px;font-size:14px;color:var(--ink);
+    cursor:pointer;user-select:none;border-bottom:1px solid var(--border);}
+  .setting-toggle-row:last-child{border-bottom:none;}
+  .setting-toggle-row input{width:17px;height:17px;accent-color:var(--accent);cursor:pointer;margin:0;flex-shrink:0;}
   #forgotPasswordLink{font-size:12.5px;color:var(--accent);font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap;}
   .auth-submit{width:100%;padding:12px 0;border-radius:10px;border:none;cursor:pointer;color:#fff;background:var(--accent);
     font-size:14.5px;font-weight:600;font-family:'Inter',sans-serif;}
@@ -400,14 +404,14 @@
   <div class="content">
     <div id="entriesTab"></div>
     <div id="statsTab" style="display:none;">
-      <div class="card">
+      <div class="card" id="pieChartCard">
         <div class="card-title" id="statsCatTitle">Витрати за категоріями</div>
         <div class="card-sub" id="statsMonthLabel">—</div>
         <div id="pieEmpty" class="empty" style="display:none;padding:30px 0;font-size:13.5px;">Немає витрат цього місяця</div>
         <div style="height:220px;"><canvas id="pieChart"></canvas></div>
         <div id="pieLegend"></div>
       </div>
-      <div class="card">
+      <div class="card" id="trendChartCard">
         <div class="trend-head">
           <div>
             <div class="card-title" id="statsTrendTitle">Дохід і витрати</div>
@@ -421,7 +425,7 @@
         </div>
         <div style="height:220px;"><canvas id="barChart"></canvas></div>
       </div>
-      <div class="card">
+      <div class="card" id="savingsTrendCard">
         <div class="trend-head">
           <div>
             <div class="card-title" id="savingsTrendTitle">Заощадження</div>
@@ -445,7 +449,7 @@
     </div>
     <div id="savingsTab" style="display:none;">
       <div id="savingsGoalsList">
-        <div class="card">
+        <div class="card" id="savingsTotalCard">
           <div class="card-title" id="savingsTotalLabel">Загальний баланс заощаджень</div>
           <div class="balance" id="savingsTotalBalance" style="margin-top:6px;">0,00 ₴</div>
         </div>
@@ -627,6 +631,40 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
       </button>
     </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="statsSettingsOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="statsSettingsTitle">Налаштування статистики</div>
+      <button class="close-btn" id="closeStatsSettings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <label class="setting-toggle-row">
+      <input type="checkbox" id="showChartPie" checked>
+      <span id="showChartPieLabel">Витрати за категоріями</span>
+    </label>
+    <label class="setting-toggle-row">
+      <input type="checkbox" id="showChartTrend" checked>
+      <span id="showChartTrendLabel">Дохід і витрати</span>
+    </label>
+    <label class="setting-toggle-row">
+      <input type="checkbox" id="showChartSavings" checked>
+      <span id="showChartSavingsLabel">Заощадження</span>
+    </label>
+  </div>
+</div>
+
+<div class="modal-overlay" id="savingsSettingsOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="savingsSettingsTitle">Налаштування заощаджень</div>
+      <button class="close-btn" id="closeSavingsSettings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <label class="setting-toggle-row">
+      <input type="checkbox" id="showSavingsTotalToggle" checked>
+      <span id="showSavingsTotalToggleLabel">Показувати загальний баланс заощаджень</span>
+    </label>
   </div>
 </div>
 

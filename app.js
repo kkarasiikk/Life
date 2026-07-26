@@ -39,7 +39,7 @@ const T = {
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
     emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу',
-    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн',
+    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
     chartIncome: 'Дохід', chartExpense: 'Витрати',
@@ -88,7 +88,7 @@ const T = {
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
     emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу',
-    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн',
+    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
     chartIncome: 'Доход', chartExpense: 'Расходы',
@@ -137,7 +137,7 @@ const T = {
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
     emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej',
-    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline',
+    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
@@ -186,7 +186,7 @@ const T = {
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
     emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below',
-    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline',
+    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
     chartIncome: 'Income', chartExpense: 'Expenses',
@@ -332,6 +332,10 @@ let hiddenStatsCategories = [];
 try { hiddenStatsCategories = JSON.parse(localStorage.getItem('financeAppHiddenStatsCats') || '[]'); } catch (e) { hiddenStatsCategories = []; }
 let hiddenSavingsTrendGoals = [];
 try { hiddenSavingsTrendGoals = JSON.parse(localStorage.getItem('financeAppHiddenSavingsGoals') || '[]'); } catch (e) { hiddenSavingsTrendGoals = []; }
+let showChartPie = localStorage.getItem('financeAppShowChartPie') !== '0';
+let showChartTrend = localStorage.getItem('financeAppShowChartTrend') !== '0';
+let showChartSavings = localStorage.getItem('financeAppShowChartSavings') !== '0';
+let showSavingsTotal = localStorage.getItem('financeAppShowSavingsTotal') !== '0';
 const MONTHS_WORD = {
   uk: { 3: 'місяці', 6: 'місяців', 12: 'місяців', 24: 'місяці', 36: 'місяців' },
   ru: { 3: 'месяца', 6: 'месяцев', 12: 'месяцев', 24: 'месяца', 36: 'месяцев' },
@@ -446,6 +450,16 @@ function applyStaticTranslations() {
   document.getElementById('categoriesTitle').textContent = t('categoriesTitle');
   document.getElementById('statsToggleBtn').setAttribute('aria-label', t('tabStats'));
   document.getElementById('categoriesBtn').setAttribute('aria-label', t('categoriesTitle'));
+  document.getElementById('statsSettingsTitle').textContent = t('statsSettingsTitle');
+  document.getElementById('showChartPieLabel').textContent = t('statsCatTitle');
+  document.getElementById('showChartTrendLabel').textContent = t('statsTrendTitle');
+  document.getElementById('showChartSavingsLabel').textContent = t('savingsTrendTitle');
+  document.getElementById('savingsSettingsTitle').textContent = t('savingsSettingsTitle');
+  document.getElementById('showSavingsTotalToggleLabel').textContent = t('showSavingsTotalLabel');
+  document.getElementById('showChartPie').checked = showChartPie;
+  document.getElementById('showChartTrend').checked = showChartTrend;
+  document.getElementById('showChartSavings').checked = showChartSavings;
+  document.getElementById('showSavingsTotalToggle').checked = showSavingsTotal;
   document.getElementById('settingsLangLabel').textContent = t('langLabel');
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
   document.getElementById('expenseCatManageLabel').textContent = t('expenseCatManageLabel');
@@ -981,6 +995,7 @@ function lastUsedGoalCurrency(goalId) {
 }
 
 function renderSavingsGoalsList() {
+  document.getElementById('savingsTotalCard').style.display = showSavingsTotal ? '' : 'none';
   renderBalanceBlock(document.getElementById('savingsTotalBalance'), totalSavingsBalance());
 
   const container = document.getElementById('savingsGoalsCards');
@@ -1324,6 +1339,13 @@ function toggleSavingsTrendGoal(goalId) {
 }
 
 function renderStats(monthTx, ty, tm) {
+  document.getElementById('pieChartCard').style.display = showChartPie ? '' : 'none';
+  document.getElementById('trendChartCard').style.display = showChartTrend ? '' : 'none';
+  document.getElementById('savingsTrendCard').style.display = showChartSavings ? '' : 'none';
+
+  if (!showChartPie) {
+    if (pieChart) { pieChart.destroy(); pieChart = null; }
+  } else {
   const map = {};
   monthTx.filter(tx => tx.type === 'expense').forEach(tx => { map[tx.category] = (map[tx.category] || 0) + tx.amount; });
   const entries = Object.entries(map).sort((a, b) => b[1] - a[1]);
@@ -1385,6 +1407,7 @@ function renderStats(monthTx, ty, tm) {
       });
     }
   }
+  }
 
   const now = new Date();
   const nomMonths = MONTHS_NOM[currentLang] || MONTHS_NOM.uk;
@@ -1397,6 +1420,9 @@ function renderStats(monthTx, ty, tm) {
     expenseData.push(transactions.filter(tx => { const td = new Date(tx.date); return td.getFullYear() === y && td.getMonth() === m && tx.type === 'expense'; }).reduce((s, tx) => s + tx.amount, 0));
   }
   const wordMap = MONTHS_WORD[currentLang] || MONTHS_WORD.uk;
+  if (!showChartTrend) {
+    if (barChart) { barChart.destroy(); barChart = null; }
+  } else {
   document.getElementById('statsTrendSub').textContent = `${t('lastLabel')} ${trendPeriodMonths} ${wordMap[trendPeriodMonths] || wordMap[6]}`;
   const barCanvas = document.getElementById('barChart');
   if (barChart) barChart.destroy();
@@ -1415,8 +1441,12 @@ function renderStats(monthTx, ty, tm) {
       }
     }
   });
+  }
 
   // ---- Графік динаміки заощаджень (по лінії на кожну ціль, у вибраній валюті) ----
+  if (!showChartSavings) {
+    if (savingsTrendChart) { savingsTrendChart.destroy(); savingsTrendChart = null; }
+  } else {
   const trendEmptyEl = document.getElementById('savingsTrendEmpty');
   const savingsCanvas = document.getElementById('savingsTrendChart');
   const legendEl = document.getElementById('savingsTrendLegend');
@@ -1506,6 +1536,7 @@ function renderStats(monthTx, ty, tm) {
         }
       });
     }
+  }
   }
 }
 
@@ -1735,9 +1766,43 @@ document.getElementById('addExpenseCatBtn').addEventListener('click', () => addC
 document.getElementById('addIncomeCatBtn').addEventListener('click', () => addCategoryFromInput('income'));
 document.getElementById('newExpenseCatInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') addCategoryFromInput('expense'); });
 document.getElementById('newIncomeCatInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') addCategoryFromInput('income'); });
-document.getElementById('categoriesBtn').addEventListener('click', () => document.getElementById('categoriesOverlay').classList.add('show'));
+document.getElementById('categoriesBtn').addEventListener('click', () => {
+  if (currentTab === 'stats') {
+    document.getElementById('statsSettingsOverlay').classList.add('show');
+  } else if (currentTab === 'savings') {
+    document.getElementById('savingsSettingsOverlay').classList.add('show');
+  } else {
+    document.getElementById('categoriesOverlay').classList.add('show');
+  }
+});
 document.getElementById('closeCategories').addEventListener('click', () => document.getElementById('categoriesOverlay').classList.remove('show'));
 document.getElementById('categoriesOverlay').addEventListener('click', (e) => { if (e.target.id === 'categoriesOverlay') e.currentTarget.classList.remove('show'); });
+
+document.getElementById('closeStatsSettings').addEventListener('click', () => document.getElementById('statsSettingsOverlay').classList.remove('show'));
+document.getElementById('statsSettingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'statsSettingsOverlay') e.currentTarget.classList.remove('show'); });
+document.getElementById('showChartPie').addEventListener('change', (e) => {
+  showChartPie = e.target.checked;
+  localStorage.setItem('financeAppShowChartPie', showChartPie ? '1' : '0');
+  render();
+});
+document.getElementById('showChartTrend').addEventListener('change', (e) => {
+  showChartTrend = e.target.checked;
+  localStorage.setItem('financeAppShowChartTrend', showChartTrend ? '1' : '0');
+  render();
+});
+document.getElementById('showChartSavings').addEventListener('change', (e) => {
+  showChartSavings = e.target.checked;
+  localStorage.setItem('financeAppShowChartSavings', showChartSavings ? '1' : '0');
+  render();
+});
+
+document.getElementById('closeSavingsSettings').addEventListener('click', () => document.getElementById('savingsSettingsOverlay').classList.remove('show'));
+document.getElementById('savingsSettingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'savingsSettingsOverlay') e.currentTarget.classList.remove('show'); });
+document.getElementById('showSavingsTotalToggle').addEventListener('change', (e) => {
+  showSavingsTotal = e.target.checked;
+  localStorage.setItem('financeAppShowSavingsTotal', showSavingsTotal ? '1' : '0');
+  renderSavingsGoalsList();
+});
 document.getElementById('statsToggleBtn').addEventListener('click', () => selectTab(currentTab === 'stats' ? 'entries' : 'stats'));
 document.getElementById('savingsToggleBtn').addEventListener('click', () => selectTab(currentTab === 'savings' ? 'entries' : 'savings'));
 document.getElementById('closePage').addEventListener('click', () => document.getElementById('pageOverlay').classList.remove('show'));
