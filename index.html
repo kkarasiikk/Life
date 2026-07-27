@@ -234,6 +234,13 @@
     border-radius:12px;border:1.5px dashed var(--border);background:transparent;color:var(--ink-muted);
     font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;}
   .goal-add-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .note-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:14px 18px;margin-bottom:10px;cursor:pointer;text-align:left;width:100%;font-family:'Inter',sans-serif;}
+  .note-card:hover{border-color:var(--accent);}
+  .note-card-title{font-size:14.5px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .note-card-snippet{font-size:13px;color:var(--ink-muted);margin-top:4px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;}
+  .note-card-date{font-size:11.5px;color:var(--ink-muted);margin-top:6px;}
   .goal-detail-head{display:flex;align-items:center;gap:6px;margin-bottom:14px;}
   .goal-detail-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
     color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;font-weight:700;}
@@ -368,6 +375,9 @@
         <button id="nextMonthHeader" aria-label="Наступний місяць"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
       </div>
       <div class="header-actions">
+        <button class="header-icon-btn header-text-btn" id="notesToggleBtn" aria-label="Нотатки">
+          <span id="notesToggleLabel">Нотатки</span>
+        </button>
         <button class="header-icon-btn header-text-btn" id="statsToggleBtn" aria-label="Статистика">
           <span id="statsToggleLabel">Статистика</span>
         </button>
@@ -475,6 +485,17 @@
           <div class="balance" id="savingsBalance" style="margin-top:6px;">0,00 ₴</div>
         </div>
         <div id="savingsList"></div>
+      </div>
+    </div>
+    <div id="notesTab" style="display:none;">
+      <div id="notesCards"></div>
+      <button type="button" class="goal-add-btn" id="addNoteBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        <span id="addNoteBtnLabel">Нова нотатка</span>
+      </button>
+      <div id="notesEmpty" class="empty" style="display:none;padding:30px 0;font-size:13.5px;">
+        <div class="title" id="notesEmptyTitle">Тут поки порожньо</div>
+        <div id="notesEmptySub">Додай першу нотатку кнопкою нижче</div>
       </div>
     </div>
     <div id="pageViewTab" style="display:none;">
