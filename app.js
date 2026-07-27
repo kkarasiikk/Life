@@ -28,7 +28,7 @@ const T = {
     err_resetFailed: 'Не вдалося надіслати лист. Перевір email і спробуй ще раз',
     balanceLabel: 'Кошти', logout: 'Вийти',
     incomeMonthLabel: 'Дохід за місяць', expenseMonthLabel: 'Витрати за місяць',
-    tabEntries: 'Кошти', tabStats: 'Статистика', tabPages: 'Сторінки', tabSavings: 'Збереження', savingsBalanceLabel: 'Баланс заощаджень', savingsEmptySub: 'Додай першу операцію кнопкою внизу', fabDepositLabel: 'Поповнити', fabWithdrawLabel: 'Зняти', newDepositTitle: 'Поповнення', newWithdrawTitle: 'Зняття коштів', editDepositTitle: 'Редагувати поповнення', editWithdrawTitle: 'Редагувати зняття', savingsTotalLabel: 'Загальний баланс заощаджень', addGoalLabel: 'Нова ціль', goalFormTitleNew: 'Нова ціль', goalFormTitleEdit: 'Редагувати ціль', goalNameLabel: 'Назва', goalNamePlaceholder: 'Напр. На відпустку', goalNameError: 'Введи назву цілі', deleteGoalLabel: 'Видалити ціль', confirmTitleGoal: 'Видалити ціль?', confirmSubGoal: 'Усі операції в цій цілі теж буде видалено.', defaultGoalName: 'Загальні заощадження', savingsTrendTitle: 'Заощадження', savingsTrendSub: 'Динаміка за 6 місяців', savingsTrendEmpty: 'Ще немає заощаджень',
+    tabEntries: 'Кошти', tabStats: 'Статистика', tabPages: 'Сторінки', tabSavings: 'Збереження', savingsBalanceLabel: 'Баланс заощаджень', savingsEmptySub: 'Додай першу операцію кнопкою внизу', fabDepositLabel: 'Поповнити', fabWithdrawLabel: 'Зняти', newDepositTitle: 'Поповнення', newWithdrawTitle: 'Зняття коштів', editDepositTitle: 'Редагувати поповнення', editWithdrawTitle: 'Редагувати зняття', savingsTotalLabel: 'Загальний баланс', addGoalLabel: 'Нова ціль', goalFormTitleNew: 'Нова ціль', goalFormTitleEdit: 'Редагувати ціль', goalNameLabel: 'Назва', goalNamePlaceholder: 'Напр. На відпустку', goalNameError: 'Введи назву цілі', deleteGoalLabel: 'Видалити ціль', confirmTitleGoal: 'Видалити ціль?', confirmSubGoal: 'Усі операції в цій цілі теж буде видалено.', defaultGoalName: 'Загальні заощадження', savingsTrendTitle: 'Збереження', savingsTrendSub: 'Динаміка за 6 місяців', savingsTrendEmpty: 'Ще немає заощаджень',
     prevMonthAria: 'Попередній місяць', nextMonthAria: 'Наступний місяць',
     newPageBtn: 'Нова сторінка', pageTitleLabel: 'Назва', pageContentLabel: 'Текст',
     pageTitlePlaceholder: 'Напр. Ідеї на відпустку', pageContentPlaceholder: 'Пиши тут що завгодно…',
@@ -39,7 +39,7 @@ const T = {
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
     emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу',
-    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень',
+    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
     chartIncome: 'Дохід', chartExpense: 'Витрати',
@@ -49,7 +49,7 @@ const T = {
     noteLabel: 'Нотатка (необовʼязково)', notePlaceholder: 'Напр. кава з другом',
     saveBtn: 'Зберегти запис', amountError: 'Введи суму більшу за нуль',
     saveError: 'Не вдалося зберегти. Перевір інтернет-з’єднання',
-    confirmTitle: 'Видалити запис?', confirmSub: 'Цю дію не можна скасувати.',
+    confirmTitle: 'Видалити запис?', confirmSub: 'Цю дію не можна скасувати.', confirmTitleLogout: 'Вийти з акаунту?', confirmSubLogout: 'Доведеться увійти знову, щоб побачити свої дані.',
     cancelBtn: 'Скасувати', deleteBtn: 'Видалити',
     settingsTitle: 'Налаштування', langLabel: 'Мова', currencyLabel: 'Валюта', categoriesTitle: 'Категорії',
     expenseCatManageLabel: 'Категорії витрат', incomeCatManageLabel: 'Категорії доходів',
@@ -77,7 +77,7 @@ const T = {
     err_resetFailed: 'Не удалось отправить письмо. Проверь email и попробуй ещё раз',
     balanceLabel: 'Средства', logout: 'Выйти',
     incomeMonthLabel: 'Доход за месяц', expenseMonthLabel: 'Расходы за месяц',
-    tabEntries: 'Средства', tabStats: 'Статистика', tabPages: 'Страницы', tabSavings: 'Сбережения', savingsBalanceLabel: 'Баланс сбережений', savingsEmptySub: 'Добавь первую операцию кнопкой внизу', fabDepositLabel: 'Пополнить', fabWithdrawLabel: 'Снять', newDepositTitle: 'Пополнение', newWithdrawTitle: 'Снятие средств', editDepositTitle: 'Редактировать пополнение', editWithdrawTitle: 'Редактировать снятие', savingsTotalLabel: 'Общий баланс сбережений', addGoalLabel: 'Новая цель', goalFormTitleNew: 'Новая цель', goalFormTitleEdit: 'Редактировать цель', goalNameLabel: 'Название', goalNamePlaceholder: 'Напр. На отпуск', goalNameError: 'Введи название цели', deleteGoalLabel: 'Удалить цель', confirmTitleGoal: 'Удалить цель?', confirmSubGoal: 'Все операции в этой цели тоже будут удалены.', defaultGoalName: 'Общие сбережения', savingsTrendTitle: 'Сбережения', savingsTrendSub: 'Динамика за 6 месяцев', savingsTrendEmpty: 'Пока нет сбережений',
+    tabEntries: 'Средства', tabStats: 'Статистика', tabPages: 'Страницы', tabSavings: 'Сбережения', savingsBalanceLabel: 'Баланс сбережений', savingsEmptySub: 'Добавь первую операцию кнопкой внизу', fabDepositLabel: 'Пополнить', fabWithdrawLabel: 'Снять', newDepositTitle: 'Пополнение', newWithdrawTitle: 'Снятие средств', editDepositTitle: 'Редактировать пополнение', editWithdrawTitle: 'Редактировать снятие', savingsTotalLabel: 'Общий баланс', addGoalLabel: 'Новая цель', goalFormTitleNew: 'Новая цель', goalFormTitleEdit: 'Редактировать цель', goalNameLabel: 'Название', goalNamePlaceholder: 'Напр. На отпуск', goalNameError: 'Введи название цели', deleteGoalLabel: 'Удалить цель', confirmTitleGoal: 'Удалить цель?', confirmSubGoal: 'Все операции в этой цели тоже будут удалены.', defaultGoalName: 'Общие сбережения', savingsTrendTitle: 'Сбережения', savingsTrendSub: 'Динамика за 6 месяцев', savingsTrendEmpty: 'Пока нет сбережений',
     prevMonthAria: 'Предыдущий месяц', nextMonthAria: 'Следующий месяц',
     newPageBtn: 'Новая страница', pageTitleLabel: 'Название', pageContentLabel: 'Текст',
     pageTitlePlaceholder: 'Напр. Идеи на отпуск', pageContentPlaceholder: 'Пиши здесь что угодно…',
@@ -88,7 +88,7 @@ const T = {
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
     emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу',
-    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений',
+    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
     chartIncome: 'Доход', chartExpense: 'Расходы',
@@ -98,7 +98,7 @@ const T = {
     noteLabel: 'Заметка (необязательно)', notePlaceholder: 'Напр. кофе с другом',
     saveBtn: 'Сохранить запись', amountError: 'Введи сумму больше нуля',
     saveError: 'Не удалось сохранить. Проверь интернет-соединение',
-    confirmTitle: 'Удалить запись?', confirmSub: 'Это действие нельзя отменить.',
+    confirmTitle: 'Удалить запись?', confirmSub: 'Это действие нельзя отменить.', confirmTitleLogout: 'Выйти из аккаунта?', confirmSubLogout: 'Придётся войти снова, чтобы увидеть свои данные.',
     cancelBtn: 'Отмена', deleteBtn: 'Удалить',
     settingsTitle: 'Настройки', langLabel: 'Язык', currencyLabel: 'Валюта', categoriesTitle: 'Категории',
     expenseCatManageLabel: 'Категории расходов', incomeCatManageLabel: 'Категории доходов',
@@ -126,7 +126,7 @@ const T = {
     err_resetFailed: 'Nie udało się wysłać emaila. Sprawdź adres i spróbuj ponownie',
     balanceLabel: 'Środki', logout: 'Wyloguj',
     incomeMonthLabel: 'Przychód w tym miesiącu', expenseMonthLabel: 'Wydatki w tym miesiącu',
-    tabEntries: 'Środki', tabStats: 'Statystyki', tabPages: 'Strony', tabSavings: 'Oszczędności', savingsBalanceLabel: 'Saldo oszczędności', savingsEmptySub: 'Dodaj pierwszą operację przyciskiem poniżej', fabDepositLabel: 'Wpłać', fabWithdrawLabel: 'Wypłać', newDepositTitle: 'Wpłata', newWithdrawTitle: 'Wypłata środków', editDepositTitle: 'Edytuj wpłatę', editWithdrawTitle: 'Edytuj wypłatę', savingsTotalLabel: 'Łączne saldo oszczędności', addGoalLabel: 'Nowy cel', goalFormTitleNew: 'Nowy cel', goalFormTitleEdit: 'Edytuj cel', goalNameLabel: 'Nazwa', goalNamePlaceholder: 'Np. Na wakacje', goalNameError: 'Wpisz nazwę celu', deleteGoalLabel: 'Usuń cel', confirmTitleGoal: 'Usunąć cel?', confirmSubGoal: 'Wszystkie operacje w tym celu też zostaną usunięte.', defaultGoalName: 'Ogólne oszczędności', savingsTrendTitle: 'Oszczędności', savingsTrendSub: 'Dynamika za 6 miesięcy', savingsTrendEmpty: 'Jeszcze brak oszczędności',
+    tabEntries: 'Środki', tabStats: 'Statystyki', tabPages: 'Strony', tabSavings: 'Oszczędności', savingsBalanceLabel: 'Saldo oszczędności', savingsEmptySub: 'Dodaj pierwszą operację przyciskiem poniżej', fabDepositLabel: 'Wpłać', fabWithdrawLabel: 'Wypłać', newDepositTitle: 'Wpłata', newWithdrawTitle: 'Wypłata środków', editDepositTitle: 'Edytuj wpłatę', editWithdrawTitle: 'Edytuj wypłatę', savingsTotalLabel: 'Łączne saldo', addGoalLabel: 'Nowy cel', goalFormTitleNew: 'Nowy cel', goalFormTitleEdit: 'Edytuj cel', goalNameLabel: 'Nazwa', goalNamePlaceholder: 'Np. Na wakacje', goalNameError: 'Wpisz nazwę celu', deleteGoalLabel: 'Usuń cel', confirmTitleGoal: 'Usunąć cel?', confirmSubGoal: 'Wszystkie operacje w tym celu też zostaną usunięte.', defaultGoalName: 'Ogólne oszczędności', savingsTrendTitle: 'Oszczędności', savingsTrendSub: 'Dynamika za 6 miesięcy', savingsTrendEmpty: 'Jeszcze brak oszczędności',
     prevMonthAria: 'Poprzedni miesiąc', nextMonthAria: 'Następny miesiąc',
     newPageBtn: 'Nowa strona', pageTitleLabel: 'Tytuł', pageContentLabel: 'Treść',
     pageTitlePlaceholder: 'Np. Pomysły na wakacje', pageContentPlaceholder: 'Napisz tu cokolwiek…',
@@ -137,7 +137,7 @@ const T = {
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
     emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej',
-    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności',
+    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
@@ -147,7 +147,7 @@ const T = {
     noteLabel: 'Notatka (opcjonalnie)', notePlaceholder: 'Np. kawa ze znajomym',
     saveBtn: 'Zapisz wpis', amountError: 'Wpisz kwotę większą od zera',
     saveError: 'Nie udało się zapisać. Sprawdź połączenie z internetem',
-    confirmTitle: 'Usunąć wpis?', confirmSub: 'Tej czynności nie można cofnąć.',
+    confirmTitle: 'Usunąć wpis?', confirmSub: 'Tej czynności nie można cofnąć.', confirmTitleLogout: 'Wylogować się?', confirmSubLogout: 'Aby zobaczyć swoje dane, trzeba będzie zalogować się ponownie.',
     cancelBtn: 'Anuluj', deleteBtn: 'Usuń',
     settingsTitle: 'Ustawienia', langLabel: 'Język', currencyLabel: 'Waluta', categoriesTitle: 'Kategorie',
     expenseCatManageLabel: 'Kategorie wydatków', incomeCatManageLabel: 'Kategorie przychodów',
@@ -175,7 +175,7 @@ const T = {
     err_resetFailed: 'Could not send the email. Check the address and try again',
     balanceLabel: 'Funds', logout: 'Log out',
     incomeMonthLabel: 'Income this month', expenseMonthLabel: 'Expenses this month',
-    tabEntries: 'Funds', tabStats: 'Stats', tabPages: 'Pages', tabSavings: 'Savings', savingsBalanceLabel: 'Savings balance', savingsEmptySub: 'Add your first entry using the button below', fabDepositLabel: 'Deposit', fabWithdrawLabel: 'Withdraw', newDepositTitle: 'Deposit', newWithdrawTitle: 'Withdrawal', editDepositTitle: 'Edit deposit', editWithdrawTitle: 'Edit withdrawal', savingsTotalLabel: 'Total savings balance', addGoalLabel: 'New goal', goalFormTitleNew: 'New goal', goalFormTitleEdit: 'Edit goal', goalNameLabel: 'Name', goalNamePlaceholder: 'E.g. Vacation fund', goalNameError: 'Enter a goal name', deleteGoalLabel: 'Delete goal', confirmTitleGoal: 'Delete goal?', confirmSubGoal: 'All entries in this goal will be deleted too.', defaultGoalName: 'General savings', savingsTrendTitle: 'Savings', savingsTrendSub: 'Trend over 6 months', savingsTrendEmpty: 'No savings yet',
+    tabEntries: 'Funds', tabStats: 'Stats', tabPages: 'Pages', tabSavings: 'Savings', savingsBalanceLabel: 'Savings balance', savingsEmptySub: 'Add your first entry using the button below', fabDepositLabel: 'Deposit', fabWithdrawLabel: 'Withdraw', newDepositTitle: 'Deposit', newWithdrawTitle: 'Withdrawal', editDepositTitle: 'Edit deposit', editWithdrawTitle: 'Edit withdrawal', savingsTotalLabel: 'Total balance', addGoalLabel: 'New goal', goalFormTitleNew: 'New goal', goalFormTitleEdit: 'Edit goal', goalNameLabel: 'Name', goalNamePlaceholder: 'E.g. Vacation fund', goalNameError: 'Enter a goal name', deleteGoalLabel: 'Delete goal', confirmTitleGoal: 'Delete goal?', confirmSubGoal: 'All entries in this goal will be deleted too.', defaultGoalName: 'General savings', savingsTrendTitle: 'Savings', savingsTrendSub: 'Trend over 6 months', savingsTrendEmpty: 'No savings yet',
     prevMonthAria: 'Previous month', nextMonthAria: 'Next month',
     newPageBtn: 'New page', pageTitleLabel: 'Title', pageContentLabel: 'Content',
     pageTitlePlaceholder: 'E.g. Vacation ideas', pageContentPlaceholder: 'Write anything here…',
@@ -186,7 +186,7 @@ const T = {
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
     emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below',
-    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance',
+    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
     chartIncome: 'Income', chartExpense: 'Expenses',
@@ -196,7 +196,7 @@ const T = {
     noteLabel: 'Note (optional)', notePlaceholder: 'E.g. coffee with a friend',
     saveBtn: 'Save entry', amountError: 'Enter an amount greater than zero',
     saveError: 'Could not save. Check your internet connection',
-    confirmTitle: 'Delete entry?', confirmSub: 'This action cannot be undone.',
+    confirmTitle: 'Delete entry?', confirmSub: 'This action cannot be undone.', confirmTitleLogout: 'Log out?', confirmSubLogout: "You'll need to sign in again to see your data.",
     cancelBtn: 'Cancel', deleteBtn: 'Delete',
     settingsTitle: 'Settings', langLabel: 'Language', currencyLabel: 'Currency', categoriesTitle: 'Categories',
     expenseCatManageLabel: 'Expense categories', incomeCatManageLabel: 'Income categories',
@@ -336,6 +336,10 @@ let showChartPie = localStorage.getItem('financeAppShowChartPie') !== '0';
 let showChartTrend = localStorage.getItem('financeAppShowChartTrend') !== '0';
 let showChartSavings = localStorage.getItem('financeAppShowChartSavings') !== '0';
 let showSavingsTotal = localStorage.getItem('financeAppShowSavingsTotal') !== '0';
+let savingsTotalMode = localStorage.getItem('financeAppSavingsTotalMode') || 'multi';
+if (!['multi', 'single'].includes(savingsTotalMode)) savingsTotalMode = 'multi';
+let savingsTotalCurrency = localStorage.getItem('financeAppSavingsTotalCurrency') || currentCurrency;
+if (!CURRENCY_CODES.includes(savingsTotalCurrency)) savingsTotalCurrency = 'UAH';
 const MONTHS_WORD = {
   uk: { 3: 'місяці', 6: 'місяців', 12: 'місяців', 24: 'місяці', 36: 'місяців' },
   ru: { 3: 'месяца', 6: 'месяцев', 12: 'месяцев', 24: 'месяца', 36: 'месяцев' },
@@ -461,6 +465,9 @@ function applyStaticTranslations() {
   document.getElementById('showChartTrend').checked = showChartTrend;
   document.getElementById('showChartSavings').checked = showChartSavings;
   document.getElementById('showSavingsTotalToggle').checked = showSavingsTotal;
+  document.getElementById('savingsTotalModeLabel').textContent = t('savingsTotalModeLabel');
+  renderSavingsTotalModePicker();
+  renderSavingsTotalCurrencySelect();
   document.getElementById('settingsLangLabel').textContent = t('langLabel');
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
   document.getElementById('expenseCatManageLabel').textContent = t('expenseCatManageLabel');
@@ -532,6 +539,36 @@ function renderSavingsTrendCurrencySelect() {
     select.dataset.bound = '1';
   }
   select.value = savingsTrendCurrency;
+}
+
+function renderSavingsTotalModePicker() {
+  const picker = document.getElementById('savingsTotalModePicker');
+  picker.innerHTML = `
+    <button type="button" class="cat-choice${savingsTotalMode === 'multi' ? ' selected' : ''}" data-mode="multi" style="${savingsTotalMode === 'multi' ? 'background:var(--accent);' : ''}">${t('savingsTotalModeMulti')}</button>
+    <button type="button" class="cat-choice${savingsTotalMode === 'single' ? ' selected' : ''}" data-mode="single" style="${savingsTotalMode === 'single' ? 'background:var(--accent);' : ''}">${t('savingsTotalModeSingle')}</button>`;
+  picker.querySelectorAll('.cat-choice').forEach(btn => {
+    btn.addEventListener('click', () => {
+      savingsTotalMode = btn.dataset.mode;
+      localStorage.setItem('financeAppSavingsTotalMode', savingsTotalMode);
+      renderSavingsTotalModePicker();
+      renderSavingsGoalsList();
+    });
+  });
+  document.getElementById('savingsTotalCurrencyWrap').style.display = savingsTotalMode === 'single' ? 'block' : 'none';
+}
+
+function renderSavingsTotalCurrencySelect() {
+  const select = document.getElementById('savingsTotalCurrencySelect');
+  if (select.dataset.bound !== '1') {
+    select.innerHTML = CURRENCY_CODES.map(c => `<option value="${c}">${c} ${CURRENCIES[c].symbol}</option>`).join('');
+    select.addEventListener('change', () => {
+      savingsTotalCurrency = select.value;
+      localStorage.setItem('financeAppSavingsTotalCurrency', savingsTotalCurrency);
+      renderSavingsGoalsList();
+    });
+    select.dataset.bound = '1';
+  }
+  select.value = savingsTotalCurrency;
 }
 
 function renderCategoryManager() {
@@ -700,7 +737,12 @@ document.getElementById('forgotPasswordLink').addEventListener('click', async ()
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
   document.getElementById('appMenuOverlay').classList.remove('show');
-  auth.signOut();
+  pendingDeleteId = null;
+  pendingDeleteType = 'logout';
+  document.getElementById('confirmTitle').textContent = t('confirmTitleLogout');
+  document.getElementById('confirmSub').textContent = t('confirmSubLogout');
+  document.getElementById('confirmDelete').textContent = t('logout');
+  document.getElementById('confirmOverlay').classList.add('show');
 });
 
 auth.onAuthStateChanged((user) => {
@@ -997,7 +1039,27 @@ function lastUsedGoalCurrency(goalId) {
 
 function renderSavingsGoalsList() {
   document.getElementById('savingsTotalCard').style.display = showSavingsTotal ? '' : 'none';
-  renderBalanceBlock(document.getElementById('savingsTotalBalance'), totalSavingsBalance());
+  const rateSub = document.getElementById('savingsTotalRateSub');
+  if (savingsTotalMode === 'single') {
+    const totalConverted = savings.reduce((s, sv) => {
+      const converted = convertAmount(sv.amount, sv.currency || currentCurrency, savingsTotalCurrency);
+      return s + (sv.type === 'deposit' ? converted : -converted);
+    }, 0);
+    renderBalanceBlock(document.getElementById('savingsTotalBalance'), { [savingsTotalCurrency]: totalConverted });
+    const needsConversion = savings.some(sv => (sv.currency || currentCurrency) !== savingsTotalCurrency);
+    if (exchangeRatesDate) {
+      rateSub.textContent = `${t('rateAsOf')} ${exchangeRatesDate}`;
+      rateSub.style.display = 'block';
+    } else if (needsConversion) {
+      rateSub.textContent = t('rateUnavailable');
+      rateSub.style.display = 'block';
+    } else {
+      rateSub.style.display = 'none';
+    }
+  } else {
+    renderBalanceBlock(document.getElementById('savingsTotalBalance'), totalSavingsBalance());
+    rateSub.style.display = 'none';
+  }
 
   const container = document.getElementById('savingsGoalsCards');
   const sorted = [...savingsGoals].sort((a, b) => {
@@ -1664,6 +1726,7 @@ document.getElementById('deletePageInlineBtn').addEventListener('click', () => {
   pendingDeleteType = 'page';
   document.getElementById('confirmTitle').textContent = t('confirmTitlePage');
   document.getElementById('confirmSub').textContent = t('confirmSub');
+  document.getElementById('confirmDelete').textContent = t('deleteBtn');
   document.getElementById('confirmOverlay').classList.add('show');
 });
 document.getElementById('prevMonth').addEventListener('click', () => { monthOffset--; render(); });
@@ -1707,6 +1770,8 @@ document.getElementById('confirmDelete').addEventListener('click', async () => {
       await deleteSavingsGoalRemote(id);
       document.getElementById('goalFormOverlay').classList.remove('show');
       backToGoalsList();
+    } else if (type === 'logout') {
+      auth.signOut();
     } else {
       await deleteTransactionRemote(id);
     }
@@ -1729,6 +1794,7 @@ document.getElementById('deleteEntryBtn').addEventListener('click', () => {
   pendingDeleteType = entryMenuKind === 'saving' ? 'saving' : 'entry';
   document.getElementById('confirmTitle').textContent = t('confirmTitle');
   document.getElementById('confirmSub').textContent = t('confirmSub');
+  document.getElementById('confirmDelete').textContent = t('deleteBtn');
   document.getElementById('confirmOverlay').classList.add('show');
 });
 document.getElementById('addSavingsGoalBtn').addEventListener('click', () => openGoalForm(null));
@@ -1746,6 +1812,7 @@ document.getElementById('deleteGoalBtn').addEventListener('click', () => {
   pendingDeleteType = 'goal';
   document.getElementById('confirmTitle').textContent = t('confirmTitleGoal');
   document.getElementById('confirmSub').textContent = t('confirmSubGoal');
+  document.getElementById('confirmDelete').textContent = t('deleteBtn');
   document.getElementById('confirmOverlay').classList.add('show');
 });
 document.getElementById('openDeposit').addEventListener('click', () => openSavingsForm('deposit'));
@@ -1815,6 +1882,7 @@ document.getElementById('deletePageBtn').addEventListener('click', () => {
   pendingDeleteType = 'page';
   document.getElementById('confirmTitle').textContent = t('confirmTitlePage');
   document.getElementById('confirmSub').textContent = t('confirmSub');
+  document.getElementById('confirmDelete').textContent = t('deleteBtn');
   document.getElementById('confirmOverlay').classList.add('show');
 });
 

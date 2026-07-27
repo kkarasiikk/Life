@@ -450,8 +450,9 @@
     <div id="savingsTab" style="display:none;">
       <div id="savingsGoalsList">
         <div class="card" id="savingsTotalCard">
-          <div class="card-title" id="savingsTotalLabel">Загальний баланс заощаджень</div>
+          <div class="card-title" id="savingsTotalLabel">Загальний баланс</div>
           <div class="balance" id="savingsTotalBalance" style="margin-top:6px;">0,00 ₴</div>
+          <div class="card-sub" id="savingsTotalRateSub" style="display:none;margin-top:6px;text-align:center;"></div>
         </div>
         <div id="savingsGoalsCards"></div>
         <button type="button" class="goal-add-btn" id="addSavingsGoalBtn">
@@ -666,6 +667,11 @@
       <input type="checkbox" id="showSavingsTotalToggle" checked>
       <span id="showSavingsTotalToggleLabel">Показувати загальний баланс заощаджень</span>
     </label>
+    <label class="field-label" id="savingsTotalModeLabel" style="margin-top:14px;">Загальний баланс — валюта</label>
+    <div class="cat-picker" id="savingsTotalModePicker"></div>
+    <div id="savingsTotalCurrencyWrap" style="margin-top:10px;display:none;">
+      <select id="savingsTotalCurrencySelect" class="trend-currency-select"></select>
+    </div>
   </div>
 </div>
 
