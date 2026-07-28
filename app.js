@@ -39,7 +39,7 @@ const T = {
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
     emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу',
-    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта',
+    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта', walletSyncLabel: 'Синхронізація з карткою', connectWalletSyncBtnLabel: 'Підключити синхронізацію з карткою', walletSyncDesc: 'Встав ці дані в Shortcut на iPhone.', walletSyncKeyLabel: 'Ключ синхронізації', walletSyncUrlLabel: 'Адреса (URL)', regenWalletSyncBtnLabel: 'Новий ключ', disableWalletSyncBtnLabel: 'Вимкнути',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
     chartIncome: 'Дохід', chartExpense: 'Витрати',
@@ -88,7 +88,7 @@ const T = {
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
     emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу',
-    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта',
+    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта', walletSyncLabel: 'Синхронизация с картой', connectWalletSyncBtnLabel: 'Подключить синхронизацию с картой', walletSyncDesc: 'Вставь эти данные в Shortcut на iPhone.', walletSyncKeyLabel: 'Ключ синхронизации', walletSyncUrlLabel: 'Адрес (URL)', regenWalletSyncBtnLabel: 'Новый ключ', disableWalletSyncBtnLabel: 'Отключить',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
     chartIncome: 'Доход', chartExpense: 'Расходы',
@@ -137,7 +137,7 @@ const T = {
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
     emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej',
-    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta',
+    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta', walletSyncLabel: 'Synchronizacja z kartą', connectWalletSyncBtnLabel: 'Połącz synchronizację z kartą', walletSyncDesc: 'Wklej te dane w Shortcut na iPhonie.', walletSyncKeyLabel: 'Klucz synchronizacji', walletSyncUrlLabel: 'Adres (URL)', regenWalletSyncBtnLabel: 'Nowy klucz', disableWalletSyncBtnLabel: 'Wyłącz',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
@@ -186,7 +186,7 @@ const T = {
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
     emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below',
-    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency',
+    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency', walletSyncLabel: 'Card sync', connectWalletSyncBtnLabel: 'Connect card sync', walletSyncDesc: 'Paste this into the Shortcut on your iPhone.', walletSyncKeyLabel: 'Sync key', walletSyncUrlLabel: 'Address (URL)', regenWalletSyncBtnLabel: 'New key', disableWalletSyncBtnLabel: 'Disable',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
     chartIncome: 'Income', chartExpense: 'Expenses',
@@ -372,6 +372,28 @@ let migrationDone = false;
 let entryMenuKind = 'tx'; // 'tx' | 'saving'
 let currentPageId = null; // page being edited, null = new page
 let pageOriginTab = 'entries'; // where to return to when leaving a page view
+let walletSyncKey = null;
+const WALLET_SYNC_URL = 'https://us-central1-me-and-only-me-7f531.cloudfunctions.net/walletSync';
+
+function generateSyncKey() {
+  const bytes = new Uint8Array(18);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function renderWalletSyncUI() {
+  const off = document.getElementById('walletSyncOff');
+  const on = document.getElementById('walletSyncOn');
+  if (walletSyncKey) {
+    off.style.display = 'none';
+    on.style.display = 'block';
+    document.getElementById('walletSyncKeyDisplay').value = walletSyncKey;
+    document.getElementById('walletSyncUrlDisplay').value = WALLET_SYNC_URL;
+  } else {
+    off.style.display = 'block';
+    on.style.display = 'none';
+  }
+}
 let pieChart = null, barChart = null, savingsTrendChart = null;
 let unsubscribeSnapshot = null;
 let unsubscribeProfile = null;
@@ -471,6 +493,13 @@ function applyStaticTranslations() {
   renderSavingsTotalCurrencySelect();
   document.getElementById('settingsLangLabel').textContent = t('langLabel');
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
+  document.getElementById('walletSyncLabel').textContent = t('walletSyncLabel');
+  document.getElementById('connectWalletSyncBtnLabel').textContent = t('connectWalletSyncBtnLabel');
+  document.getElementById('walletSyncDesc').textContent = t('walletSyncDesc');
+  document.getElementById('walletSyncKeyLabel').textContent = t('walletSyncKeyLabel');
+  document.getElementById('walletSyncUrlLabel').textContent = t('walletSyncUrlLabel');
+  document.getElementById('regenWalletSyncBtn').textContent = t('regenWalletSyncBtnLabel');
+  document.getElementById('disableWalletSyncBtn').textContent = t('disableWalletSyncBtnLabel');
   document.getElementById('expenseCatManageLabel').textContent = t('expenseCatManageLabel');
   document.getElementById('incomeCatManageLabel').textContent = t('incomeCatManageLabel');
   document.getElementById('newExpenseCatInput').placeholder = t('newCatPlaceholder');
@@ -775,6 +804,7 @@ auth.onAuthStateChanged((user) => {
     savingsDataLoaded = false;
     goalsDataLoaded = false;
     migrationDone = false;
+    walletSyncKey = null;
     document.getElementById('appScreen').style.display = 'none';
     document.getElementById('authScreen').style.display = 'flex';
     document.getElementById('authPassword').value = '';
@@ -827,6 +857,7 @@ function subscribeToProfile(uid) {
     }
     if (formType === 'expense' && !findCategory('expense', selectedCategory)) selectedCategory = categoriesExpense[0] ? categoriesExpense[0].id : null;
     if (formType === 'income' && !findCategory('income', selectedCategory)) selectedCategory = categoriesIncome[0] ? categoriesIncome[0].id : null;
+    if (data.walletSyncKey !== walletSyncKey) { walletSyncKey = data.walletSyncKey || null; renderWalletSyncUI(); }
     if (changed) { applyStaticTranslations(); render(); }
   }, () => {});
 }
@@ -1876,6 +1907,23 @@ document.getElementById('settingsBtn').addEventListener('click', () => {
   document.getElementById('settingsOverlay').classList.add('show');
 });
 document.getElementById('closeSettings').addEventListener('click', () => document.getElementById('settingsOverlay').classList.remove('show'));
+document.getElementById('connectWalletSyncBtn').addEventListener('click', async () => {
+  const key = generateSyncKey();
+  try {
+    await db.collection('users').doc(auth.currentUser.uid).set({ walletSyncKey: key }, { merge: true });
+  } catch (e) { console.error(e); }
+});
+document.getElementById('regenWalletSyncBtn').addEventListener('click', async () => {
+  const key = generateSyncKey();
+  try {
+    await db.collection('users').doc(auth.currentUser.uid).set({ walletSyncKey: key }, { merge: true });
+  } catch (e) { console.error(e); }
+});
+document.getElementById('disableWalletSyncBtn').addEventListener('click', async () => {
+  try {
+    await db.collection('users').doc(auth.currentUser.uid).update({ walletSyncKey: firebase.firestore.FieldValue.delete() });
+  } catch (e) { console.error(e); }
+});
 document.getElementById('closeCategoryTx').addEventListener('click', () => document.getElementById('categoryTxOverlay').classList.remove('show'));
 document.getElementById('categoryTxOverlay').addEventListener('click', (e) => { if (e.target.id === 'categoryTxOverlay') e.currentTarget.classList.remove('show'); });
 document.getElementById('settingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'settingsOverlay') e.currentTarget.classList.remove('show'); });

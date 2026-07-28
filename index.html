@@ -627,6 +627,24 @@
     <div class="cat-picker" id="langPicker"></div>
     <label class="field-label" id="settingsCurrencyLabel" style="margin-top:6px;">Валюта</label>
     <div class="cat-picker" id="currencyPicker"></div>
+    <label class="field-label" id="walletSyncLabel" style="margin-top:14px;">Синхронізація з карткою</label>
+    <div id="walletSyncOff">
+      <button type="button" class="goal-add-btn" id="connectWalletSyncBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        <span id="connectWalletSyncBtnLabel">Підключити синхронізацію з карткою</span>
+      </button>
+    </div>
+    <div id="walletSyncOn" style="display:none;">
+      <div class="card-sub" id="walletSyncDesc" style="margin-bottom:8px;">Встав ці дані в Shortcut на iPhone.</div>
+      <label class="field-label" id="walletSyncKeyLabel">Ключ синхронізації</label>
+      <input type="text" id="walletSyncKeyDisplay" readonly style="font-family:monospace;font-size:14px;">
+      <label class="field-label" id="walletSyncUrlLabel" style="margin-top:10px;">Адреса (URL)</label>
+      <input type="text" id="walletSyncUrlDisplay" readonly style="font-family:monospace;font-size:12px;">
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button type="button" class="btn-cancel" id="regenWalletSyncBtn" style="flex:1;">Новий ключ</button>
+        <button type="button" class="btn-delete" id="disableWalletSyncBtn" style="flex:1;">Вимкнути</button>
+      </div>
+    </div>
   </div>
 </div>
 
