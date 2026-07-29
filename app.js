@@ -1351,14 +1351,6 @@ function renderNotesTab() {
 }
 
 function renderPageTabs() {
-  const container = document.getElementById('pageTabsList');
-  const sorted = [...pages].sort((a, b) => {
-    const ta = a.updatedAt && a.updatedAt.toMillis ? a.updatedAt.toMillis() : 0;
-    const tb = b.updatedAt && b.updatedAt.toMillis ? b.updatedAt.toMillis() : 0;
-    return tb - ta;
-  });
-  container.innerHTML = sorted.map(p => `<button type="button" class="tab-btn page-tab${currentTab === 'page:' + p.id ? ' active' : ''}" data-tab="page:${p.id}"><span class="page-tab-label">${escapeHtml(p.title || t('pageNoTitle'))}</span></button>`).join('');
-
   if (currentTab.startsWith('page:') && !pages.find(p => 'page:' + p.id === currentTab)) {
     selectTab(pageOriginTab === 'notes' ? 'notes' : 'entries');
   } else if (currentTab.startsWith('page:')) {
