@@ -1316,8 +1316,79 @@ function openEntryMenu(btn, kind) {
   menu.style.top = top + 'px';
 }
 
+function inlineFormat(text) {
+  return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+}
+
+function renderNoteContent(text) {
+  const lines = (text || '').split('\n');
+  let html = '';
+  let listBuffer = [];
+  let listType = null; // 'bullet' | 'checklist'
+
+  function flushList() {
+    if (!listBuffer.length) return;
+    if (listType === 'checklist') {
+      html += '<ul class="note-checklist">' + listBuffer.map(item => `
+        <li><label class="note-check-row">
+          <input type="checkbox" data-line="${item.lineIndex}" ${item.checked ? 'checked' : ''}>
+          <span class="${item.checked ? 'checked-text' : ''}">${inlineFormat(item.text)}</span>
+        </label></li>`).join('') + '</ul>';
+    } else {
+      html += '<ul class="note-bullet">' + listBuffer.map(item => `<li>${inlineFormat(item.text)}</li>`).join('') + '</ul>';
+    }
+    listBuffer = [];
+    listType = null;
+  }
+
+  lines.forEach((line, idx) => {
+    const checkMatch = line.match(/^\[([ x])\]\s?(.*)$/i);
+    const bulletMatch = line.match(/^-\s+(.*)$/);
+    const h2Match = line.match(/^##\s+(.*)$/);
+    const h1Match = line.match(/^#\s+(.*)$/);
+
+    if (checkMatch) {
+      if (listType !== 'checklist') flushList();
+      listType = 'checklist';
+      listBuffer.push({ lineIndex: idx, checked: checkMatch[1].toLowerCase() === 'x', text: checkMatch[2] });
+    } else if (bulletMatch) {
+      if (listType !== 'bullet') flushList();
+      listType = 'bullet';
+      listBuffer.push({ lineIndex: idx, text: bulletMatch[1] });
+    } else {
+      flushList();
+      if (h2Match) html += `<div class="note-h2">${inlineFormat(h2Match[1])}</div>`;
+      else if (h1Match) html += `<div class="note-h1">${inlineFormat(h1Match[1])}</div>`;
+      else if (line.trim() === '') html += '';
+      else html += `<div class="note-p">${inlineFormat(line)}</div>`;
+    }
+  });
+  flushList();
+  return html;
+}
+
+function toggleNoteChecklistLine(pageId, lineIndex) {
+  const page = pages.find(p => p.id === pageId);
+  if (!page) return;
+  const lines = (page.content || '').split('\n');
+  const m = (lines[lineIndex] || '').match(/^\[([ x])\]\s?(.*)$/i);
+  if (!m) return;
+  const nowChecked = m[1].toLowerCase() !== 'x';
+  lines[lineIndex] = `[${nowChecked ? 'x' : ' '}] ${m[2]}`;
+  const uid = auth.currentUser.uid;
+  db.collection('users').doc(uid).collection('pages').doc(pageId)
+    .update({ content: lines.join('\n'), updatedAt: firebase.firestore.FieldValue.serverTimestamp() })
+    .catch(e => console.error(e));
+}
+
 function pageSnippet(text) {
-  const clean = (text || '').replace(/\s+/g, ' ').trim();
+  const clean = (text || '')
+    .replace(/^\[([ x])\]\s?/gim, '')
+    .replace(/^#{1,2}\s+/gim, '')
+    .replace(/^-\s+/gim, '')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
   return clean.length > 90 ? clean.slice(0, 90) + '…' : clean;
 }
 
@@ -1362,7 +1433,11 @@ function renderPageView(id) {
   const page = pages.find(p => p.id === id);
   if (!page) return;
   document.getElementById('pageViewTitle').textContent = page.title || t('pageNoTitle');
-  document.getElementById('pageViewContent').textContent = page.content || '';
+  const contentEl = document.getElementById('pageViewContent');
+  contentEl.innerHTML = renderNoteContent(page.content || '');
+  contentEl.querySelectorAll('.note-check-row input[type=checkbox]').forEach(cb => {
+    cb.addEventListener('change', () => toggleNoteChecklistLine(id, parseInt(cb.dataset.line, 10)));
+  });
 }
 
 function openPageEditor(id) {
@@ -1995,6 +2070,31 @@ document.getElementById('notesToggleBtn').addEventListener('click', () => select
 document.getElementById('addNoteBtn').addEventListener('click', () => {
   pageOriginTab = 'notes';
   openPageEditor(null);
+});
+function applyNoteFormat(fmt) {
+  const ta = document.getElementById('pageContentInput');
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  const value = ta.value;
+
+  if (fmt === 'bold') {
+    const selected = value.slice(start, end);
+    ta.value = value.slice(0, start) + '**' + selected + '**' + value.slice(end);
+    const cursorPos = selected ? start + 2 + selected.length + 2 : start + 2;
+    ta.focus();
+    ta.setSelectionRange(cursorPos, cursorPos);
+    return;
+  }
+
+  const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+  const prefix = fmt === 'h1' ? '# ' : fmt === 'h2' ? '## ' : fmt === 'bullet' ? '- ' : fmt === 'check' ? '[ ] ' : '';
+  ta.value = value.slice(0, lineStart) + prefix + value.slice(lineStart);
+  const cursorPos = start + prefix.length;
+  ta.focus();
+  ta.setSelectionRange(cursorPos, cursorPos);
+}
+document.querySelectorAll('.note-tb-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyNoteFormat(btn.dataset.fmt));
 });
 document.getElementById('closePage').addEventListener('click', () => document.getElementById('pageOverlay').classList.remove('show'));
 document.getElementById('pageOverlay').addEventListener('click', (e) => { if (e.target.id === 'pageOverlay') e.currentTarget.classList.remove('show'); });
