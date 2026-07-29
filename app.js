@@ -38,7 +38,7 @@ const T = {
     pageError: 'Введи назву нотатки', pageSaveError: 'Не вдалося зберегти. Перевір інтернет-з’єднання',
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
-    emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу',
+    emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу', searchPlaceholder: 'Пошук по нотатках і категоріях', searchEmptyTitle: 'Нічого не знайдено', searchEmptySub: 'Спробуй інше слово для пошуку',
     deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта', walletSyncLabel: 'Синхронізація з карткою', connectWalletSyncBtnLabel: 'Підключити синхронізацію з карткою', walletSyncDesc: 'Встав ці дані в Shortcut на iPhone.', walletSyncKeyLabel: 'Ключ синхронізації', walletSyncUrlLabel: 'Адреса (URL)', regenWalletSyncBtnLabel: 'Новий ключ', disableWalletSyncBtnLabel: 'Вимкнути',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
@@ -87,7 +87,7 @@ const T = {
     pageError: 'Введи название заметки', pageSaveError: 'Не удалось сохранить. Проверь интернет-соединение',
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
-    emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу',
+    emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу', searchPlaceholder: 'Поиск по заметкам и категориям', searchEmptyTitle: 'Ничего не найдено', searchEmptySub: 'Попробуй другое слово для поиска',
     deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта', walletSyncLabel: 'Синхронизация с картой', connectWalletSyncBtnLabel: 'Подключить синхронизацию с картой', walletSyncDesc: 'Вставь эти данные в Shortcut на iPhone.', walletSyncKeyLabel: 'Ключ синхронизации', walletSyncUrlLabel: 'Адрес (URL)', regenWalletSyncBtnLabel: 'Новый ключ', disableWalletSyncBtnLabel: 'Отключить',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
@@ -136,7 +136,7 @@ const T = {
     pageError: 'Wpisz tytuł notatki', pageSaveError: 'Nie udało się zapisać. Sprawdź połączenie z internetem',
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
-    emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej',
+    emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej', searchPlaceholder: 'Szukaj w notatkach i kategoriach', searchEmptyTitle: 'Nic nie znaleziono', searchEmptySub: 'Spróbuj innego słowa',
     deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta', walletSyncLabel: 'Synchronizacja z kartą', connectWalletSyncBtnLabel: 'Połącz synchronizację z kartą', walletSyncDesc: 'Wklej te dane w Shortcut na iPhonie.', walletSyncKeyLabel: 'Klucz synchronizacji', walletSyncUrlLabel: 'Adres (URL)', regenWalletSyncBtnLabel: 'Nowy klucz', disableWalletSyncBtnLabel: 'Wyłącz',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
@@ -185,7 +185,7 @@ const T = {
     pageError: 'Enter a note title', pageSaveError: 'Could not save. Check your internet connection',
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
-    emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below',
+    emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below', searchPlaceholder: 'Search notes and categories', searchEmptyTitle: 'Nothing found', searchEmptySub: 'Try a different search term',
     deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency', walletSyncLabel: 'Card sync', connectWalletSyncBtnLabel: 'Connect card sync', walletSyncDesc: 'Paste this into the Shortcut on your iPhone.', walletSyncKeyLabel: 'Sync key', walletSyncUrlLabel: 'Address (URL)', regenWalletSyncBtnLabel: 'New key', disableWalletSyncBtnLabel: 'Disable',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
@@ -326,6 +326,7 @@ if (!CURRENCY_CODES.includes(savingsTrendCurrency)) savingsTrendCurrency = 'UAH'
 let transactions = [];
 let monthOffset = 0;
 let currentTab = 'entries';
+let searchQuery = '';
 let trendPeriodMonths = 6;
 let savingsTrendPeriodMonths = 6;
 let hiddenStatsCategories = [];
@@ -493,6 +494,7 @@ function applyStaticTranslations() {
   renderSavingsTotalCurrencySelect();
   document.getElementById('settingsLangLabel').textContent = t('langLabel');
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
+  document.getElementById('searchInput').setAttribute('placeholder', t('searchPlaceholder'));
   document.getElementById('walletSyncLabel').textContent = t('walletSyncLabel');
   document.getElementById('connectWalletSyncBtnLabel').textContent = t('connectWalletSyncBtnLabel');
   document.getElementById('walletSyncDesc').textContent = t('walletSyncDesc');
@@ -1012,15 +1014,28 @@ function render() {
   document.getElementById('monthIncome').textContent = formatMoney(monthIncome);
   document.getElementById('monthExpense').textContent = formatMoney(monthExpense);
 
-  renderEntries(monthTx);
+  const searchResults = searchTransactions(searchQuery);
+  renderEntries(searchResults !== null ? searchResults : monthTx, searchResults !== null);
   if (currentTab === 'stats') renderStats(monthTx, ty, tm);
   if (currentTab.startsWith('page:')) renderPageView(currentTab.slice(5));
 }
 
-function renderEntries(monthTx) {
+function searchTransactions(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return null;
+  return transactions.filter(tx => {
+    const note = (tx.note || '').toLowerCase();
+    const catLabel = catDisplay(tx.type, tx.category).toLowerCase();
+    return note.includes(q) || catLabel.includes(q);
+  }).sort((a, b) => b.date.localeCompare(a.date) || String(b.id).localeCompare(String(a.id)));
+}
+
+function renderEntries(monthTx, isSearch) {
   const container = document.getElementById('entriesTab');
   if (monthTx.length === 0) {
-    container.innerHTML = `<div class="empty"><div class="title">${t('emptyTitle')}</div><div>${t('emptySub')}</div></div>`;
+    const title = isSearch ? t('searchEmptyTitle') : t('emptyTitle');
+    const sub = isSearch ? t('searchEmptySub') : t('emptySub');
+    container.innerHTML = `<div class="empty"><div class="title">${title}</div><div>${sub}</div></div>`;
     return;
   }
   const genMonths = MONTHS_GEN[currentLang] || MONTHS_GEN.uk;
@@ -1030,7 +1045,9 @@ function renderEntries(monthTx) {
 
   container.innerHTML = dates.map(d => {
     const dateObj = new Date(d);
-    const dayLabel = `${dateObj.getDate()} ${genMonths[dateObj.getMonth()]}`;
+    const dayLabel = isSearch
+      ? `${dateObj.getDate()} ${genMonths[dateObj.getMonth()]} ${dateObj.getFullYear()}`
+      : `${dateObj.getDate()} ${genMonths[dateObj.getMonth()]}`;
     const items = groups[d].map(tx => `
       <div class="entry">
         <span class="cat-tag" style="color:${catPair(tx.type, tx.category).text};background:${catPair(tx.type, tx.category).bg};">${escapeHtml(catDisplay(tx.type, tx.category))}</span>
@@ -1760,6 +1777,7 @@ function selectTab(tabKey) {
   document.getElementById('balanceSummary').style.display = tabKey === 'entries' ? 'block' : 'none';
   document.getElementById('header').classList.toggle('slim', tabKey !== 'entries');
   document.getElementById('entriesTab').style.display = tabKey === 'entries' ? 'block' : 'none';
+  document.getElementById('searchBar').style.display = tabKey === 'entries' ? 'flex' : 'none';
   document.getElementById('statsTab').style.display = tabKey === 'stats' ? 'block' : 'none';
   document.getElementById('savingsTab').style.display = isSavings ? 'block' : 'none';
   document.getElementById('notesTab').style.display = isNotes ? 'block' : 'none';
@@ -1809,6 +1827,17 @@ document.getElementById('deletePageInlineBtn').addEventListener('click', () => {
 });
 document.getElementById('prevMonth').addEventListener('click', () => { monthOffset--; render(); });
 document.getElementById('nextMonth').addEventListener('click', () => { if (monthOffset < 0) { monthOffset++; render(); } });
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  document.getElementById('clearSearchBtn').style.display = searchQuery ? 'flex' : 'none';
+  render();
+});
+document.getElementById('clearSearchBtn').addEventListener('click', () => {
+  searchQuery = '';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('clearSearchBtn').style.display = 'none';
+  render();
+});
 document.getElementById('backToEntriesBtn').addEventListener('click', () => {
   selectTab(currentTab.startsWith('page:') && pageOriginTab === 'notes' ? 'notes' : 'entries');
 });
