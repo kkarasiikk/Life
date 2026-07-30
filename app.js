@@ -453,7 +453,7 @@ function applyStaticTranslations() {
   document.getElementById('pageTitleLabel').textContent = t('pageTitleLabel');
   document.getElementById('pageContentLabel').textContent = t('pageContentLabel');
   document.getElementById('pageTitleInput').placeholder = t('pageTitlePlaceholder');
-  document.getElementById('pageContentInput').placeholder = t('pageContentPlaceholder');
+  document.getElementById('pageContentInput').setAttribute('data-placeholder', t('pageContentPlaceholder'));
   document.getElementById('savePageBtn').textContent = t('savePageBtn');
   document.getElementById('deletePageBtn').textContent = t('deletePageBtn');
   document.getElementById('prevMonth').setAttribute('aria-label', t('prevMonthAria'));
@@ -1320,7 +1320,9 @@ function inlineFormat(text) {
   return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }
 
-function renderNoteContent(text) {
+// Старий текстовий формат (нотатки, збережені до появи WYSIWYG-редактора) —
+// конвертує "# Заголовок", "**жирний**", "- пункт", "[ ] діло" у нормальний HTML.
+function legacyNoteToHtml(text) {
   const lines = (text || '').split('\n');
   let html = '';
   let listBuffer = [];
@@ -1329,19 +1331,16 @@ function renderNoteContent(text) {
   function flushList() {
     if (!listBuffer.length) return;
     if (listType === 'checklist') {
-      html += '<ul class="note-checklist">' + listBuffer.map(item => `
-        <li><label class="note-check-row">
-          <input type="checkbox" data-line="${item.lineIndex}" ${item.checked ? 'checked' : ''}>
-          <span class="${item.checked ? 'checked-text' : ''}">${inlineFormat(item.text)}</span>
-        </label></li>`).join('') + '</ul>';
+      html += listBuffer.map(item => `
+        <div class="note-check-row"><input type="checkbox" ${item.checked ? 'checked' : ''}><span${item.checked ? ' class="checked-text"' : ''}>${inlineFormat(item.text)}</span></div>`).join('');
     } else {
-      html += '<ul class="note-bullet">' + listBuffer.map(item => `<li>${inlineFormat(item.text)}</li>`).join('') + '</ul>';
+      html += '<ul>' + listBuffer.map(item => `<li>${inlineFormat(item.text)}</li>`).join('') + '</ul>';
     }
     listBuffer = [];
     listType = null;
   }
 
-  lines.forEach((line, idx) => {
+  lines.forEach(line => {
     const checkMatch = line.match(/^\[([ x])\]\s?(.*)$/i);
     const bulletMatch = line.match(/^-\s+(.*)$/);
     const h2Match = line.match(/^##\s+(.*)$/);
@@ -1350,45 +1349,52 @@ function renderNoteContent(text) {
     if (checkMatch) {
       if (listType !== 'checklist') flushList();
       listType = 'checklist';
-      listBuffer.push({ lineIndex: idx, checked: checkMatch[1].toLowerCase() === 'x', text: checkMatch[2] });
+      listBuffer.push({ checked: checkMatch[1].toLowerCase() === 'x', text: checkMatch[2] });
     } else if (bulletMatch) {
       if (listType !== 'bullet') flushList();
       listType = 'bullet';
-      listBuffer.push({ lineIndex: idx, text: bulletMatch[1] });
+      listBuffer.push({ text: bulletMatch[1] });
     } else {
       flushList();
-      if (h2Match) html += `<div class="note-h2">${inlineFormat(h2Match[1])}</div>`;
-      else if (h1Match) html += `<div class="note-h1">${inlineFormat(h1Match[1])}</div>`;
+      if (h2Match) html += `<h4>${inlineFormat(h2Match[1])}</h4>`;
+      else if (h1Match) html += `<h3>${inlineFormat(h1Match[1])}</h3>`;
       else if (line.trim() === '') html += '';
-      else html += `<div class="note-p">${inlineFormat(line)}</div>`;
+      else html += `<div>${inlineFormat(line)}</div>`;
     }
   });
   flushList();
   return html;
 }
 
-function toggleNoteChecklistLine(pageId, lineIndex) {
-  const page = pages.find(p => p.id === pageId);
-  if (!page) return;
-  const lines = (page.content || '').split('\n');
-  const m = (lines[lineIndex] || '').match(/^\[([ x])\]\s?(.*)$/i);
-  if (!m) return;
-  const nowChecked = m[1].toLowerCase() !== 'x';
-  lines[lineIndex] = `[${nowChecked ? 'x' : ' '}] ${m[2]}`;
+// Стара нотатка зберігалась як звичайний текст, нова — як HTML з редактора.
+// Розрізняємо за тим, чи починається вміст з тега.
+function noteContentToHtml(content) {
+  const c = content || '';
+  return /^\s*</.test(c) ? c : legacyNoteToHtml(c);
+}
+
+function toggleNoteCheckboxAndSave(pageId, containerEl) {
   const uid = auth.currentUser.uid;
   db.collection('users').doc(uid).collection('pages').doc(pageId)
-    .update({ content: lines.join('\n'), updatedAt: firebase.firestore.FieldValue.serverTimestamp() })
+    .update({ content: containerEl.innerHTML, updatedAt: firebase.firestore.FieldValue.serverTimestamp() })
     .catch(e => console.error(e));
 }
 
-function pageSnippet(text) {
-  const clean = (text || '')
-    .replace(/^\[([ x])\]\s?/gim, '')
-    .replace(/^#{1,2}\s+/gim, '')
-    .replace(/^-\s+/gim, '')
-    .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/\s+/g, ' ')
-    .trim();
+function pageSnippet(content) {
+  const c = content || '';
+  let text;
+  if (/^\s*</.test(c)) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = c;
+    text = tmp.textContent || '';
+  } else {
+    text = c
+      .replace(/^\[([ x])\]\s?/gim, '')
+      .replace(/^#{1,2}\s+/gim, '')
+      .replace(/^-\s+/gim, '')
+      .replace(/\*\*(.+?)\*\*/g, '$1');
+  }
+  const clean = text.replace(/\s+/g, ' ').trim();
   return clean.length > 90 ? clean.slice(0, 90) + '…' : clean;
 }
 
@@ -1434,9 +1440,14 @@ function renderPageView(id) {
   if (!page) return;
   document.getElementById('pageViewTitle').textContent = page.title || t('pageNoTitle');
   const contentEl = document.getElementById('pageViewContent');
-  contentEl.innerHTML = renderNoteContent(page.content || '');
+  contentEl.innerHTML = noteContentToHtml(page.content || '');
   contentEl.querySelectorAll('.note-check-row input[type=checkbox]').forEach(cb => {
-    cb.addEventListener('change', () => toggleNoteChecklistLine(id, parseInt(cb.dataset.line, 10)));
+    cb.addEventListener('change', () => {
+      if (cb.checked) cb.setAttribute('checked', ''); else cb.removeAttribute('checked');
+      const span = cb.nextElementSibling;
+      if (span) span.classList.toggle('checked-text', cb.checked);
+      toggleNoteCheckboxAndSave(id, contentEl);
+    });
   });
 }
 
@@ -1445,7 +1456,7 @@ function openPageEditor(id) {
   const page = id ? pages.find(p => p.id === id) : null;
   document.getElementById('pageModalTitle').textContent = page ? t('editPageTitle') : t('newPageTitle');
   document.getElementById('pageTitleInput').value = page ? (page.title || '') : '';
-  document.getElementById('pageContentInput').value = page ? (page.content || '') : '';
+  document.getElementById('pageContentInput').innerHTML = page ? noteContentToHtml(page.content || '') : '';
   document.getElementById('pageError').style.display = 'none';
   document.getElementById('deletePageBtn').style.display = page ? 'block' : 'none';
   document.getElementById('pageOverlay').classList.add('show');
@@ -1453,7 +1464,7 @@ function openPageEditor(id) {
 
 async function savePage() {
   const title = document.getElementById('pageTitleInput').value.trim();
-  const content = document.getElementById('pageContentInput').value;
+  const content = document.getElementById('pageContentInput').innerHTML;
   const errEl = document.getElementById('pageError');
   errEl.style.display = 'none';
   if (!title) {
@@ -2071,30 +2082,67 @@ document.getElementById('addNoteBtn').addEventListener('click', () => {
   pageOriginTab = 'notes';
   openPageEditor(null);
 });
+function insertChecklistItem() {
+  const editor = document.getElementById('pageContentInput');
+  editor.focus();
+  const sel = window.getSelection();
+  if (!sel.rangeCount) return;
+  const range = sel.getRangeAt(0);
+  if (!editor.contains(range.commonAncestorContainer)) return;
+  range.deleteContents();
+
+  const row = document.createElement('div');
+  row.className = 'note-check-row';
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.contentEditable = 'false';
+  const span = document.createElement('span');
+  span.textContent = '\u00A0';
+  row.appendChild(checkbox);
+  row.appendChild(span);
+
+  range.insertNode(row);
+  const after = document.createElement('div');
+  after.innerHTML = '<br>';
+  row.after(after);
+
+  const newRange = document.createRange();
+  newRange.selectNodeContents(span);
+  newRange.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(newRange);
+}
+
 function applyNoteFormat(fmt) {
-  const ta = document.getElementById('pageContentInput');
-  const start = ta.selectionStart;
-  const end = ta.selectionEnd;
-  const value = ta.value;
-
+  const editor = document.getElementById('pageContentInput');
+  editor.focus();
   if (fmt === 'bold') {
-    const selected = value.slice(start, end);
-    ta.value = value.slice(0, start) + '**' + selected + '**' + value.slice(end);
-    const cursorPos = selected ? start + 2 + selected.length + 2 : start + 2;
-    ta.focus();
-    ta.setSelectionRange(cursorPos, cursorPos);
-    return;
+    document.execCommand('bold');
+  } else if (fmt === 'h1') {
+    document.execCommand('formatBlock', false, 'h3');
+  } else if (fmt === 'h2') {
+    document.execCommand('formatBlock', false, 'h4');
+  } else if (fmt === 'bullet') {
+    document.execCommand('insertUnorderedList');
+  } else if (fmt === 'check') {
+    insertChecklistItem();
   }
-
-  const lineStart = value.lastIndexOf('\n', start - 1) + 1;
-  const prefix = fmt === 'h1' ? '# ' : fmt === 'h2' ? '## ' : fmt === 'bullet' ? '- ' : fmt === 'check' ? '[ ] ' : '';
-  ta.value = value.slice(0, lineStart) + prefix + value.slice(lineStart);
-  const cursorPos = start + prefix.length;
-  ta.focus();
-  ta.setSelectionRange(cursorPos, cursorPos);
 }
 document.querySelectorAll('.note-tb-btn').forEach(btn => {
   btn.addEventListener('click', () => applyNoteFormat(btn.dataset.fmt));
+});
+document.getElementById('pageContentInput').addEventListener('paste', (e) => {
+  e.preventDefault();
+  const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+  document.execCommand('insertText', false, text);
+});
+document.getElementById('pageContentInput').addEventListener('change', (e) => {
+  const cb = e.target;
+  if (cb.tagName === 'INPUT' && cb.type === 'checkbox') {
+    if (cb.checked) cb.setAttribute('checked', ''); else cb.removeAttribute('checked');
+    const span = cb.nextElementSibling;
+    if (span) span.classList.toggle('checked-text', cb.checked);
+  }
 });
 document.getElementById('closePage').addEventListener('click', () => document.getElementById('pageOverlay').classList.remove('show'));
 document.getElementById('pageOverlay').addEventListener('click', (e) => { if (e.target.id === 'pageOverlay') e.currentTarget.classList.remove('show'); });

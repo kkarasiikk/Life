@@ -264,21 +264,23 @@
     font-family:'Inter',sans-serif;font-size:12.5px;padding:0;}
   .note-tb-btn:hover{border-color:var(--accent);color:var(--accent);}
   .note-view-content{font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
-  .note-view-content .note-h1{font-size:19px;font-weight:700;color:var(--ink);margin:14px 0 6px;}
-  .note-view-content .note-h1:first-child{margin-top:0;}
-  .note-view-content .note-h2{font-size:16px;font-weight:700;color:var(--ink);margin:12px 0 5px;}
-  .note-view-content .note-h2:first-child{margin-top:0;}
-  .note-view-content .note-p{margin:0 0 8px;white-space:pre-wrap;}
-  .note-view-content .note-bullet{margin:0 0 8px;padding-left:20px;}
-  .note-view-content .note-bullet li{margin-bottom:3px;}
-  .note-view-content .note-checklist{list-style:none;margin:0 0 8px;padding:0;}
-  .note-view-content .note-checklist li{margin-bottom:4px;}
-  .note-check-row{display:flex;align-items:flex-start;gap:8px;cursor:pointer;user-select:none;}
+  .note-view-content h3{font-size:19px;font-weight:700;color:var(--ink);margin:14px 0 6px;}
+  .note-view-content h3:first-child{margin-top:0;}
+  .note-view-content h4{font-size:16px;font-weight:700;color:var(--ink);margin:12px 0 5px;}
+  .note-view-content h4:first-child{margin-top:0;}
+  .note-view-content ul{margin:0 0 8px;padding-left:20px;}
+  .note-view-content ul li{margin-bottom:3px;}
+  .note-check-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px;list-style:none;}
   .note-check-row input{width:17px;height:17px;accent-color:var(--accent);cursor:pointer;margin:2px 0 0;flex-shrink:0;}
   .note-check-row .checked-text{color:var(--ink-muted);text-decoration:line-through;}
   #pageContentInput{width:100%;font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;border:1px solid var(--border);
-    border-radius:8px;padding:10px 12px;outline:none;color:var(--ink);background:var(--bg);resize:vertical;min-height:180px;margin-bottom:16px;}
+    border-radius:8px;padding:10px 12px;outline:none;color:var(--ink);background:var(--bg);min-height:180px;margin-bottom:16px;
+    overflow-y:auto;max-height:50vh;}
   #pageContentInput:focus{border-color:var(--accent);}
+  #pageContentInput:empty:before{content:attr(data-placeholder);color:var(--ink-muted);}
+  .note-editor h3{font-size:19px;font-weight:700;color:var(--ink);margin:10px 0 6px;}
+  .note-editor h4{font-size:16px;font-weight:700;color:var(--ink);margin:8px 0 4px;}
+  .note-editor ul{margin:0 0 8px;padding-left:20px;}
   .page-modal-actions{display:flex;gap:8px;}
   .page-modal-actions .submit-btn{margin-top:0;flex:1;}
   .page-modal-actions .btn-delete{border-radius:10px;padding:13px 18px;font-weight:600;font-size:15px;}
@@ -764,7 +766,7 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="14" height="14" rx="3"/><path d="M6 11l2 2 4-4"/></svg>
       </button>
     </div>
-    <textarea id="pageContentInput" placeholder="Пиши тут що завгодно…"></textarea>
+    <div id="pageContentInput" class="note-editor" contenteditable="true" data-placeholder="Пиши тут що завгодно…"></div>
     <div class="form-error" id="pageError" style="display:none;"></div>
     <div class="page-modal-actions">
       <button class="btn-delete" id="deletePageBtn" style="display:none;">Видалити</button>
