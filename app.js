@@ -1,5 +1,27 @@
+// ---- Service Worker ----
+// Перенесено сюди з inline <script> в index.html, щоб CSP міг забороняти
+// інлайн-скрипти (script-src без 'unsafe-inline') без винятків.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(() => {}));
+}
+
 // ---- Firebase ----
 firebase.initializeApp(firebaseConfig);
+
+// ---- App Check ----
+// Дозволяє звертатись до Firestore/Auth лише зі сторінок нашого сайту (перевірено
+// через reCAPTCHA v3), а не з довільного скрипта, що напряму викликає Firebase API
+// з чужого домену. Активуємо ДО того, як почнемо користуватись auth/db — так радить
+// документація Firebase. Якщо ключ у firebase-config.js ще не налаштовано (заглушка),
+// просто пропускаємо — застосунок далі працює як і раніше, без App Check.
+if (typeof RECAPTCHA_V3_SITE_KEY === 'string' && RECAPTCHA_V3_SITE_KEY && !RECAPTCHA_V3_SITE_KEY.startsWith('ВСТАВ_')) {
+  try {
+    firebase.appCheck().activate(RECAPTCHA_V3_SITE_KEY, /* isTokenAutoRefreshEnabled */ true);
+  } catch (err) {
+    console.warn('App Check: не вдалося активувати', err);
+  }
+}
+
 const auth = firebase.auth();
 const db = firebase.firestore();
 // Кешуємо дані Firestore локально (IndexedDB), щоб застосунок реально працював

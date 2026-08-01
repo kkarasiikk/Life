@@ -8,6 +8,29 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Life">
 <meta name="mobile-web-app-capable" content="yes">
+<!--
+  Content-Security-Policy — обмежує, звідки браузеру дозволено завантажувати
+  скрипти/стилі/шрифти і куди дозволено робити мережеві запити. Все, чого
+  немає в списку нижче, браузер заблокує — це підстраховка на випадок XSS
+  (навіть якщо колись з'явиться діра, шкідливий код не зможе завантажити
+  щось стороннє чи "злити" дані на чужий сервер).
+  GitHub Pages не дозволяє власні HTTP-заголовки, тому CSP тут — через meta-тег
+  (є обмеження: frame-ancestors у meta-тегу браузери ігнорують, це нормально).
+-->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' https://cdnjs.cloudflare.com https://www.gstatic.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  img-src 'self' data:;
+  connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com https://firebaseinstallations.googleapis.com https://content-firebaseappcheck.googleapis.com https://bank.gov.ua;
+  frame-src https://www.google.com/recaptcha/ https://me-and-only-me-7f531.firebaseapp.com;
+  worker-src 'self';
+  manifest-src 'self';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+">
 <title>Life</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -18,6 +41,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check-compat.js"></script>
 <style>
   :root{
     --bg:#FAF8F4; --surface:#FFFDF9; --ink:#2D2A26; --ink-soft:#524D45; --ink-muted:#8A8478;
@@ -781,10 +805,5 @@
 
 <script src="firebase-config.js"></script>
 <script src="app.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(()=>{}));
-}
-</script>
 </body>
 </html>
