@@ -24,7 +24,7 @@
     --border:#EDEAE3; --income:#7FA88F; --income-light:#EEF4F0; --expense:#C97B5A; --expense-light:#FBEFE7; --accent:#5B7A9D; --accent-light:#EAF0F5;
   }
   *{box-sizing:border-box;}
-  html{overscroll-behavior-y:none;}
+  html{overscroll-behavior-y:none;scrollbar-gutter:stable;overflow-y:scroll;}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;
     padding-bottom:calc(100px + env(safe-area-inset-bottom));
     -webkit-tap-highlight-color:transparent;overscroll-behavior-y:none;-webkit-overflow-scrolling:touch;}
@@ -308,7 +308,7 @@
     .app-topbar{padding:28px 0 0;}
     .header{border-bottom:none;border-radius:16px;border:1px solid var(--border);
       padding:26px 26px 24px;margin:20px auto 0;max-width:960px;}
-    .header-top-row{position:relative;}
+    .header-top-row{position:relative;height:32px;}
     .month-nav-header{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
       flex:none;width:auto;}
     .month-nav-header .month-label{font-size:14px;}
