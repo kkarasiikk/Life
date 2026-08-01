@@ -77,7 +77,7 @@ const T = {
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
     emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу', searchPlaceholder: 'Пошук по нотатках і категоріях', searchEmptyTitle: 'Нічого не знайдено', searchEmptySub: 'Спробуй інше слово для пошуку',
-    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Налаштування нотаток', notesSortLabel: 'Сортування', notesSortUpdated: 'Спочатку нещодавно оновлені', notesSortCreated: 'Спочатку нещодавно створені', notesSortTitle: 'За назвою (А-Я)', showNoteSnippetLabel: 'Показувати текст нотатки в списку',
+    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Налаштування нотаток', notesSortLabel: 'Сортування', notesSortUpdated: 'Спочатку нещодавно оновлені', notesSortCreated: 'Спочатку нещодавно створені', notesSortTitle: 'За назвою (А-Я)', showNoteSnippetLabel: 'Показувати текст нотатки в списку', emailVerifyText: 'Підтверди пошту — лист надіслано на твою адресу.', resendVerifyBtnLabel: 'Надіслати ще раз', verifyEmailSent: 'Надіслано!', dangerZoneLabel: 'Небезпечна зона', deleteAccountBtnLabel: 'Видалити акаунт і всі дані', deletingAccount: 'Видалення...', confirmTitleAccount: 'Видалити акаунт назавжди?', confirmSubAccount: 'Усі транзакції, нотатки й заощадження будуть видалені без можливості відновлення.', reauthRequired: 'З міркувань безпеки вийди з акаунта і зайди знову, потім спробуй видалити акаунт ще раз.', deleteAccountError: 'Не вдалося видалити акаунт. Спробуй пізніше.', passwordHint: 'Мінімум 6 символів',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
     chartIncome: 'Дохід', chartExpense: 'Витрати',
@@ -126,7 +126,7 @@ const T = {
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
     emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу', searchPlaceholder: 'Поиск по заметкам и категориям', searchEmptyTitle: 'Ничего не найдено', searchEmptySub: 'Попробуй другое слово для поиска',
-    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Настройки заметок', notesSortLabel: 'Сортировка', notesSortUpdated: 'Сначала недавно обновлённые', notesSortCreated: 'Сначала недавно созданные', notesSortTitle: 'По названию (А-Я)', showNoteSnippetLabel: 'Показывать текст заметки в списке',
+    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Настройки заметок', notesSortLabel: 'Сортировка', notesSortUpdated: 'Сначала недавно обновлённые', notesSortCreated: 'Сначала недавно созданные', notesSortTitle: 'По названию (А-Я)', showNoteSnippetLabel: 'Показывать текст заметки в списке', emailVerifyText: 'Подтверди почту — письмо отправлено на твой адрес.', resendVerifyBtnLabel: 'Отправить ещё раз', verifyEmailSent: 'Отправлено!', dangerZoneLabel: 'Опасная зона', deleteAccountBtnLabel: 'Удалить аккаунт и все данные', deletingAccount: 'Удаление...', confirmTitleAccount: 'Удалить аккаунт навсегда?', confirmSubAccount: 'Все транзакции, заметки и сбережения будут удалены без возможности восстановления.', reauthRequired: 'Из соображений безопасности выйди из аккаунта и зайди снова, затем попробуй удалить аккаунт ещё раз.', deleteAccountError: 'Не удалось удалить аккаунт. Попробуй позже.', passwordHint: 'Минимум 6 символов',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
     chartIncome: 'Доход', chartExpense: 'Расходы',
@@ -175,7 +175,7 @@ const T = {
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
     emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej', searchPlaceholder: 'Szukaj w notatkach i kategoriach', searchEmptyTitle: 'Nic nie znaleziono', searchEmptySub: 'Spróbuj innego słowa',
-    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta', notesSettingsTitle: 'Ustawienia notatek', notesSortLabel: 'Sortowanie', notesSortUpdated: 'Najpierw ostatnio zaktualizowane', notesSortCreated: 'Najpierw ostatnio utworzone', notesSortTitle: 'Według nazwy (A-Z)', showNoteSnippetLabel: 'Pokazuj tekst notatki na liście',
+    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta', notesSettingsTitle: 'Ustawienia notatek', notesSortLabel: 'Sortowanie', notesSortUpdated: 'Najpierw ostatnio zaktualizowane', notesSortCreated: 'Najpierw ostatnio utworzone', notesSortTitle: 'Według nazwy (A-Z)', showNoteSnippetLabel: 'Pokazuj tekst notatki na liście', emailVerifyText: 'Potwierdź e-mail — wiadomość została wysłana na Twój adres.', resendVerifyBtnLabel: 'Wyślij ponownie', verifyEmailSent: 'Wysłano!', dangerZoneLabel: 'Strefa niebezpieczna', deleteAccountBtnLabel: 'Usuń konto i wszystkie dane', deletingAccount: 'Usuwanie...', confirmTitleAccount: 'Usunąć konto na zawsze?', confirmSubAccount: 'Wszystkie transakcje, notatki i oszczędności zostaną usunięte bez możliwości przywrócenia.', reauthRequired: 'Ze względów bezpieczeństwa wyloguj się i zaloguj ponownie, a następnie spróbuj usunąć konto jeszcze raz.', deleteAccountError: 'Nie udało się usunąć konta. Spróbuj później.', passwordHint: 'Minimum 6 znaków',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
@@ -224,7 +224,7 @@ const T = {
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
     emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below', searchPlaceholder: 'Search notes and categories', searchEmptyTitle: 'Nothing found', searchEmptySub: 'Try a different search term',
-    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency', notesSettingsTitle: 'Notes settings', notesSortLabel: 'Sort by', notesSortUpdated: 'Recently updated first', notesSortCreated: 'Recently created first', notesSortTitle: 'By title (A-Z)', showNoteSnippetLabel: 'Show note text in list',
+    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency', notesSettingsTitle: 'Notes settings', notesSortLabel: 'Sort by', notesSortUpdated: 'Recently updated first', notesSortCreated: 'Recently created first', notesSortTitle: 'By title (A-Z)', showNoteSnippetLabel: 'Show note text in list', emailVerifyText: 'Please verify your email — a link has been sent to your address.', resendVerifyBtnLabel: 'Resend', verifyEmailSent: 'Sent!', dangerZoneLabel: 'Danger zone', deleteAccountBtnLabel: 'Delete account and all data', deletingAccount: 'Deleting...', confirmTitleAccount: 'Delete account permanently?', confirmSubAccount: 'All transactions, notes, and savings will be deleted with no way to recover them.', reauthRequired: 'For security, please sign out and sign back in, then try deleting your account again.', deleteAccountError: 'Could not delete the account. Please try again later.', passwordHint: 'At least 6 characters',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
     chartIncome: 'Income', chartExpense: 'Expenses',
@@ -402,7 +402,7 @@ let categoriesIncome = defaultCategories('income');
 let usingDefaultCategories = { expense: true, income: true };
 let selectedCategory = categoriesExpense[0] ? categoriesExpense[0].id : null;
 let pendingDeleteId = null;
-let pendingDeleteType = 'entry'; // 'entry' | 'page'
+let pendingDeleteType = 'entry'; // 'entry' | 'page' | 'saving' | 'goal' | 'logout' | 'account'
 let entryMenuTxId = null;
 let editingTxId = null;
 let pages = [];
@@ -539,6 +539,10 @@ function applyStaticTranslations() {
   renderSavingsTotalCurrencySelect();
   document.getElementById('settingsLangLabel').textContent = t('langLabel');
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
+  document.getElementById('emailVerifyText').textContent = t('emailVerifyText');
+  document.getElementById('resendVerifyBtn').textContent = t('resendVerifyBtnLabel');
+  document.getElementById('dangerZoneLabel').textContent = t('dangerZoneLabel');
+  document.getElementById('deleteAccountBtn').textContent = t('deleteAccountBtnLabel');
   document.getElementById('searchInput').setAttribute('placeholder', t('searchPlaceholder'));
   document.getElementById('expenseCatManageLabel').textContent = t('expenseCatManageLabel');
   document.getElementById('incomeCatManageLabel').textContent = t('incomeCatManageLabel');
@@ -740,6 +744,10 @@ function setAuthMode(mode) {
     : `${t('switchToLogin')} <a id="authToggle">${t('loginBtn')}</a>`;
   document.getElementById('authError').style.display = 'none';
   document.getElementById('authInfo').style.display = 'none';
+  const hintEl = document.getElementById('authPasswordHint');
+  hintEl.textContent = t('passwordHint');
+  hintEl.style.display = mode === 'signup' ? 'block' : 'none';
+  document.getElementById('authPassword').setAttribute('autocomplete', mode === 'login' ? 'current-password' : 'new-password');
   document.getElementById('authToggle').addEventListener('click', () => setAuthMode(mode === 'login' ? 'signup' : 'login'));
 }
 
@@ -766,6 +774,7 @@ document.getElementById('authForm').addEventListener('submit', async (e) => {
       await auth.signInWithEmailAndPassword(email, password);
     } else {
       await auth.createUserWithEmailAndPassword(email, password);
+      auth.currentUser.sendEmailVerification().catch(() => {});
     }
     if (remember) {
       localStorage.setItem('financeAppLastEmail', email);
@@ -964,6 +973,33 @@ function updateSavingsGoalRemote(id, name) {
   const uid = auth.currentUser.uid;
   return db.collection('users').doc(uid).collection('savingsGoals').doc(id).update({ name });
 }
+async function deleteAccountAndAllData() {
+  const user = auth.currentUser;
+  const uid = user.uid;
+  const subcollections = ['transactions', 'savings', 'savingsGoals', 'pages'];
+  for (const name of subcollections) {
+    const col = db.collection('users').doc(uid).collection(name);
+    // Видаляємо пачками по 450 (ліміт батча — 500), поки колекція не спорожніє.
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const snap = await col.limit(450).get();
+      if (snap.empty) break;
+      const batch = db.batch();
+      snap.docs.forEach(d => batch.delete(d.ref));
+      await batch.commit();
+    }
+  }
+  await db.collection('users').doc(uid).delete();
+  await user.delete();
+}
+
+function updateEmailVerifyBanner() {
+  const banner = document.getElementById('emailVerifyBanner');
+  const user = auth.currentUser;
+  const needsVerify = !!(user && !user.emailVerified && user.providerData.some(p => p.providerId === 'password'));
+  banner.style.display = needsVerify ? 'block' : 'none';
+}
+
 async function deleteSavingsGoalRemote(id) {
   const uid = auth.currentUser.uid;
   const batch = db.batch();
@@ -2054,6 +2090,23 @@ document.getElementById('confirmDelete').addEventListener('click', async () => {
       backToGoalsList();
     } else if (type === 'logout') {
       auth.signOut();
+    } else if (type === 'account') {
+      const btn = document.getElementById('deleteAccountBtn');
+      btn.disabled = true;
+      btn.textContent = t('deletingAccount');
+      try {
+        await deleteAccountAndAllData();
+      } catch (err) {
+        console.error('Account deletion failed:', err);
+        if (err.code === 'auth/requires-recent-login') {
+          alert(t('reauthRequired'));
+        } else {
+          alert(t('deleteAccountError'));
+        }
+      } finally {
+        btn.disabled = false;
+        btn.textContent = t('deleteAccountBtnLabel');
+      }
     } else {
       await deleteTransactionRemote(id);
     }
@@ -2107,8 +2160,29 @@ document.getElementById('appMenuOverlay').addEventListener('click', (e) => { if 
 document.getElementById('settingsBtn').addEventListener('click', () => {
   document.getElementById('appMenuOverlay').classList.remove('show');
   document.getElementById('settingsOverlay').classList.add('show');
+  updateEmailVerifyBanner();
 });
 document.getElementById('closeSettings').addEventListener('click', () => document.getElementById('settingsOverlay').classList.remove('show'));
+document.getElementById('resendVerifyBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('resendVerifyBtn');
+  if (btn.disabled) return;
+  try {
+    await auth.currentUser.sendEmailVerification();
+    btn.textContent = t('verifyEmailSent');
+  } catch (e) {
+    console.error(e);
+  }
+  btn.disabled = true;
+  setTimeout(() => { btn.disabled = false; btn.textContent = t('resendVerifyBtnLabel'); }, 30000);
+});
+document.getElementById('deleteAccountBtn').addEventListener('click', () => {
+  pendingDeleteId = null;
+  pendingDeleteType = 'account';
+  document.getElementById('confirmTitle').textContent = t('confirmTitleAccount');
+  document.getElementById('confirmSub').textContent = t('confirmSubAccount');
+  document.getElementById('confirmDelete').textContent = t('deleteAccountBtnLabel');
+  document.getElementById('confirmOverlay').classList.add('show');
+});
 document.getElementById('closeCategoryTx').addEventListener('click', () => document.getElementById('categoryTxOverlay').classList.remove('show'));
 document.getElementById('categoryTxOverlay').addEventListener('click', (e) => { if (e.target.id === 'categoryTxOverlay') e.currentTarget.classList.remove('show'); });
 document.getElementById('settingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'settingsOverlay') e.currentTarget.classList.remove('show'); });

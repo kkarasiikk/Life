@@ -366,6 +366,7 @@
       <input type="email" id="authEmail" name="email" autocomplete="username">
       <label class="field-label" id="authPasswordLabel">Пароль</label>
       <input type="password" id="authPassword" name="password" autocomplete="current-password">
+      <div class="auth-hint" id="authPasswordHint" style="display:none;font-size:12px;color:var(--ink-muted);margin-top:4px;">Мінімум 6 символів</div>
       <div class="auth-options-row">
         <label class="remember-me">
           <input type="checkbox" id="rememberMe" checked>
@@ -589,7 +590,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="modalTitle">Нова витрата</div>
-      <button class="close-btn" id="closeForm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeForm" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="field-label" id="amountLabel">Сума, ₴</label>
     <input class="amount-input" id="amountInput" type="text" inputmode="decimal" placeholder="0.00">
@@ -608,7 +609,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="savingsModalTitle">Поповнення</div>
-      <button class="close-btn" id="closeSavingsForm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeSavingsForm" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="field-label" id="savingsAmountLabel">Сума, ₴</label>
     <input class="amount-input" id="savingsAmountInput" type="text" inputmode="decimal" placeholder="0.00">
@@ -626,7 +627,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="goalFormTitle">Нова ціль</div>
-      <button class="close-btn" id="closeGoalForm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeGoalForm" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="field-label" id="goalNameLabel">Назва</label>
     <input type="text" id="goalNameInput" placeholder="Напр. На відпустку">
@@ -645,7 +646,7 @@
         <div class="modal-title" id="categoryTxTitle">Категорія</div>
         <div class="card-sub" id="categoryTxSub" style="margin-top:2px;">—</div>
       </div>
-      <button class="close-btn" id="closeCategoryTx"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeCategoryTx" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <div id="categoryTxList"></div>
   </div>
@@ -679,12 +680,22 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="settingsTitle">Налаштування</div>
-      <button class="close-btn" id="closeSettings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeSettings" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="field-label" id="settingsLangLabel">Мова</label>
     <div class="cat-picker" id="langPicker"></div>
     <label class="field-label" id="settingsCurrencyLabel" style="margin-top:6px;">Валюта</label>
     <div class="cat-picker" id="currencyPicker"></div>
+
+    <div id="emailVerifyBanner" style="display:none;margin-top:16px;padding:12px;border-radius:10px;background:var(--accent-light);">
+      <div id="emailVerifyText" style="font-size:13px;color:var(--ink-soft);margin-bottom:8px;">Підтверди пошту — лист надіслано на твою адресу.</div>
+      <button type="button" class="btn-cancel" id="resendVerifyBtn" style="width:100%;">Надіслати ще раз</button>
+    </div>
+
+    <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);">
+      <label class="field-label" id="dangerZoneLabel" style="color:var(--danger,#c0392b);">Небезпечна зона</label>
+      <button type="button" class="btn-delete" id="deleteAccountBtn" style="width:100%;margin-top:8px;">Видалити акаунт і всі дані</button>
+    </div>
   </div>
 </div>
 
@@ -692,7 +703,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="categoriesTitle">Категорії</div>
-      <button class="close-btn" id="closeCategories"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeCategories" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="field-label" id="expenseCatManageLabel">Категорії витрат</label>
     <div class="cat-manage-list" id="expenseCatManageList"></div>
@@ -718,7 +729,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="statsSettingsTitle">Налаштування статистики</div>
-      <button class="close-btn" id="closeStatsSettings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeStatsSettings" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="field-label" id="statsSettingsChartsLabel">Видимі діаграми</label>
     <label class="setting-toggle-row">
@@ -740,7 +751,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="savingsSettingsTitle">Налаштування заощаджень</div>
-      <button class="close-btn" id="closeSavingsSettings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeSavingsSettings" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="setting-toggle-row">
       <input type="checkbox" id="showSavingsTotalToggle" checked>
@@ -758,7 +769,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="notesSettingsTitle">Налаштування нотаток</div>
-      <button class="close-btn" id="closeNotesSettings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closeNotesSettings" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="field-label" id="notesSortLabel">Сортування</label>
     <select id="notesSortSelect" class="trend-currency-select">
@@ -777,7 +788,7 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="pageModalTitle">Нова сторінка</div>
-      <button class="close-btn" id="closePage"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="close-btn" id="closePage" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <label class="field-label" id="pageTitleLabel">Назва</label>
     <input type="text" id="pageTitleInput" placeholder="Напр. Ідеї на відпустку">
@@ -786,10 +797,10 @@
       <button type="button" class="note-tb-btn" data-fmt="bold" title="Жирний"><b>Ж</b></button>
       <button type="button" class="note-tb-btn" data-fmt="h1" title="Заголовок">H1</button>
       <button type="button" class="note-tb-btn" data-fmt="h2" title="Підзаголовок">H2</button>
-      <button type="button" class="note-tb-btn" data-fmt="bullet" title="Список">
+      <button type="button" class="note-tb-btn" data-fmt="bullet" title="Список" aria-label="Список">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="4" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.5" fill="currentColor" stroke="none"/><path d="M9 6h11M9 12h11M9 18h11"/></svg>
       </button>
-      <button type="button" class="note-tb-btn" data-fmt="check" title="Чек-лист">
+      <button type="button" class="note-tb-btn" data-fmt="check" title="Чек-лист" aria-label="Чек-лист">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="14" height="14" rx="3"/><path d="M6 11l2 2 4-4"/></svg>
       </button>
     </div>
