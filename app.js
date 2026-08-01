@@ -39,7 +39,7 @@ const T = {
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
     emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу', searchPlaceholder: 'Пошук по нотатках і категоріях', searchEmptyTitle: 'Нічого не знайдено', searchEmptySub: 'Спробуй інше слово для пошуку',
-    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта',
+    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Налаштування нотаток', notesSortLabel: 'Сортування', notesSortUpdated: 'Спочатку нещодавно оновлені', notesSortCreated: 'Спочатку нещодавно створені', notesSortTitle: 'За назвою (А-Я)', showNoteSnippetLabel: 'Показувати текст нотатки в списку',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
     chartIncome: 'Дохід', chartExpense: 'Витрати',
@@ -88,7 +88,7 @@ const T = {
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
     emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу', searchPlaceholder: 'Поиск по заметкам и категориям', searchEmptyTitle: 'Ничего не найдено', searchEmptySub: 'Попробуй другое слово для поиска',
-    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта',
+    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Настройки заметок', notesSortLabel: 'Сортировка', notesSortUpdated: 'Сначала недавно обновлённые', notesSortCreated: 'Сначала недавно созданные', notesSortTitle: 'По названию (А-Я)', showNoteSnippetLabel: 'Показывать текст заметки в списке',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
     chartIncome: 'Доход', chartExpense: 'Расходы',
@@ -137,7 +137,7 @@ const T = {
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
     emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej', searchPlaceholder: 'Szukaj w notatkach i kategoriach', searchEmptyTitle: 'Nic nie znaleziono', searchEmptySub: 'Spróbuj innego słowa',
-    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta',
+    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta', notesSettingsTitle: 'Ustawienia notatek', notesSortLabel: 'Sortowanie', notesSortUpdated: 'Najpierw ostatnio zaktualizowane', notesSortCreated: 'Najpierw ostatnio utworzone', notesSortTitle: 'Według nazwy (A-Z)', showNoteSnippetLabel: 'Pokazuj tekst notatki na liście',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
@@ -186,7 +186,7 @@ const T = {
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
     emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below', searchPlaceholder: 'Search notes and categories', searchEmptyTitle: 'Nothing found', searchEmptySub: 'Try a different search term',
-    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency',
+    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency', notesSettingsTitle: 'Notes settings', notesSortLabel: 'Sort by', notesSortUpdated: 'Recently updated first', notesSortCreated: 'Recently created first', notesSortTitle: 'By title (A-Z)', showNoteSnippetLabel: 'Show note text in list',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
     chartIncome: 'Income', chartExpense: 'Expenses',
@@ -342,6 +342,9 @@ try { hiddenStatsCategories = JSON.parse(localStorage.getItem('financeAppHiddenS
 let hiddenSavingsTrendGoals = [];
 try { hiddenSavingsTrendGoals = JSON.parse(localStorage.getItem('financeAppHiddenSavingsGoals') || '[]'); } catch (e) { hiddenSavingsTrendGoals = []; }
 let showChartPie = localStorage.getItem('financeAppShowChartPie') !== '0';
+let notesSortMode = localStorage.getItem('financeAppNotesSortMode') || 'updated';
+if (!['updated', 'created', 'title'].includes(notesSortMode)) notesSortMode = 'updated';
+let showNoteSnippet = localStorage.getItem('financeAppShowNoteSnippet') !== '0';
 let showChartTrend = localStorage.getItem('financeAppShowChartTrend') !== '0';
 let showChartSavings = localStorage.getItem('financeAppShowChartSavings') !== '0';
 let showSavingsTotal = localStorage.getItem('financeAppShowSavingsTotal') !== '0';
@@ -480,6 +483,15 @@ function applyStaticTranslations() {
   document.getElementById('showChartSavingsLabel').textContent = t('savingsTrendTitle');
   document.getElementById('savingsSettingsTitle').textContent = t('savingsSettingsTitle');
   document.getElementById('showSavingsTotalToggleLabel').textContent = t('showSavingsTotalLabel');
+  document.getElementById('notesSettingsTitle').textContent = t('notesSettingsTitle');
+  document.getElementById('notesSortLabel').textContent = t('notesSortLabel');
+  document.getElementById('notesSortSelect').innerHTML = `
+    <option value="updated">${t('notesSortUpdated')}</option>
+    <option value="created">${t('notesSortCreated')}</option>
+    <option value="title">${t('notesSortTitle')}</option>`;
+  document.getElementById('notesSortSelect').value = notesSortMode;
+  document.getElementById('showNoteSnippetToggleLabel').textContent = t('showNoteSnippetLabel');
+  document.getElementById('showNoteSnippetToggle').checked = showNoteSnippet;
   document.getElementById('showChartPie').checked = showChartPie;
   document.getElementById('showChartTrend').checked = showChartTrend;
   document.getElementById('showChartSavings').checked = showChartSavings;
@@ -1424,8 +1436,23 @@ function formatPageDate(ts) {
   return `${d.getDate()} ${genMonths[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+function saveNotesSettings() {
+  localStorage.setItem('financeAppNotesSortMode', notesSortMode);
+  localStorage.setItem('financeAppShowNoteSnippet', showNoteSnippet ? '1' : '0');
+}
+
 function renderNotesTab() {
+  document.getElementById('notesSortSelect').value = notesSortMode;
+  document.getElementById('showNoteSnippetToggle').checked = showNoteSnippet;
   const sorted = [...pages].sort((a, b) => {
+    if (notesSortMode === 'title') {
+      return (a.title || '').localeCompare(b.title || '', undefined, { sensitivity: 'base' });
+    }
+    if (notesSortMode === 'created') {
+      const ca = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
+      const cb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
+      return cb - ca;
+    }
     const ta = a.updatedAt && a.updatedAt.toMillis ? a.updatedAt.toMillis() : 0;
     const tb = b.updatedAt && b.updatedAt.toMillis ? b.updatedAt.toMillis() : 0;
     return tb - ta;
@@ -1435,7 +1462,7 @@ function renderNotesTab() {
   container.innerHTML = sorted.map(p => `
     <button type="button" class="note-card" data-id="${p.id}">
       <div class="note-card-title">${escapeHtml(p.title || t('pageNoTitle'))}</div>
-      ${p.content ? `<div class="note-card-snippet">${escapeHtml(pageSnippet(p.content))}</div>` : ''}
+      ${(showNoteSnippet && p.content) ? `<div class="note-card-snippet">${escapeHtml(pageSnippet(p.content))}</div>` : ''}
       <div class="note-card-date">${formatPageDate(p.updatedAt)}</div>
     </button>`).join('');
   container.querySelectorAll('.note-card').forEach(card => {
@@ -1889,11 +1916,13 @@ function selectTab(tabKey) {
   document.getElementById('savingsTab').style.display = isSavings ? 'block' : 'none';
   document.getElementById('notesTab').style.display = isNotes ? 'block' : 'none';
   document.getElementById('pageViewTab').style.display = isPage ? 'block' : 'none';
-  document.getElementById('categoriesBtn').style.display = (isNotes || isPage) ? 'none' : 'flex';
+  document.getElementById('categoriesBtn').style.display = isPage ? 'none' : 'flex';
   document.getElementById('monthNavHeader').classList.toggle('show', tabKey === 'entries' || tabKey === 'stats');
   document.getElementById('backToEntriesBtn').classList.toggle('show', tabKey !== 'entries');
   document.getElementById('fabRow').style.display = (isPage || isSavings || isNotes) ? 'none' : 'flex';
   document.getElementById('appMenuOverlay').classList.remove('show');
+  document.getElementById('categoriesBtn').setAttribute('aria-label',
+    tabKey === 'stats' ? t('statsSettingsTitle') : tabKey === 'savings' ? t('savingsSettingsTitle') : tabKey === 'notes' ? t('notesSettingsTitle') : t('categoriesTitle'));
   updateHeaderSectionTitle();
   if (isSavings) {
     currentSavingsGoalId = null;
@@ -2054,6 +2083,8 @@ document.getElementById('categoriesBtn').addEventListener('click', () => {
     document.getElementById('statsSettingsOverlay').classList.add('show');
   } else if (currentTab === 'savings') {
     document.getElementById('savingsSettingsOverlay').classList.add('show');
+  } else if (currentTab === 'notes') {
+    document.getElementById('notesSettingsOverlay').classList.add('show');
   } else {
     document.getElementById('categoriesOverlay').classList.add('show');
   }
@@ -2081,6 +2112,18 @@ document.getElementById('showChartSavings').addEventListener('change', (e) => {
 
 document.getElementById('closeSavingsSettings').addEventListener('click', () => document.getElementById('savingsSettingsOverlay').classList.remove('show'));
 document.getElementById('savingsSettingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'savingsSettingsOverlay') e.currentTarget.classList.remove('show'); });
+document.getElementById('closeNotesSettings').addEventListener('click', () => document.getElementById('notesSettingsOverlay').classList.remove('show'));
+document.getElementById('notesSettingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'notesSettingsOverlay') e.currentTarget.classList.remove('show'); });
+document.getElementById('notesSortSelect').addEventListener('change', (e) => {
+  notesSortMode = e.target.value;
+  saveNotesSettings();
+  renderNotesTab();
+});
+document.getElementById('showNoteSnippetToggle').addEventListener('change', (e) => {
+  showNoteSnippet = e.target.checked;
+  saveNotesSettings();
+  renderNotesTab();
+});
 document.getElementById('showSavingsTotalToggle').addEventListener('change', (e) => {
   showSavingsTotal = e.target.checked;
   localStorage.setItem('financeAppShowSavingsTotal', showSavingsTotal ? '1' : '0');

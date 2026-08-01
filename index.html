@@ -730,6 +730,25 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="notesSettingsOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="notesSettingsTitle">Налаштування нотаток</div>
+      <button class="close-btn" id="closeNotesSettings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <label class="field-label" id="notesSortLabel">Сортування</label>
+    <select id="notesSortSelect" class="trend-currency-select">
+      <option value="updated">Спочатку нещодавно оновлені</option>
+      <option value="created">Спочатку нещодавно створені</option>
+      <option value="title">За назвою (А-Я)</option>
+    </select>
+    <label class="setting-toggle-row" style="margin-top:14px;">
+      <input type="checkbox" id="showNoteSnippetToggle" checked>
+      <span id="showNoteSnippetToggleLabel">Показувати текст нотатки в списку</span>
+    </label>
+  </div>
+</div>
+
 <div class="modal-overlay" id="pageOverlay">
   <div class="modal">
     <div class="modal-head">
