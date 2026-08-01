@@ -55,7 +55,7 @@ const T = {
     expenseCatManageLabel: 'Категорії витрат', incomeCatManageLabel: 'Категорії доходів',
     newCatPlaceholder: 'Нова категорія', addCatAria: 'Додати категорію', deleteCatAria: 'Видалити категорію',
     catLastError: 'Має залишитися хоча б одна категорія',
-    catInUseConfirm: 'Ця категорія використовується у {count} записах. Видалити її?',
+    catInUseConfirm: 'Ця категорія використовується у {count} записах. Їх буде перенесено в іншу категорію. Видалити її?',
     chooseFileBtn: 'Обрати файл',
   },
   ru: {
@@ -104,7 +104,7 @@ const T = {
     expenseCatManageLabel: 'Категории расходов', incomeCatManageLabel: 'Категории доходов',
     newCatPlaceholder: 'Новая категория', addCatAria: 'Добавить категорию', deleteCatAria: 'Удалить категорию',
     catLastError: 'Должна остаться хотя бы одна категория',
-    catInUseConfirm: 'Эта категория используется в {count} записях. Удалить её?',
+    catInUseConfirm: 'Эта категория используется в {count} записях. Они будут перенесены в другую категорию. Удалить её?',
     chooseFileBtn: 'Выбрать файл',
   },
   pl: {
@@ -153,7 +153,7 @@ const T = {
     expenseCatManageLabel: 'Kategorie wydatków', incomeCatManageLabel: 'Kategorie przychodów',
     newCatPlaceholder: 'Nowa kategoria', addCatAria: 'Dodaj kategorię', deleteCatAria: 'Usuń kategorię',
     catLastError: 'Musi zostać przynajmniej jedna kategoria',
-    catInUseConfirm: 'Ta kategoria jest używana w {count} wpisach. Usunąć ją?',
+    catInUseConfirm: 'Ta kategoria jest używana w {count} wpisach. Zostaną przeniesione do innej kategorii. Usunąć ją?',
     chooseFileBtn: 'Wybierz plik',
   },
   en: {
@@ -202,7 +202,7 @@ const T = {
     expenseCatManageLabel: 'Expense categories', incomeCatManageLabel: 'Income categories',
     newCatPlaceholder: 'New category', addCatAria: 'Add category', deleteCatAria: 'Delete category',
     catLastError: 'At least one category must remain',
-    catInUseConfirm: 'This category is used in {count} entries. Delete it anyway?',
+    catInUseConfirm: 'This category is used in {count} entries. They will be moved to another category. Delete it anyway?',
     chooseFileBtn: 'Choose file',
   },
 };
@@ -291,7 +291,15 @@ try {
   }
 } catch (e) { /* ignore corrupted cache */ }
 
+// Чи знаємо ми реальний курс цієї валюти (UAH завжди базова = 1).
+function hasRate(cur) {
+  return cur === 'UAH' || typeof exchangeRates[cur] === 'number';
+}
+// Повертає null, якщо курс однієї з валют невідомий, замість того щоб мовчки
+// рахувати 1:1 (раніше це показувало явно неправильну суму без попередження).
 function convertAmount(amount, fromCur, toCur) {
+  if (fromCur === toCur) return amount;
+  if (!hasRate(fromCur) || !hasRate(toCur)) return null;
   const from = exchangeRates[fromCur] || 1;
   const to = exchangeRates[toCur] || 1;
   return amount * from / to;
@@ -405,6 +413,15 @@ function todayISO() {
   const off = d.getTimezoneOffset();
   const local = new Date(d.getTime() - off * 60000);
   return local.toISOString().slice(0, 10);
+}
+// Парсить дату у форматі "YYYY-MM-DD" як ЛОКАЛЬНУ дату (без часу).
+// На відміну від `new Date("YYYY-MM-DD")`, який трактує рядок як UTC-північ
+// і в поясах з від'ємним зсувом (Америка тощо) зсуває дату на день назад
+// після конвертації в локальний час — це ламало групування за датою/місяцем.
+function parseISODate(s) {
+  if (!s) return new Date(NaN);
+  const [y, m, d] = s.split('-').map(Number);
+  return new Date(y, (m || 1) - 1, d || 1);
 }
 function escapeHtml(s) {
   const div = document.createElement('div');
@@ -676,8 +693,6 @@ function setAuthMode(mode) {
   document.getElementById('authToggle').addEventListener('click', () => setAuthMode(mode === 'login' ? 'signup' : 'login'));
 }
 
-document.getElementById('authToggle').addEventListener('click', () => setAuthMode('signup'));
-
 document.getElementById('authForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('authEmail').value.trim();
@@ -948,7 +963,17 @@ function deleteCategory(type, id) {
   const current = type === 'income' ? categoriesIncome : categoriesExpense;
   if (current.length <= 1) return Promise.reject(new Error('last'));
   const list = current.filter(c => c.id !== id);
-  return saveCategoriesList(type, list);
+  // Транзакції, що використовували видалену категорію, переносимо на першу
+  // з категорій, що залишилися, — інакше вони лишаться з "сирітським" id,
+  // який в інтерфейсі показувався б замість людяної назви.
+  const fallbackId = list[0].id;
+  const affected = transactions.filter(tx => tx.type === type && tx.category === id);
+  const uid = auth.currentUser.uid;
+  const batch = db.batch();
+  affected.forEach(tx => {
+    batch.update(db.collection('users').doc(uid).collection('transactions').doc(tx.id), { category: fallbackId });
+  });
+  return batch.commit().then(() => saveCategoriesList(type, list));
 }
 
 // ---- Обчислення на основі поточного місяця ----
@@ -969,7 +994,7 @@ function render() {
   document.getElementById('nextMonthHeader').disabled = monthOffset === 0;
 
   const monthTx = transactions.filter(tx => {
-    const d = new Date(tx.date);
+    const d = parseISODate(tx.date);
     return d.getFullYear() === ty && d.getMonth() === tm;
   }).sort((a, b) => b.date.localeCompare(a.date) || String(b.id).localeCompare(String(a.id)));
 
@@ -1013,7 +1038,7 @@ function renderEntries(monthTx, isSearch) {
   const dates = Object.keys(groups).sort((a, b) => b.localeCompare(a));
 
   container.innerHTML = dates.map(d => {
-    const dateObj = new Date(d);
+    const dateObj = parseISODate(d);
     const dayLabel = isSearch
       ? `${dateObj.getDate()} ${genMonths[dateObj.getMonth()]} ${dateObj.getFullYear()}`
       : `${dateObj.getDate()} ${genMonths[dateObj.getMonth()]}`;
@@ -1064,12 +1089,20 @@ function renderSavingsGoalsList() {
   document.getElementById('savingsTotalCard').style.display = showSavingsTotal ? '' : 'none';
   const rateSub = document.getElementById('savingsTotalRateSub');
   if (savingsTotalMode === 'single') {
-    const totalConverted = savings.reduce((s, sv) => {
-      const converted = convertAmount(sv.amount, sv.currency || currentCurrency, savingsTotalCurrency);
-      return s + (sv.type === 'deposit' ? converted : -converted);
-    }, 0);
-    renderBalanceBlock(document.getElementById('savingsTotalBalance'), { [savingsTotalCurrency]: totalConverted });
     const needsConversion = savings.some(sv => (sv.currency || currentCurrency) !== savingsTotalCurrency);
+    const rateMissing = savings.some(sv => convertAmount(sv.amount, sv.currency || currentCurrency, savingsTotalCurrency) === null);
+    if (rateMissing) {
+      // Курс невідомий (офлайн, кеш порожній) — показуємо прочерк замість
+      // помилкової суми, порахованої так, ніби всі валюти рівні гривні.
+      document.getElementById('savingsTotalBalance').className = 'balance';
+      document.getElementById('savingsTotalBalance').textContent = '—';
+    } else {
+      const totalConverted = savings.reduce((s, sv) => {
+        const converted = convertAmount(sv.amount, sv.currency || currentCurrency, savingsTotalCurrency);
+        return s + (sv.type === 'deposit' ? converted : -converted);
+      }, 0);
+      renderBalanceBlock(document.getElementById('savingsTotalBalance'), { [savingsTotalCurrency]: totalConverted });
+    }
     if (exchangeRatesDate) {
       rateSub.textContent = `${t('rateAsOf')} ${exchangeRatesDate}`;
       rateSub.style.display = 'block';
@@ -1176,7 +1209,7 @@ function renderSavings() {
   const dates = Object.keys(groups).sort((a, b) => b.localeCompare(a));
 
   container.innerHTML = dates.map(d => {
-    const dateObj = new Date(d);
+    const dateObj = parseISODate(d);
     const dayLabel = `${dateObj.getDate()} ${genMonths[dateObj.getMonth()]}`;
     const items = [...groups[d]].sort((a, b) => String(b.id).localeCompare(String(a.id))).map(sv => `
       <div class="entry">
@@ -1509,7 +1542,7 @@ function openCategoryTxModal(catId, monthTx, ty, tm) {
     list.innerHTML = `<div class="empty" style="padding:24px 0;">${t('statsNoExpenses')}</div>`;
   } else {
     list.innerHTML = catTx.map(tx => {
-      const dateObj = new Date(tx.date);
+      const dateObj = parseISODate(tx.date);
       const dayLabel = `${dateObj.getDate()} ${genMonths[dateObj.getMonth()]}`;
       return `<div class="entry">
         <span class="cat-tag-date">${dayLabel}</span>
@@ -1619,8 +1652,8 @@ function renderStats(monthTx, ty, tm) {
     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
     const y = d.getFullYear(), m = d.getMonth();
     labels.push(nomMonths[m].slice(0, 3));
-    incomeData.push(transactions.filter(tx => { const td = new Date(tx.date); return td.getFullYear() === y && td.getMonth() === m && tx.type === 'income'; }).reduce((s, tx) => s + tx.amount, 0));
-    expenseData.push(transactions.filter(tx => { const td = new Date(tx.date); return td.getFullYear() === y && td.getMonth() === m && tx.type === 'expense'; }).reduce((s, tx) => s + tx.amount, 0));
+    incomeData.push(transactions.filter(tx => { const td = parseISODate(tx.date); return td.getFullYear() === y && td.getMonth() === m && tx.type === 'income'; }).reduce((s, tx) => s + tx.amount, 0));
+    expenseData.push(transactions.filter(tx => { const td = parseISODate(tx.date); return td.getFullYear() === y && td.getMonth() === m && tx.type === 'expense'; }).reduce((s, tx) => s + tx.amount, 0));
   }
   const wordMap = MONTHS_WORD[currentLang] || MONTHS_WORD.uk;
   if (!showChartTrend) {
@@ -1672,10 +1705,20 @@ function renderStats(monthTx, ty, tm) {
     const svWordMap = MONTHS_WORD[currentLang] || MONTHS_WORD.uk;
     const periodText = `${t('lastLabel')} ${savingsTrendPeriodMonths} ${svWordMap[savingsTrendPeriodMonths] || svWordMap[6]}`;
     const needsConversion = savings.some(sv => (sv.currency || currentCurrency) !== savingsTrendCurrency);
+    const rateMissing = savings.some(sv => convertAmount(sv.amount, sv.currency || currentCurrency, savingsTrendCurrency) === null);
     let subText = periodText;
     if (exchangeRatesDate) subText += ` · ${t('rateAsOf')} ${exchangeRatesDate}`;
     else if (needsConversion) subText += ` · ${t('rateUnavailable')}`;
     document.getElementById('savingsTrendSub').textContent = subText;
+    if (rateMissing) {
+      // Курс частини валют невідомий — краще показати порожній стан з
+      // поясненням, ніж графік із хибними (NaN) точками.
+      trendEmptyEl.style.display = 'block';
+      savingsCanvas.style.display = 'none';
+      legendEl.innerHTML = '';
+      if (savingsTrendChart) { savingsTrendChart.destroy(); savingsTrendChart = null; }
+      return;
+    }
     const sortedGoals = [...savingsGoals].sort((a, b) => {
       const ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
       const tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
@@ -1690,7 +1733,7 @@ function renderStats(monthTx, ty, tm) {
       colorIdx++;
       const data = monthPoints.map(pt => {
         const cutoff = new Date(pt.y, pt.m + 1, 0);
-        return goalTx.filter(sv => new Date(sv.date) <= cutoff).reduce((s, sv) => {
+        return goalTx.filter(sv => parseISODate(sv.date) <= cutoff).reduce((s, sv) => {
           const converted = convertAmount(sv.amount, sv.currency || currentCurrency, savingsTrendCurrency);
           return s + (sv.type === 'deposit' ? converted : -converted);
         }, 0);
@@ -1701,7 +1744,7 @@ function renderStats(monthTx, ty, tm) {
     // Загальний баланс — сума всіх цілей разом
     const totalData = monthPoints.map(pt => {
       const cutoff = new Date(pt.y, pt.m + 1, 0);
-      return savings.filter(sv => new Date(sv.date) <= cutoff).reduce((s, sv) => {
+      return savings.filter(sv => parseISODate(sv.date) <= cutoff).reduce((s, sv) => {
         const converted = convertAmount(sv.amount, sv.currency || currentCurrency, savingsTrendCurrency);
         return s + (sv.type === 'deposit' ? converted : -converted);
       }, 0);
@@ -1847,7 +1890,6 @@ function selectTab(tabKey) {
   document.getElementById('notesTab').style.display = isNotes ? 'block' : 'none';
   document.getElementById('pageViewTab').style.display = isPage ? 'block' : 'none';
   document.getElementById('categoriesBtn').style.display = (isNotes || isPage) ? 'none' : 'flex';
-  document.getElementById('monthNav').style.display = 'none';
   document.getElementById('monthNavHeader').classList.toggle('show', tabKey === 'entries' || tabKey === 'stats');
   document.getElementById('backToEntriesBtn').classList.toggle('show', tabKey !== 'entries');
   document.getElementById('fabRow').style.display = (isPage || isSavings || isNotes) ? 'none' : 'flex';
