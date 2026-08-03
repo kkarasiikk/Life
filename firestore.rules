@@ -12,7 +12,6 @@ rules_version = '2';
 // і лише якщо форма даних відповідає тому, що реально пише застосунок —
 // це другий рівень захисту (перший — App Check) на випадок зіпсованого/
 // зловмисного запиту напряму через Firestore SDK (в обхід UI застосунку).
-// Cloud Function walletSync працює через Admin SDK і ці правила не зачіпають.
 
 service cloud.firestore {
   match /databases/{database}/documents {
