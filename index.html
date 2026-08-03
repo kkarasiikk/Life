@@ -38,6 +38,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -690,6 +691,7 @@
     <div class="cat-picker" id="currencyPicker"></div>
     <label class="field-label" id="exportDataLabel" style="margin-top:14px;">Дані</label>
     <button type="button" class="submit-btn" id="exportDataBtn">Експортувати всі дані (JSON)</button>
+    <button type="button" class="submit-btn" id="exportXlsxBtn" style="background:var(--accent-light);color:var(--accent);margin-top:8px;">Експортувати в Excel (.xlsx)</button>
     <div class="field-hint" id="exportDataDesc">Завантажить файл з усіма твоїми записами, категоріями, заощадженнями й нотатками.</div>
   </div>
 </div>

@@ -98,6 +98,13 @@ const T = {
     exportDataLabel: 'Дані', exportDataBtn: 'Експортувати всі дані (JSON)',
     exportDataDesc: 'Завантажить файл з усіма твоїми записами, категоріями, заощадженнями й нотатками.',
     exportDataError: 'Не вдалося підготувати експорт. Спробуй ще раз.',
+    exportXlsxBtn: 'Експортувати в Excel (.xlsx)',
+    exportXlsxSheetTx: 'Транзакції', exportXlsxSheetSavings: 'Заощадження', exportXlsxSheetGoals: 'Цілі заощаджень',
+    exportXlsxSheetNotes: 'Нотатки', exportXlsxSheetCats: 'Категорії',
+    exportXlsxColDate: 'Дата', exportXlsxColType: 'Тип', exportXlsxColCategory: 'Категорія', exportXlsxColAmount: 'Сума',
+    exportXlsxColCurrency: 'Валюта', exportXlsxColNote: 'Нотатка', exportXlsxColGoal: 'Ціль', exportXlsxColName: 'Назва',
+    exportXlsxColCreated: 'Створено', exportXlsxColUpdated: 'Оновлено', exportXlsxColTitle: 'Заголовок', exportXlsxColContent: 'Зміст',
+    exportXlsxTypeExpense: 'Витрата', exportXlsxTypeIncome: 'Дохід', exportXlsxTypeDeposit: 'Поповнення', exportXlsxTypeWithdraw: 'Зняття',
   },
   ru: {
     appTitle: 'Life',
@@ -150,6 +157,13 @@ const T = {
     exportDataLabel: 'Данные', exportDataBtn: 'Экспортировать все данные (JSON)',
     exportDataDesc: 'Скачает файл со всеми твоими записями, категориями, накоплениями и заметками.',
     exportDataError: 'Не удалось подготовить экспорт. Попробуй ещё раз.',
+    exportXlsxBtn: 'Экспортировать в Excel (.xlsx)',
+    exportXlsxSheetTx: 'Транзакции', exportXlsxSheetSavings: 'Накопления', exportXlsxSheetGoals: 'Цели накоплений',
+    exportXlsxSheetNotes: 'Заметки', exportXlsxSheetCats: 'Категории',
+    exportXlsxColDate: 'Дата', exportXlsxColType: 'Тип', exportXlsxColCategory: 'Категория', exportXlsxColAmount: 'Сумма',
+    exportXlsxColCurrency: 'Валюта', exportXlsxColNote: 'Заметка', exportXlsxColGoal: 'Цель', exportXlsxColName: 'Название',
+    exportXlsxColCreated: 'Создано', exportXlsxColUpdated: 'Обновлено', exportXlsxColTitle: 'Заголовок', exportXlsxColContent: 'Содержимое',
+    exportXlsxTypeExpense: 'Расход', exportXlsxTypeIncome: 'Доход', exportXlsxTypeDeposit: 'Пополнение', exportXlsxTypeWithdraw: 'Снятие',
   },
   pl: {
     appTitle: 'Life',
@@ -202,6 +216,13 @@ const T = {
     exportDataLabel: 'Dane', exportDataBtn: 'Eksportuj wszystkie dane (JSON)',
     exportDataDesc: 'Pobierze plik ze wszystkimi wpisami, kategoriami, oszczędnościami i notatkami.',
     exportDataError: 'Nie udało się przygotować eksportu. Spróbuj ponownie.',
+    exportXlsxBtn: 'Eksportuj do Excela (.xlsx)',
+    exportXlsxSheetTx: 'Transakcje', exportXlsxSheetSavings: 'Oszczędności', exportXlsxSheetGoals: 'Cele oszczędnościowe',
+    exportXlsxSheetNotes: 'Notatki', exportXlsxSheetCats: 'Kategorie',
+    exportXlsxColDate: 'Data', exportXlsxColType: 'Typ', exportXlsxColCategory: 'Kategoria', exportXlsxColAmount: 'Kwota',
+    exportXlsxColCurrency: 'Waluta', exportXlsxColNote: 'Notatka', exportXlsxColGoal: 'Cel', exportXlsxColName: 'Nazwa',
+    exportXlsxColCreated: 'Utworzono', exportXlsxColUpdated: 'Zaktualizowano', exportXlsxColTitle: 'Tytuł', exportXlsxColContent: 'Treść',
+    exportXlsxTypeExpense: 'Wydatek', exportXlsxTypeIncome: 'Przychód', exportXlsxTypeDeposit: 'Wpłata', exportXlsxTypeWithdraw: 'Wypłata',
   },
   en: {
     appTitle: 'Life',
@@ -254,6 +275,13 @@ const T = {
     exportDataLabel: 'Data', exportDataBtn: 'Export all data (JSON)',
     exportDataDesc: 'Downloads a file with all your entries, categories, savings, and notes.',
     exportDataError: 'Could not prepare the export. Please try again.',
+    exportXlsxBtn: 'Export to Excel (.xlsx)',
+    exportXlsxSheetTx: 'Transactions', exportXlsxSheetSavings: 'Savings', exportXlsxSheetGoals: 'Savings goals',
+    exportXlsxSheetNotes: 'Notes', exportXlsxSheetCats: 'Categories',
+    exportXlsxColDate: 'Date', exportXlsxColType: 'Type', exportXlsxColCategory: 'Category', exportXlsxColAmount: 'Amount',
+    exportXlsxColCurrency: 'Currency', exportXlsxColNote: 'Note', exportXlsxColGoal: 'Goal', exportXlsxColName: 'Name',
+    exportXlsxColCreated: 'Created', exportXlsxColUpdated: 'Updated', exportXlsxColTitle: 'Title', exportXlsxColContent: 'Content',
+    exportXlsxTypeExpense: 'Expense', exportXlsxTypeIncome: 'Income', exportXlsxTypeDeposit: 'Deposit', exportXlsxTypeWithdraw: 'Withdrawal',
   },
 };
 
@@ -553,6 +581,7 @@ function applyStaticTranslations() {
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
   document.getElementById('exportDataLabel').textContent = t('exportDataLabel');
   document.getElementById('exportDataBtn').textContent = t('exportDataBtn');
+  document.getElementById('exportXlsxBtn').textContent = t('exportXlsxBtn');
   document.getElementById('exportDataDesc').textContent = t('exportDataDesc');
   document.getElementById('searchInput').setAttribute('placeholder', t('searchPlaceholder'));
   document.getElementById('expenseCatManageLabel').textContent = t('expenseCatManageLabel');
@@ -1081,6 +1110,92 @@ function exportAllData() {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   } catch (err) {
     console.error('Export failed', err);
+    alert(t('exportDataError'));
+  }
+}
+
+// Перетворює Firestore Timestamp / рядок / Date у людський рядок дати-часу.
+function formatExportTimestamp(value) {
+  if (!value) return '';
+  if (typeof value.toDate === 'function') value = value.toDate();
+  if (typeof value === 'string') {
+    const d = new Date(value);
+    return isNaN(d) ? value : d.toLocaleString();
+  }
+  if (value instanceof Date) return value.toLocaleString();
+  return String(value);
+}
+
+// Прибирає HTML-розмітку нотатки, лишаючи тільки текст (для клітинки Excel).
+function stripHtmlForExport(html) {
+  if (!html) return '';
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return (div.textContent || div.innerText || '').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+// Формує книгу Excel (.xlsx) з окремими листами для транзакцій, заощаджень,
+// цілей, нотаток і категорій. Використовує SheetJS (window.XLSX),
+// завантажену з cdnjs — того ж CDN, що вже дозволений у CSP.
+function exportAllDataXlsx() {
+  try {
+    if (typeof XLSX === 'undefined') {
+      alert(t('exportDataError'));
+      return;
+    }
+    const wb = XLSX.utils.book_new();
+
+    const txRows = transactions
+      .slice()
+      .sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+      .map(tx => ({
+        [t('exportXlsxColDate')]: tx.date || '',
+        [t('exportXlsxColType')]: tx.type === 'income' ? t('exportXlsxTypeIncome') : t('exportXlsxTypeExpense'),
+        [t('exportXlsxColCategory')]: catLabel(tx.type, tx.category),
+        [t('exportXlsxColAmount')]: typeof tx.amount === 'number' ? tx.amount : Number(tx.amount) || 0,
+        [t('exportXlsxColNote')]: tx.note || '',
+      }));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(txRows), t('exportXlsxSheetTx'));
+
+    const goalNameById = {};
+    savingsGoals.forEach(g => { goalNameById[g.id] = g.name || t('defaultGoalName'); });
+    const savingsRows = savings
+      .slice()
+      .sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+      .map(sv => ({
+        [t('exportXlsxColDate')]: sv.date || '',
+        [t('exportXlsxColGoal')]: goalNameById[sv.goalId] || '',
+        [t('exportXlsxColType')]: sv.type === 'withdraw' ? t('exportXlsxTypeWithdraw') : t('exportXlsxTypeDeposit'),
+        [t('exportXlsxColAmount')]: typeof sv.amount === 'number' ? sv.amount : Number(sv.amount) || 0,
+        [t('exportXlsxColCurrency')]: sv.currency || '',
+        [t('exportXlsxColNote')]: sv.note || '',
+      }));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(savingsRows), t('exportXlsxSheetSavings'));
+
+    const goalsRows = savingsGoals.map(g => ({
+      [t('exportXlsxColName')]: g.name || t('defaultGoalName'),
+      [t('exportXlsxColCreated')]: formatExportTimestamp(g.createdAt),
+    }));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(goalsRows), t('exportXlsxSheetGoals'));
+
+    const notesRows = pages.map(p => ({
+      [t('exportXlsxColTitle')]: p.title || t('pageNoTitle'),
+      [t('exportXlsxColContent')]: stripHtmlForExport(p.content),
+      [t('exportXlsxColCreated')]: formatExportTimestamp(p.createdAt),
+      [t('exportXlsxColUpdated')]: formatExportTimestamp(p.updatedAt),
+    }));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(notesRows), t('exportXlsxSheetNotes'));
+
+    const catRows = [
+      ...categoriesExpense.map(c => ({ [t('exportXlsxColType')]: t('exportXlsxTypeExpense'), [t('exportXlsxColName')]: c.label })),
+      ...categoriesIncome.map(c => ({ [t('exportXlsxColType')]: t('exportXlsxTypeIncome'), [t('exportXlsxColName')]: c.label })),
+    ];
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(catRows), t('exportXlsxSheetCats'));
+
+    const stamp = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(wb, `life-backup-${stamp}.xlsx`);
+  } catch (err) {
+    console.error('XLSX export failed', err);
     alert(t('exportDataError'));
   }
 }
@@ -2169,6 +2284,7 @@ document.getElementById('settingsBtn').addEventListener('click', () => {
 });
 document.getElementById('closeSettings').addEventListener('click', () => document.getElementById('settingsOverlay').classList.remove('show'));
 document.getElementById('exportDataBtn').addEventListener('click', exportAllData);
+document.getElementById('exportXlsxBtn').addEventListener('click', exportAllDataXlsx);
 document.getElementById('closeCategoryTx').addEventListener('click', () => document.getElementById('categoryTxOverlay').classList.remove('show'));
 document.getElementById('categoryTxOverlay').addEventListener('click', (e) => { if (e.target.id === 'categoryTxOverlay') e.currentTarget.classList.remove('show'); });
 document.getElementById('settingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'settingsOverlay') e.currentTarget.classList.remove('show'); });
