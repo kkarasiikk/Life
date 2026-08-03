@@ -95,6 +95,9 @@ const T = {
     catLastError: 'Має залишитися хоча б одна категорія',
     catInUseConfirm: 'Ця категорія використовується у {count} записах. Їх буде перенесено в іншу категорію. Видалити її?',
     chooseFileBtn: 'Обрати файл',
+    exportDataLabel: 'Дані', exportDataBtn: 'Експортувати всі дані (JSON)',
+    exportDataDesc: 'Завантажить файл з усіма твоїми записами, категоріями, заощадженнями й нотатками.',
+    exportDataError: 'Не вдалося підготувати експорт. Спробуй ще раз.',
   },
   ru: {
     appTitle: 'Life',
@@ -144,6 +147,9 @@ const T = {
     catLastError: 'Должна остаться хотя бы одна категория',
     catInUseConfirm: 'Эта категория используется в {count} записях. Они будут перенесены в другую категорию. Удалить её?',
     chooseFileBtn: 'Выбрать файл',
+    exportDataLabel: 'Данные', exportDataBtn: 'Экспортировать все данные (JSON)',
+    exportDataDesc: 'Скачает файл со всеми твоими записями, категориями, накоплениями и заметками.',
+    exportDataError: 'Не удалось подготовить экспорт. Попробуй ещё раз.',
   },
   pl: {
     appTitle: 'Life',
@@ -193,6 +199,9 @@ const T = {
     catLastError: 'Musi zostać przynajmniej jedna kategoria',
     catInUseConfirm: 'Ta kategoria jest używana w {count} wpisach. Zostaną przeniesione do innej kategorii. Usunąć ją?',
     chooseFileBtn: 'Wybierz plik',
+    exportDataLabel: 'Dane', exportDataBtn: 'Eksportuj wszystkie dane (JSON)',
+    exportDataDesc: 'Pobierze plik ze wszystkimi wpisami, kategoriami, oszczędnościami i notatkami.',
+    exportDataError: 'Nie udało się przygotować eksportu. Spróbuj ponownie.',
   },
   en: {
     appTitle: 'Life',
@@ -242,6 +251,9 @@ const T = {
     catLastError: 'At least one category must remain',
     catInUseConfirm: 'This category is used in {count} entries. They will be moved to another category. Delete it anyway?',
     chooseFileBtn: 'Choose file',
+    exportDataLabel: 'Data', exportDataBtn: 'Export all data (JSON)',
+    exportDataDesc: 'Downloads a file with all your entries, categories, savings, and notes.',
+    exportDataError: 'Could not prepare the export. Please try again.',
   },
 };
 
@@ -539,6 +551,9 @@ function applyStaticTranslations() {
   renderSavingsTotalCurrencySelect();
   document.getElementById('settingsLangLabel').textContent = t('langLabel');
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
+  document.getElementById('exportDataLabel').textContent = t('exportDataLabel');
+  document.getElementById('exportDataBtn').textContent = t('exportDataBtn');
+  document.getElementById('exportDataDesc').textContent = t('exportDataDesc');
   document.getElementById('searchInput').setAttribute('placeholder', t('searchPlaceholder'));
   document.getElementById('expenseCatManageLabel').textContent = t('expenseCatManageLabel');
   document.getElementById('incomeCatManageLabel').textContent = t('incomeCatManageLabel');
@@ -1028,6 +1043,46 @@ function deleteCategory(type, id) {
     batch.update(db.collection('users').doc(uid).collection('transactions').doc(tx.id), { category: fallbackId });
   });
   return batch.commit().then(() => saveCategoriesList(type, list));
+}
+
+// Формує повний бекап даних користувача (все, що вже синхронізовано в
+// пам'яті через onSnapshot-слухачі) і пропонує завантажити як .json файл.
+// Працює повністю на клієнті, без додаткових запитів до Firestore.
+function exportAllData() {
+  try {
+    const user = auth.currentUser;
+    const payload = {
+      exportedAt: new Date().toISOString(),
+      appVersion: 'life-app',
+      account: user ? { uid: user.uid, email: user.email || null } : null,
+      settings: {
+        lang: currentLang,
+        currency: currentCurrency,
+      },
+      categories: {
+        expense: categoriesExpense,
+        income: categoriesIncome,
+      },
+      transactions,
+      savingsGoals,
+      savings,
+      notes: pages,
+    };
+    const json = JSON.stringify(payload, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const stamp = new Date().toISOString().slice(0, 10);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `life-backup-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch (err) {
+    console.error('Export failed', err);
+    alert(t('exportDataError'));
+  }
 }
 
 // ---- Обчислення на основі поточного місяця ----
@@ -2113,6 +2168,7 @@ document.getElementById('settingsBtn').addEventListener('click', () => {
   document.getElementById('settingsOverlay').classList.add('show');
 });
 document.getElementById('closeSettings').addEventListener('click', () => document.getElementById('settingsOverlay').classList.remove('show'));
+document.getElementById('exportDataBtn').addEventListener('click', exportAllData);
 document.getElementById('closeCategoryTx').addEventListener('click', () => document.getElementById('categoryTxOverlay').classList.remove('show'));
 document.getElementById('categoryTxOverlay').addEventListener('click', (e) => { if (e.target.id === 'categoryTxOverlay') e.currentTarget.classList.remove('show'); });
 document.getElementById('settingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'settingsOverlay') e.currentTarget.classList.remove('show'); });

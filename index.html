@@ -228,6 +228,7 @@
   .modal-title{font-family:'Inter',sans-serif;font-size:18px;font-weight:700;}
   .close-btn{background:none;border:none;cursor:pointer;color:var(--ink-muted);}
   label.field-label{font-size:12px;color:var(--ink-muted);font-weight:500;display:block;margin-top:2px;}
+  .field-hint{font-size:11.5px;color:var(--ink-muted);margin-top:6px;line-height:1.4;}
   .amount-input{width:100%;font-family:'Inter',sans-serif;font-size:26px;font-weight:700;border:none;
     border-bottom:2px solid var(--border);padding:8px 0;margin-bottom:16px;outline:none;background:transparent;color:var(--ink);font-variant-numeric:tabular-nums;}
   .cat-picker{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;margin-bottom:16px;}
@@ -687,6 +688,9 @@
     <div class="cat-picker" id="langPicker"></div>
     <label class="field-label" id="settingsCurrencyLabel" style="margin-top:6px;">Валюта</label>
     <div class="cat-picker" id="currencyPicker"></div>
+    <label class="field-label" id="exportDataLabel" style="margin-top:14px;">Дані</label>
+    <button type="button" class="submit-btn" id="exportDataBtn">Експортувати всі дані (JSON)</button>
+    <div class="field-hint" id="exportDataDesc">Завантажить файл з усіма твоїми записами, категоріями, заощадженнями й нотатками.</div>
   </div>
 </div>
 
