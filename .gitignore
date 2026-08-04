@@ -1,0 +1,16 @@
+# Залежності (якщо колись повернеться Node-частина, напр. Cloud Functions)
+node_modules/
+npm-debug.log*
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+*.local
+
+# ОС/редактори
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

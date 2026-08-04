@@ -200,6 +200,7 @@
   .period-btn.active{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(20,20,24,.06);}
   #savingsTrendPeriodPicker .period-btn{padding:5px 7px;}
   .card-sub{font-size:12.5px;color:var(--ink-muted);margin-bottom:8px;}
+  .card-sub.stale{color:var(--expense);font-weight:600;}
   .legend-row{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:2px;width:100%;
     background:none;border:none;cursor:pointer;padding:6px 6px;border-radius:8px;text-align:left;font-family:'Inter',sans-serif;}
   .legend-row:hover{background:var(--bg);}
@@ -375,7 +376,7 @@
         </label>
         <a id="forgotPasswordLink">Забув(ла) пароль?</a>
       </div>
-      <div class="auth-error" id="authError"></div>
+      <div class="auth-error" id="authError" role="alert" aria-live="assertive"></div>
       <div class="auth-info" id="authInfo"></div>
       <button class="auth-submit" id="authSubmit" type="submit">Увійти</button>
     </form>
@@ -603,7 +604,7 @@
     <input type="date" id="dateInput">
     <label class="field-label" id="noteLabel">Нотатка (необовʼязково)</label>
     <input type="text" id="noteInput" placeholder="">
-    <div class="form-error" id="formError" style="display:none;"></div>
+    <div class="form-error" id="formError" style="display:none;" role="alert" aria-live="assertive"></div>
     <button class="submit-btn" id="submitBtn">Зберегти запис</button>
   </div>
 </div>
@@ -621,7 +622,7 @@
     <input type="date" id="savingsDateInput">
     <label class="field-label" id="savingsNoteLabel">Нотатка (необовʼязково)</label>
     <input type="text" id="savingsNoteInput" placeholder="">
-    <div class="form-error" id="savingsFormError" style="display:none;"></div>
+    <div class="form-error" id="savingsFormError" style="display:none;" role="alert" aria-live="assertive"></div>
     <button class="submit-btn" id="savingsSubmitBtn">Зберегти запис</button>
   </div>
 </div>
@@ -634,7 +635,7 @@
     </div>
     <label class="field-label" id="goalNameLabel">Назва</label>
     <input type="text" id="goalNameInput" placeholder="Напр. На відпустку">
-    <div class="form-error" id="goalFormError" style="display:none;"></div>
+    <div class="form-error" id="goalFormError" style="display:none;" role="alert" aria-live="assertive"></div>
     <button class="submit-btn" id="goalFormSubmitBtn" style="background:var(--accent);">Зберегти</button>
     <button type="button" id="deleteGoalBtn" style="display:none;margin-top:10px;width:100%;padding:11px 0;
       border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--expense);
@@ -692,6 +693,9 @@
     <label class="field-label" id="exportDataLabel" style="margin-top:14px;">Дані</label>
     <button type="button" class="submit-btn" id="exportXlsxBtn">Експортувати в Excel (.xlsx)</button>
     <div class="field-hint" id="exportDataDesc">Завантажить файл з усіма твоїми записами, категоріями, заощадженнями й нотатками.</div>
+    <input type="file" id="importCsvInput" accept=".csv,text/csv" style="display:none;">
+    <button type="button" class="submit-btn" id="importCsvBtn" style="background:var(--accent-light);color:var(--accent);margin-top:10px;">Імпортувати транзакції з CSV</button>
+    <div class="field-hint" id="importDataDesc">Колонки: дата (РРРР-ММ-ДД), тип (дохід/витрата), категорія, сума, нотатка.</div>
   </div>
 </div>
 
@@ -801,7 +805,7 @@
       </button>
     </div>
     <div id="pageContentInput" class="note-editor" contenteditable="true" data-placeholder="Пиши тут що завгодно…"></div>
-    <div class="form-error" id="pageError" style="display:none;"></div>
+    <div class="form-error" id="pageError" style="display:none;" role="alert" aria-live="assertive"></div>
     <div class="page-modal-actions">
       <button class="btn-delete" id="deletePageBtn" style="display:none;">Видалити</button>
       <button class="submit-btn" id="savePageBtn">Зберегти</button>

@@ -77,7 +77,7 @@ const T = {
     confirmTitlePage: 'Видалити сторінку?',
     pageNoTitle: 'Без назви',
     emptyTitle: 'Тут поки порожньо', emptySub: 'Додай перший запис кнопкою внизу', searchPlaceholder: 'Пошук по нотатках і категоріях', searchEmptyTitle: 'Нічого не знайдено', searchEmptySub: 'Спробуй інше слово для пошуку',
-    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Налаштування нотаток', notesSortLabel: 'Сортування', notesSortUpdated: 'Спочатку нещодавно оновлені', notesSortCreated: 'Спочатку нещодавно створені', notesSortTitle: 'За назвою (А-Я)', showNoteSnippetLabel: 'Показувати текст нотатки в списку', passwordHint: 'Мінімум 6 символів',
+    deleteAria: 'Видалити запис', entryMenuAria: 'Дії із записом', menuEdit: 'Редагувати', menuDelete: 'Видалити', toggleCatAria: 'Показати/приховати категорію', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступний офлайн', rateStaleSuffix: 'можливо застарів', statsSettingsTitle: 'Налаштування статистики', statsSettingsChartsLabel: 'Видимі діаграми', savingsSettingsTitle: 'Налаштування заощаджень', showSavingsTotalLabel: 'Показувати загальний баланс заощаджень', savingsTotalModeLabel: 'Загальний баланс — валюта', savingsTotalModeMulti: 'Кілька валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Налаштування нотаток', notesSortLabel: 'Сортування', notesSortUpdated: 'Спочатку нещодавно оновлені', notesSortCreated: 'Спочатку нещодавно створені', notesSortTitle: 'За назвою (А-Я)', showNoteSnippetLabel: 'Показувати текст нотатки в списку', passwordHint: 'Мінімум 6 символів',
     statsCatTitle: 'Витрати за категоріями', statsNoExpenses: 'Немає витрат цього місяця',
     statsTrendTitle: 'Дохід і витрати', statsTrendSub: 'Останні 6 місяців', lastLabel: 'Останні',
     chartIncome: 'Дохід', chartExpense: 'Витрати',
@@ -93,6 +93,7 @@ const T = {
     expenseCatManageLabel: 'Категорії витрат', incomeCatManageLabel: 'Категорії доходів',
     newCatPlaceholder: 'Нова категорія', addCatAria: 'Додати категорію', deleteCatAria: 'Видалити категорію',
     catLastError: 'Має залишитися хоча б одна категорія',
+    catDuplicateError: 'Категорія з такою назвою вже існує',
     catInUseConfirm: 'Ця категорія використовується у {count} записах. Їх буде перенесено в іншу категорію. Видалити її?',
     chooseFileBtn: 'Обрати файл',
     exportDataLabel: 'Дані',
@@ -105,6 +106,10 @@ const T = {
     exportXlsxColCurrency: 'Валюта', exportXlsxColNote: 'Нотатка', exportXlsxColGoal: 'Ціль', exportXlsxColName: 'Назва',
     exportXlsxColCreated: 'Створено', exportXlsxColUpdated: 'Оновлено', exportXlsxColTitle: 'Заголовок', exportXlsxColContent: 'Зміст',
     exportXlsxTypeExpense: 'Витрата', exportXlsxTypeIncome: 'Дохід', exportXlsxTypeDeposit: 'Поповнення', exportXlsxTypeWithdraw: 'Зняття',
+    importCsvBtn: 'Імпортувати транзакції з CSV', importDataDesc: 'Колонки: дата (РРРР-ММ-ДД), тип (дохід/витрата), категорія, сума, нотатка.',
+    importConfirm: 'Знайдено рядків: {total}. Буде додано записів: {ok}, нових категорій: {newCats}. Пропущено через помилки: {skipped}. Продовжити?',
+    importSuccess: 'Імпортовано записів: {count}', importNoValidRows: 'У файлі не знайдено жодного коректного рядка',
+    importParseError: 'Не вдалося прочитати файл. Перевір, що це коректний CSV.',
   },
   ru: {
     appTitle: 'Life',
@@ -136,7 +141,7 @@ const T = {
     confirmTitlePage: 'Удалить страницу?',
     pageNoTitle: 'Без названия',
     emptyTitle: 'Здесь пока пусто', emptySub: 'Добавь первую запись кнопкой внизу', searchPlaceholder: 'Поиск по заметкам и категориям', searchEmptyTitle: 'Ничего не найдено', searchEmptySub: 'Попробуй другое слово для поиска',
-    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Настройки заметок', notesSortLabel: 'Сортировка', notesSortUpdated: 'Сначала недавно обновлённые', notesSortCreated: 'Сначала недавно созданные', notesSortTitle: 'По названию (А-Я)', showNoteSnippetLabel: 'Показывать текст заметки в списке', passwordHint: 'Минимум 6 символов',
+    deleteAria: 'Удалить запись', entryMenuAria: 'Действия с записью', menuEdit: 'Редактировать', menuDelete: 'Удалить', toggleCatAria: 'Показать/скрыть категорию', rateAsOf: 'курс НБУ на', rateUnavailable: 'курс недоступен офлайн', rateStaleSuffix: 'возможно устарел', statsSettingsTitle: 'Настройки статистики', statsSettingsChartsLabel: 'Видимые диаграммы', savingsSettingsTitle: 'Настройки сбережений', showSavingsTotalLabel: 'Показывать общий баланс сбережений', savingsTotalModeLabel: 'Общий баланс — валюта', savingsTotalModeMulti: 'Несколько валют', savingsTotalModeSingle: 'Одна валюта', notesSettingsTitle: 'Настройки заметок', notesSortLabel: 'Сортировка', notesSortUpdated: 'Сначала недавно обновлённые', notesSortCreated: 'Сначала недавно созданные', notesSortTitle: 'По названию (А-Я)', showNoteSnippetLabel: 'Показывать текст заметки в списке', passwordHint: 'Минимум 6 символов',
     statsCatTitle: 'Расходы по категориям', statsNoExpenses: 'Нет расходов в этом месяце',
     statsTrendTitle: 'Доход и расходы', statsTrendSub: 'Последние 6 месяцев', lastLabel: 'Последние',
     chartIncome: 'Доход', chartExpense: 'Расходы',
@@ -152,6 +157,7 @@ const T = {
     expenseCatManageLabel: 'Категории расходов', incomeCatManageLabel: 'Категории доходов',
     newCatPlaceholder: 'Новая категория', addCatAria: 'Добавить категорию', deleteCatAria: 'Удалить категорию',
     catLastError: 'Должна остаться хотя бы одна категория',
+    catDuplicateError: 'Категория с таким названием уже существует',
     catInUseConfirm: 'Эта категория используется в {count} записях. Они будут перенесены в другую категорию. Удалить её?',
     chooseFileBtn: 'Выбрать файл',
     exportDataLabel: 'Данные',
@@ -164,6 +170,10 @@ const T = {
     exportXlsxColCurrency: 'Валюта', exportXlsxColNote: 'Заметка', exportXlsxColGoal: 'Цель', exportXlsxColName: 'Название',
     exportXlsxColCreated: 'Создано', exportXlsxColUpdated: 'Обновлено', exportXlsxColTitle: 'Заголовок', exportXlsxColContent: 'Содержимое',
     exportXlsxTypeExpense: 'Расход', exportXlsxTypeIncome: 'Доход', exportXlsxTypeDeposit: 'Пополнение', exportXlsxTypeWithdraw: 'Снятие',
+    importCsvBtn: 'Импортировать транзакции из CSV', importDataDesc: 'Колонки: дата (ГГГГ-ММ-ДД), тип (доход/расход), категория, сумма, заметка.',
+    importConfirm: 'Найдено строк: {total}. Будет добавлено записей: {ok}, новых категорий: {newCats}. Пропущено из-за ошибок: {skipped}. Продолжить?',
+    importSuccess: 'Импортировано записей: {count}', importNoValidRows: 'В файле не найдено ни одной корректной строки',
+    importParseError: 'Не удалось прочитать файл. Проверь, что это корректный CSV.',
   },
   pl: {
     appTitle: 'Life',
@@ -195,7 +205,7 @@ const T = {
     confirmTitlePage: 'Usunąć stronę?',
     pageNoTitle: 'Bez tytułu',
     emptyTitle: 'Tu jeszcze pusto', emptySub: 'Dodaj pierwszy wpis przyciskiem poniżej', searchPlaceholder: 'Szukaj w notatkach i kategoriach', searchEmptyTitle: 'Nic nie znaleziono', searchEmptySub: 'Spróbuj innego słowa',
-    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta', notesSettingsTitle: 'Ustawienia notatek', notesSortLabel: 'Sortowanie', notesSortUpdated: 'Najpierw ostatnio zaktualizowane', notesSortCreated: 'Najpierw ostatnio utworzone', notesSortTitle: 'Według nazwy (A-Z)', showNoteSnippetLabel: 'Pokazuj tekst notatki na liście', passwordHint: 'Minimum 6 znaków',
+    deleteAria: 'Usuń wpis', entryMenuAria: 'Działania na wpisie', menuEdit: 'Edytuj', menuDelete: 'Usuń', toggleCatAria: 'Pokaż/ukryj kategorię', rateAsOf: 'kurs NBU na', rateUnavailable: 'kurs niedostępny offline', rateStaleSuffix: 'może być nieaktualny', statsSettingsTitle: 'Ustawienia statystyk', statsSettingsChartsLabel: 'Widoczne wykresy', savingsSettingsTitle: 'Ustawienia oszczędności', showSavingsTotalLabel: 'Pokazuj łączne saldo oszczędności', savingsTotalModeLabel: 'Łączne saldo — waluta', savingsTotalModeMulti: 'Kilka walut', savingsTotalModeSingle: 'Jedna waluta', notesSettingsTitle: 'Ustawienia notatek', notesSortLabel: 'Sortowanie', notesSortUpdated: 'Najpierw ostatnio zaktualizowane', notesSortCreated: 'Najpierw ostatnio utworzone', notesSortTitle: 'Według nazwy (A-Z)', showNoteSnippetLabel: 'Pokazuj tekst notatki na liście', passwordHint: 'Minimum 6 znaków',
     statsCatTitle: 'Wydatki wg kategorii', statsNoExpenses: 'Brak wydatków w tym miesiącu',
     statsTrendTitle: 'Przychody i wydatki', statsTrendSub: 'Ostatnie 6 miesięcy', lastLabel: 'Ostatnie',
     chartIncome: 'Przychód', chartExpense: 'Wydatki',
@@ -211,6 +221,7 @@ const T = {
     expenseCatManageLabel: 'Kategorie wydatków', incomeCatManageLabel: 'Kategorie przychodów',
     newCatPlaceholder: 'Nowa kategoria', addCatAria: 'Dodaj kategorię', deleteCatAria: 'Usuń kategorię',
     catLastError: 'Musi zostać przynajmniej jedna kategoria',
+    catDuplicateError: 'Kategoria o takiej nazwie już istnieje',
     catInUseConfirm: 'Ta kategoria jest używana w {count} wpisach. Zostaną przeniesione do innej kategorii. Usunąć ją?',
     chooseFileBtn: 'Wybierz plik',
     exportDataLabel: 'Dane',
@@ -223,6 +234,10 @@ const T = {
     exportXlsxColCurrency: 'Waluta', exportXlsxColNote: 'Notatka', exportXlsxColGoal: 'Cel', exportXlsxColName: 'Nazwa',
     exportXlsxColCreated: 'Utworzono', exportXlsxColUpdated: 'Zaktualizowano', exportXlsxColTitle: 'Tytuł', exportXlsxColContent: 'Treść',
     exportXlsxTypeExpense: 'Wydatek', exportXlsxTypeIncome: 'Przychód', exportXlsxTypeDeposit: 'Wpłata', exportXlsxTypeWithdraw: 'Wypłata',
+    importCsvBtn: 'Importuj transakcje z CSV', importDataDesc: 'Kolumny: data (RRRR-MM-DD), typ (przychód/wydatek), kategoria, kwota, notatka.',
+    importConfirm: 'Znaleziono wierszy: {total}. Zostanie dodanych wpisów: {ok}, nowych kategorii: {newCats}. Pominięto z powodu błędów: {skipped}. Kontynuować?',
+    importSuccess: 'Zaimportowano wpisów: {count}', importNoValidRows: 'W pliku nie znaleziono żadnego poprawnego wiersza',
+    importParseError: 'Nie udało się odczytać pliku. Sprawdź, czy to poprawny plik CSV.',
   },
   en: {
     appTitle: 'Life',
@@ -254,7 +269,7 @@ const T = {
     confirmTitlePage: 'Delete page?',
     pageNoTitle: 'Untitled',
     emptyTitle: 'Nothing here yet', emptySub: 'Add your first entry using the button below', searchPlaceholder: 'Search notes and categories', searchEmptyTitle: 'Nothing found', searchEmptySub: 'Try a different search term',
-    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency', notesSettingsTitle: 'Notes settings', notesSortLabel: 'Sort by', notesSortUpdated: 'Recently updated first', notesSortCreated: 'Recently created first', notesSortTitle: 'By title (A-Z)', showNoteSnippetLabel: 'Show note text in list', passwordHint: 'At least 6 characters',
+    deleteAria: 'Delete entry', entryMenuAria: 'Entry actions', menuEdit: 'Edit', menuDelete: 'Delete', toggleCatAria: 'Show/hide category', rateAsOf: 'NBU rate as of', rateUnavailable: 'rate unavailable offline', rateStaleSuffix: 'may be outdated', statsSettingsTitle: 'Statistics settings', statsSettingsChartsLabel: 'Visible charts', savingsSettingsTitle: 'Savings settings', showSavingsTotalLabel: 'Show total savings balance', savingsTotalModeLabel: 'Total balance currency', savingsTotalModeMulti: 'Multiple currencies', savingsTotalModeSingle: 'Single currency', notesSettingsTitle: 'Notes settings', notesSortLabel: 'Sort by', notesSortUpdated: 'Recently updated first', notesSortCreated: 'Recently created first', notesSortTitle: 'By title (A-Z)', showNoteSnippetLabel: 'Show note text in list', passwordHint: 'At least 6 characters',
     statsCatTitle: 'Expenses by category', statsNoExpenses: 'No expenses this month',
     statsTrendTitle: 'Income & expenses', statsTrendSub: 'Last 6 months', lastLabel: 'Last',
     chartIncome: 'Income', chartExpense: 'Expenses',
@@ -270,6 +285,7 @@ const T = {
     expenseCatManageLabel: 'Expense categories', incomeCatManageLabel: 'Income categories',
     newCatPlaceholder: 'New category', addCatAria: 'Add category', deleteCatAria: 'Delete category',
     catLastError: 'At least one category must remain',
+    catDuplicateError: 'A category with this name already exists',
     catInUseConfirm: 'This category is used in {count} entries. They will be moved to another category. Delete it anyway?',
     chooseFileBtn: 'Choose file',
     exportDataLabel: 'Data',
@@ -282,6 +298,10 @@ const T = {
     exportXlsxColCurrency: 'Currency', exportXlsxColNote: 'Note', exportXlsxColGoal: 'Goal', exportXlsxColName: 'Name',
     exportXlsxColCreated: 'Created', exportXlsxColUpdated: 'Updated', exportXlsxColTitle: 'Title', exportXlsxColContent: 'Content',
     exportXlsxTypeExpense: 'Expense', exportXlsxTypeIncome: 'Income', exportXlsxTypeDeposit: 'Deposit', exportXlsxTypeWithdraw: 'Withdrawal',
+    importCsvBtn: 'Import transactions from CSV', importDataDesc: 'Columns: date (YYYY-MM-DD), type (income/expense), category, amount, note.',
+    importConfirm: 'Found rows: {total}. Will add entries: {ok}, new categories: {newCats}. Skipped due to errors: {skipped}. Continue?',
+    importSuccess: 'Imported entries: {count}', importNoValidRows: 'No valid rows found in the file',
+    importParseError: 'Could not read the file. Make sure it is a valid CSV.',
   },
 };
 
@@ -381,6 +401,179 @@ function convertAmount(amount, fromCur, toCur) {
   const from = exchangeRates[fromCur] || 1;
   const to = exchangeRates[toCur] || 1;
   return amount * from / to;
+}
+
+// Слова для розпізнавання типу транзакції в CSV незалежно від того, якою
+// мовою підписані колонки (працює завжди, а не лише для поточної мови UI).
+const IMPORT_EXPENSE_WORDS = ['витрата', 'витрати', 'expense', 'расход', 'расходы', 'wydatek', 'wydatki'];
+const IMPORT_INCOME_WORDS = ['дохід', 'доход', 'доходи', 'income', 'приход', 'przychod', 'przychód'];
+
+// Мінімальний, залежностей-незалежний CSV-парсер: підтримує кому й крапку з
+// комою як роздільник (визначається автоматично за заголовком), лапки для
+// полів з комами/переносами рядків, і "" як екранування лапки всередині поля.
+function parseCsv(text) {
+  text = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  const delimiter = (text.split('\n')[0].split(';').length > text.split('\n')[0].split(',').length) ? ';' : ',';
+  const rows = [];
+  let row = [], field = '', inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; } else { inQuotes = false; }
+      } else field += c;
+    } else if (c === '"') {
+      inQuotes = true;
+    } else if (c === delimiter) {
+      row.push(field); field = '';
+    } else if (c === '\n') {
+      row.push(field); rows.push(row); row = []; field = '';
+    } else {
+      field += c;
+    }
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows.filter(r => r.some(cell => cell.trim() !== ''));
+}
+
+// Знаходить індекс колонки за списком можливих назв заголовка (без
+// урахування регістру та мови).
+function findColumn(header, names) {
+  const norm = header.map(h => h.trim().toLowerCase());
+  for (const name of names) {
+    const idx = norm.indexOf(name);
+    if (idx !== -1) return idx;
+  }
+  return -1;
+}
+
+function normalizeImportDate(raw) {
+  raw = (raw || '').trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  const m = raw.match(/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})$/);
+  if (m) return `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`;
+  return null;
+}
+
+function normalizeImportAmount(raw) {
+  if (raw == null) return null;
+  const cleaned = String(raw).replace(/\s/g, '').replace(/,/g, '.').replace(/[^\d.\-]/g, '');
+  const n = parseFloat(cleaned);
+  if (isNaN(n) || n === 0) return null;
+  return Math.abs(n);
+}
+
+function normalizeImportType(raw, amountRaw) {
+  const v = (raw || '').trim().toLowerCase();
+  if (v === 'income' || IMPORT_INCOME_WORDS.includes(v)) return 'income';
+  if (v === 'expense' || IMPORT_EXPENSE_WORDS.includes(v)) return 'expense';
+  if (!v && amountRaw != null) {
+    const n = parseFloat(String(amountRaw).replace(/\s/g, '').replace(/,/g, '.'));
+    if (!isNaN(n)) return n < 0 ? 'expense' : 'income';
+  }
+  return null;
+}
+
+// Читає файл CSV, показує підсумок і після підтвердження масово додає
+// транзакції (і, за потреби, нові категорії) у Firestore.
+async function importTransactionsFromCsv(file) {
+  let text;
+  try {
+    text = await file.text();
+  } catch (e) {
+    alert(t('importParseError'));
+    return;
+  }
+  let rows;
+  try {
+    rows = parseCsv(text);
+  } catch (e) {
+    alert(t('importParseError'));
+    return;
+  }
+  if (rows.length < 2) { alert(t('importNoValidRows')); return; }
+
+  const header = rows[0];
+  const dateIdx = findColumn(header, ['дата', 'date', 'data']);
+  const typeIdx = findColumn(header, ['тип', 'type', 'typ']);
+  const catIdx = findColumn(header, ['категорія', 'категория', 'category', 'kategoria']);
+  const amountIdx = findColumn(header, ['сума', 'сумма', 'amount', 'kwota']);
+  const noteIdx = findColumn(header, ['нотатка', 'заметка', 'note', 'notatka']);
+  if (dateIdx === -1 || amountIdx === -1) { alert(t('importParseError')); return; }
+
+  // Робочі копії списків категорій — нові категорії з файлу додаємо сюди й
+  // зберігаємо одним записом у профіль, замість одного запису на категорію.
+  const workingCats = { expense: categoriesExpense.map(c => ({ ...c })), income: categoriesIncome.map(c => ({ ...c })) };
+  const newCatsCount = { expense: 0, income: 0 };
+
+  function resolveCategoryId(type, label) {
+    label = (label || '').trim();
+    const list = workingCats[type];
+    if (!label) return list[0] ? list[0].id : null;
+    const existing = list.find(c => c.label.trim().toLowerCase() === label.toLowerCase());
+    if (existing) return existing.id;
+    const usedColors = list.map(c => c.colorIndex);
+    let colorIndex = list.length % CATEGORY_PALETTE.length;
+    for (let i = 0; i < CATEGORY_PALETTE.length; i++) { if (!usedColors.includes(i)) { colorIndex = i; break; } }
+    const id = 'cat_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6) + list.length;
+    list.push({ id, label, colorIndex });
+    newCatsCount[type]++;
+    return id;
+  }
+
+  const toImport = [];
+  let skipped = 0;
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    const date = normalizeImportDate(r[dateIdx]);
+    const amount = normalizeImportAmount(r[amountIdx]);
+    const type = normalizeImportType(typeIdx !== -1 ? r[typeIdx] : null, r[amountIdx]);
+    if (!date || !amount || !type) { skipped++; continue; }
+    const categoryLabel = catIdx !== -1 ? r[catIdx] : '';
+    const category = resolveCategoryId(type, categoryLabel);
+    if (!category) { skipped++; continue; }
+    const note = (noteIdx !== -1 ? r[noteIdx] : '') || '';
+    toImport.push({ type, amount, category, note: note.slice(0, 2000), date });
+  }
+
+  if (!toImport.length) { alert(t('importNoValidRows')); return; }
+
+  const totalNewCats = newCatsCount.expense + newCatsCount.income;
+  const proceed = confirm(t('importConfirm', { total: rows.length - 1, ok: toImport.length, newCats: totalNewCats, skipped }));
+  if (!proceed) return;
+
+  try {
+    const uid = auth.currentUser.uid;
+    if (newCatsCount.expense) await saveCategoriesList('expense', workingCats.expense);
+    if (newCatsCount.income) await saveCategoriesList('income', workingCats.income);
+
+    // Firestore дозволяє максимум 500 операцій в одному batch — ріжемо на
+    // шматки по 400, щоб мати запас.
+    const col = db.collection('users').doc(uid).collection('transactions');
+    for (let i = 0; i < toImport.length; i += 400) {
+      const batch = db.batch();
+      toImport.slice(i, i + 400).forEach(tx => batch.set(col.doc(), tx));
+      await batch.commit();
+    }
+    alert(t('importSuccess', { count: toImport.length }));
+  } catch (e) {
+    console.error('CSV import failed', e);
+    alert(t('importParseError'));
+  }
+}
+
+
+// Курс НБУ кешується локально і може лежати без оновлення довго, якщо
+// застосунок офлайн. Позначаємо як "застарілий", коли кешу більше 2 днів,
+// щоб не вводити в оману сумами, порахованими за старим курсом.
+function isRateStale() {
+  if (!exchangeRatesDate) return false;
+  const parts = String(exchangeRatesDate).split('.');
+  const d = parts.length === 3
+    ? new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]))
+    : new Date(exchangeRatesDate);
+  if (isNaN(d)) return false;
+  return (Date.now() - d.getTime()) / 86400000 > 2;
 }
 
 async function loadExchangeRates() {
@@ -582,6 +775,8 @@ function applyStaticTranslations() {
   document.getElementById('exportDataLabel').textContent = t('exportDataLabel');
   document.getElementById('exportXlsxBtn').textContent = t('exportXlsxBtn');
   document.getElementById('exportDataDesc').textContent = t('exportDataDesc');
+  document.getElementById('importCsvBtn').textContent = t('importCsvBtn');
+  document.getElementById('importDataDesc').textContent = t('importDataDesc');
   document.getElementById('searchInput').setAttribute('placeholder', t('searchPlaceholder'));
   document.getElementById('expenseCatManageLabel').textContent = t('expenseCatManageLabel');
   document.getElementById('incomeCatManageLabel').textContent = t('incomeCatManageLabel');
@@ -710,7 +905,10 @@ function renderCategoryManager() {
         if (!cat) return;
         const val = input.value.trim();
         if (!val || val === cat.label) { input.value = cat.label; return; }
-        renameCategory(ty, id, val).catch(() => { input.value = cat.label; });
+        renameCategory(ty, id, val).catch((err) => {
+          input.value = cat.label;
+          if (err && err.message === 'duplicate') alert(t('catDuplicateError'));
+        });
       };
       input.addEventListener('blur', commit);
       input.addEventListener('keydown', (e) => { if (e.key === 'Enter') input.blur(); });
@@ -732,7 +930,9 @@ function addCategoryFromInput(type) {
   const input = document.getElementById(type === 'income' ? 'newIncomeCatInput' : 'newExpenseCatInput');
   const label = input.value.trim();
   if (!label) return;
-  addCategory(type, label).then(() => { input.value = ''; }).catch(() => {});
+  addCategory(type, label).then(() => { input.value = ''; }).catch((err) => {
+    if (err && err.message === 'duplicate') alert(t('catDuplicateError'));
+  });
 }
 
 function setLang(lang) {
@@ -1042,6 +1242,9 @@ function addCategory(type, label) {
   label = label.trim();
   if (!label) return Promise.resolve();
   const current = type === 'income' ? categoriesIncome : categoriesExpense;
+  if (current.some(c => c.label.trim().toLowerCase() === label.toLowerCase())) {
+    return Promise.reject(new Error('duplicate'));
+  }
   const usedColors = current.map(c => c.colorIndex);
   let colorIndex = current.length % CATEGORY_PALETTE.length;
   for (let i = 0; i < CATEGORY_PALETTE.length; i++) { if (!usedColors.includes(i)) { colorIndex = i; break; } }
@@ -1053,6 +1256,9 @@ function renameCategory(type, id, label) {
   label = label.trim();
   if (!label) return Promise.resolve();
   const current = type === 'income' ? categoriesIncome : categoriesExpense;
+  if (current.some(c => c.id !== id && c.label.trim().toLowerCase() === label.toLowerCase())) {
+    return Promise.reject(new Error('duplicate'));
+  }
   const list = current.map(c => c.id === id ? { ...c, label } : c);
   return saveCategoriesList(type, list);
 }
@@ -1287,10 +1493,14 @@ function renderSavingsGoalsList() {
       renderBalanceBlock(document.getElementById('savingsTotalBalance'), { [savingsTotalCurrency]: totalConverted });
     }
     if (exchangeRatesDate) {
-      rateSub.textContent = `${t('rateAsOf')} ${exchangeRatesDate}`;
+      rateSub.textContent = isRateStale()
+        ? `${t('rateAsOf')} ${exchangeRatesDate} (${t('rateStaleSuffix')})`
+        : `${t('rateAsOf')} ${exchangeRatesDate}`;
+      rateSub.classList.toggle('stale', isRateStale());
       rateSub.style.display = 'block';
     } else if (needsConversion) {
       rateSub.textContent = t('rateUnavailable');
+      rateSub.classList.remove('stale');
       rateSub.style.display = 'block';
     } else {
       rateSub.style.display = 'none';
@@ -1905,8 +2115,10 @@ function renderStats(monthTx, ty, tm) {
     const needsConversion = savings.some(sv => (sv.currency || currentCurrency) !== savingsTrendCurrency);
     const rateMissing = savings.some(sv => convertAmount(sv.amount, sv.currency || currentCurrency, savingsTrendCurrency) === null);
     let subText = periodText;
-    if (exchangeRatesDate) subText += ` · ${t('rateAsOf')} ${exchangeRatesDate}`;
-    else if (needsConversion) subText += ` · ${t('rateUnavailable')}`;
+    if (exchangeRatesDate) {
+      subText += ` · ${t('rateAsOf')} ${exchangeRatesDate}`;
+      if (isRateStale()) subText += ` (${t('rateStaleSuffix')})`;
+    } else if (needsConversion) subText += ` · ${t('rateUnavailable')}`;
     document.getElementById('savingsTrendSub').textContent = subText;
     if (rateMissing) {
       // Курс частини валют невідомий — краще показати порожній стан з
@@ -2243,6 +2455,12 @@ document.getElementById('settingsBtn').addEventListener('click', () => {
 });
 document.getElementById('closeSettings').addEventListener('click', () => document.getElementById('settingsOverlay').classList.remove('show'));
 document.getElementById('exportXlsxBtn').addEventListener('click', exportAllDataXlsx);
+document.getElementById('importCsvBtn').addEventListener('click', () => document.getElementById('importCsvInput').click());
+document.getElementById('importCsvInput').addEventListener('change', (e) => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if (file) importTransactionsFromCsv(file);
+});
 document.getElementById('closeCategoryTx').addEventListener('click', () => document.getElementById('categoryTxOverlay').classList.remove('show'));
 document.getElementById('categoryTxOverlay').addEventListener('click', (e) => { if (e.target.id === 'categoryTxOverlay') e.currentTarget.classList.remove('show'); });
 document.getElementById('settingsOverlay').addEventListener('click', (e) => { if (e.target.id === 'settingsOverlay') e.currentTarget.classList.remove('show'); });
