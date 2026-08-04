@@ -1,0 +1,45 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check JavaScript syntax
+        run: |
+          for f in app.js firebase-config.js service-worker.js; do
+            echo "Checking $f"
+            node --check "$f"
+          done
+
+      - name: Validate JSON files
+        run: |
+          for f in manifest.json firebase.json .firebaserc firestore.rules; do
+            if [[ "$f" == *.json || "$f" == .firebaserc ]]; then
+              echo "Validating $f"
+              node -e "JSON.parse(require('fs').readFileSync('$f', 'utf8'))"
+            fi
+          done
+
+      - name: Check HTML tag balance (basic sanity check)
+        run: |
+          node -e "
+            const s = require('fs').readFileSync('index.html', 'utf8');
+            const open = (s.match(/<div\b/g) || []).length;
+            const close = (s.match(/<\/div>/g) || []).length;
+            if (open !== close) {
+              console.error('Mismatched <div> tags:', open, 'open vs', close, 'close');
+              process.exit(1);
+            }
+            console.log('div tags balanced:', open);
+          "
