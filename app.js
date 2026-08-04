@@ -89,7 +89,8 @@ const T = {
     saveError: 'Не вдалося зберегти. Перевір інтернет-з’єднання',
     confirmTitle: 'Видалити запис?', confirmSub: 'Цю дію не можна скасувати.', confirmTitleLogout: 'Вийти з акаунту?', confirmSubLogout: 'Доведеться увійти знову, щоб побачити свої дані.',
     cancelBtn: 'Скасувати', deleteBtn: 'Видалити',
-    settingsTitle: 'Налаштування', langLabel: 'Мова', currencyLabel: 'Валюта', categoriesTitle: 'Категорії',
+    settingsTitle: 'Налаштування', themeLabel: 'Тема', themeLight: 'Світла', themeDark: 'Темна', themeSystem: 'Як в системі',
+    langLabel: 'Мова', currencyLabel: 'Валюта', categoriesTitle: 'Категорії',
     expenseCatManageLabel: 'Категорії витрат', incomeCatManageLabel: 'Категорії доходів',
     newCatPlaceholder: 'Нова категорія', addCatAria: 'Додати категорію', deleteCatAria: 'Видалити категорію',
     catLastError: 'Має залишитися хоча б одна категорія',
@@ -153,7 +154,8 @@ const T = {
     saveError: 'Не удалось сохранить. Проверь интернет-соединение',
     confirmTitle: 'Удалить запись?', confirmSub: 'Это действие нельзя отменить.', confirmTitleLogout: 'Выйти из аккаунта?', confirmSubLogout: 'Придётся войти снова, чтобы увидеть свои данные.',
     cancelBtn: 'Отмена', deleteBtn: 'Удалить',
-    settingsTitle: 'Настройки', langLabel: 'Язык', currencyLabel: 'Валюта', categoriesTitle: 'Категории',
+    settingsTitle: 'Настройки', themeLabel: 'Тема', themeLight: 'Светлая', themeDark: 'Тёмная', themeSystem: 'Как в системе',
+    langLabel: 'Язык', currencyLabel: 'Валюта', categoriesTitle: 'Категории',
     expenseCatManageLabel: 'Категории расходов', incomeCatManageLabel: 'Категории доходов',
     newCatPlaceholder: 'Новая категория', addCatAria: 'Добавить категорию', deleteCatAria: 'Удалить категорию',
     catLastError: 'Должна остаться хотя бы одна категория',
@@ -217,7 +219,8 @@ const T = {
     saveError: 'Nie udało się zapisać. Sprawdź połączenie z internetem',
     confirmTitle: 'Usunąć wpis?', confirmSub: 'Tej czynności nie można cofnąć.', confirmTitleLogout: 'Wylogować się?', confirmSubLogout: 'Aby zobaczyć swoje dane, trzeba będzie zalogować się ponownie.',
     cancelBtn: 'Anuluj', deleteBtn: 'Usuń',
-    settingsTitle: 'Ustawienia', langLabel: 'Język', currencyLabel: 'Waluta', categoriesTitle: 'Kategorie',
+    settingsTitle: 'Ustawienia', themeLabel: 'Motyw', themeLight: 'Jasny', themeDark: 'Ciemny', themeSystem: 'Jak w systemie',
+    langLabel: 'Język', currencyLabel: 'Waluta', categoriesTitle: 'Kategorie',
     expenseCatManageLabel: 'Kategorie wydatków', incomeCatManageLabel: 'Kategorie przychodów',
     newCatPlaceholder: 'Nowa kategoria', addCatAria: 'Dodaj kategorię', deleteCatAria: 'Usuń kategorię',
     catLastError: 'Musi zostać przynajmniej jedna kategoria',
@@ -281,7 +284,8 @@ const T = {
     saveError: 'Could not save. Check your internet connection',
     confirmTitle: 'Delete entry?', confirmSub: 'This action cannot be undone.', confirmTitleLogout: 'Log out?', confirmSubLogout: "You'll need to sign in again to see your data.",
     cancelBtn: 'Cancel', deleteBtn: 'Delete',
-    settingsTitle: 'Settings', langLabel: 'Language', currencyLabel: 'Currency', categoriesTitle: 'Categories',
+    settingsTitle: 'Settings', themeLabel: 'Theme', themeLight: 'Light', themeDark: 'Dark', themeSystem: 'System',
+    langLabel: 'Language', currencyLabel: 'Currency', categoriesTitle: 'Categories',
     expenseCatManageLabel: 'Expense categories', incomeCatManageLabel: 'Income categories',
     newCatPlaceholder: 'New category', addCatAria: 'Add category', deleteCatAria: 'Delete category',
     catLastError: 'At least one category must remain',
@@ -599,6 +603,51 @@ let currentLang = (localStorage.getItem('financeAppLang')) || 'uk';
 let currentCurrency = (localStorage.getItem('financeAppCurrency')) || 'UAH';
 if (!LANGS.includes(currentLang)) currentLang = 'uk';
 if (!CURRENCY_CODES.includes(currentCurrency)) currentCurrency = 'UAH';
+
+// ---- Тема (світла / темна / як в системі) ----
+const THEME_CHOICES = ['light', 'dark', 'system'];
+let themeChoice = localStorage.getItem('financeAppTheme') || 'system';
+if (!THEME_CHOICES.includes(themeChoice)) themeChoice = 'system';
+const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+function resolveTheme() {
+  if (themeChoice === 'dark') return 'dark';
+  if (themeChoice === 'light') return 'light';
+  return darkMediaQuery.matches ? 'dark' : 'light';
+}
+function applyTheme() {
+  const resolved = resolveTheme();
+  document.documentElement.setAttribute('data-theme', resolved);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', resolved === 'dark' ? '#1C1B18' : '#FAF8F4');
+}
+// Chart.js приймає лише готові значення кольорів (не CSS var()), тож читаємо
+// поточне значення змінної теми напряму з обчислених стилів документа.
+function themeVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function setTheme(choice) {
+  if (!THEME_CHOICES.includes(choice)) return;
+  themeChoice = choice;
+  localStorage.setItem('financeAppTheme', choice);
+  if (auth.currentUser) {
+    db.collection('users').doc(auth.currentUser.uid).set({ theme: choice }, { merge: true }).catch(() => {});
+  }
+  applyTheme();
+  renderThemePicker();
+  // Кольори на графіках Chart.js обчислюються на момент побудови, тож при
+  // зміні теми їх треба перемалювати, інакше лишаться кольори старої теми.
+  refreshChartsForTheme();
+}
+// Коли обрано "як в системі" — стежимо за зміною системної теми наживо,
+// без потреби перезавантажувати сторінку.
+darkMediaQuery.addEventListener('change', () => { if (themeChoice === 'system') { applyTheme(); refreshChartsForTheme(); } });
+function refreshChartsForTheme() {
+  if (currentTab === 'stats') render();
+  else if (currentTab === 'savings') renderSavings();
+}
+applyTheme();
+
 let savingsTrendCurrency = localStorage.getItem('financeAppSavingsTrendCurrency') || currentCurrency;
 if (!CURRENCY_CODES.includes(savingsTrendCurrency)) savingsTrendCurrency = 'UAH';
 
@@ -770,6 +819,7 @@ function applyStaticTranslations() {
   document.getElementById('savingsTotalModeLabel').textContent = t('savingsTotalModeLabel');
   renderSavingsTotalModePicker();
   renderSavingsTotalCurrencySelect();
+  document.getElementById('settingsThemeLabel').textContent = t('themeLabel');
   document.getElementById('settingsLangLabel').textContent = t('langLabel');
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
   document.getElementById('exportDataLabel').textContent = t('exportDataLabel');
@@ -808,6 +858,7 @@ function applyStaticTranslations() {
   document.getElementById('savingsNoteLabel').textContent = t('noteLabel');
   renderLangPicker();
   renderCurrencyPicker();
+  renderThemePicker();
   renderSavingsTrendCurrencySelect();
   renderCategoryManager();
   renderAuthLangRow();
@@ -828,6 +879,20 @@ function renderLangPicker() {
     data-lang="${l}" style="${l === currentLang ? 'background:var(--accent);' : ''}">${LANG_NAMES[l]}</button>`).join('');
   picker.querySelectorAll('.cat-choice').forEach(btn => {
     btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+}
+
+function renderThemePicker() {
+  const picker = document.getElementById('themePicker');
+  const options = [
+    { key: 'light', label: t('themeLight') },
+    { key: 'dark', label: t('themeDark') },
+    { key: 'system', label: t('themeSystem') },
+  ];
+  picker.innerHTML = options.map(o => `<button type="button" class="cat-choice${o.key === themeChoice ? ' selected' : ''}"
+    data-theme-choice="${o.key}" style="${o.key === themeChoice ? 'background:var(--accent);' : ''}">${o.label}</button>`).join('');
+  picker.querySelectorAll('.cat-choice').forEach(btn => {
+    btn.addEventListener('click', () => setTheme(btn.dataset.themeChoice));
   });
 }
 
@@ -1125,6 +1190,9 @@ function subscribeToProfile(uid) {
     let changed = false;
     if (data.lang && LANGS.includes(data.lang) && data.lang !== currentLang) { currentLang = data.lang; localStorage.setItem('financeAppLang', currentLang); changed = true; }
     if (data.currency && CURRENCY_CODES.includes(data.currency) && data.currency !== currentCurrency) { currentCurrency = data.currency; localStorage.setItem('financeAppCurrency', currentCurrency); changed = true; }
+    if (data.theme && THEME_CHOICES.includes(data.theme) && data.theme !== themeChoice) {
+      themeChoice = data.theme; localStorage.setItem('financeAppTheme', themeChoice); applyTheme(); changed = true;
+    }
     if (Array.isArray(data.categoriesExpense) && data.categoriesExpense.length) {
       categoriesExpense = data.categoriesExpense;
       usingDefaultCategories.expense = false;
@@ -1631,8 +1699,8 @@ function openSavingsForm(type, existing) {
   document.getElementById('savingsModalTitle').textContent = isEdit
     ? (type === 'deposit' ? t('editDepositTitle') : t('editWithdrawTitle'))
     : (type === 'deposit' ? t('newDepositTitle') : t('newWithdrawTitle'));
-  document.getElementById('savingsModalTitle').style.color = type === 'deposit' ? '#7FA88F' : '#C97B5A';
-  document.getElementById('savingsSubmitBtn').style.background = type === 'deposit' ? '#7FA88F' : '#C97B5A';
+  document.getElementById('savingsModalTitle').style.color = type === 'deposit' ? 'var(--income)' : 'var(--expense)';
+  document.getElementById('savingsSubmitBtn').style.background = type === 'deposit' ? 'var(--income)' : 'var(--expense)';
   document.getElementById('savingsSubmitBtn').textContent = t('saveBtn');
   document.getElementById('savingsAmountInput').value = existing ? String(existing.amount).replace('.', ',') : '';
   document.getElementById('savingsNoteInput').value = existing ? (existing.note || '') : '';
@@ -2040,7 +2108,7 @@ function renderStats(monthTx, ty, tm) {
       if (pieChart) pieChart.destroy();
       pieChart = new Chart(pieCanvas, {
         type: 'doughnut',
-        data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: '#FFFFFF', borderWidth: 2 }] },
+        data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: themeVar('--surface'), borderWidth: 2 }] },
         options: {
           maintainAspectRatio: false,
           plugins: {
@@ -2073,15 +2141,15 @@ function renderStats(monthTx, ty, tm) {
   barChart = new Chart(barCanvas, {
     type: 'bar',
     data: { labels, datasets: [
-      { label: t('chartIncome'), data: incomeData, backgroundColor: '#7FA88F', borderRadius: 3 },
-      { label: t('chartExpense'), data: expenseData, backgroundColor: '#C97B5A', borderRadius: 3 },
+      { label: t('chartIncome'), data: incomeData, backgroundColor: themeVar('--income'), borderRadius: 3 },
+      { label: t('chartExpense'), data: expenseData, backgroundColor: themeVar('--expense'), borderRadius: 3 },
     ]},
     options: {
       maintainAspectRatio: false,
       plugins: { tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.raw)}` } } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 }, color: '#8A8478' } },
-        y: { grid: { color: '#EDEAE3' }, ticks: { font: { family: 'Inter', size: 11 }, color: '#8A8478' } }
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 }, color: themeVar('--ink-muted') } },
+        y: { grid: { color: themeVar('--border') }, ticks: { font: { family: 'Inter', size: 11 }, color: themeVar('--ink-muted') } }
       }
     }
   });
@@ -2160,7 +2228,7 @@ function renderStats(monthTx, ty, tm) {
       }, 0);
     });
     datasets.push({
-      label: t('savingsTotalLabel'), data: totalData, borderColor: '#2D2A26', backgroundColor: '#2D2A26',
+      label: t('savingsTotalLabel'), data: totalData, borderColor: themeVar('--ink'), backgroundColor: themeVar('--ink'),
       borderWidth: 3, tension: 0.3, pointRadius: 3, fill: false, _goalId: '__total__',
     });
 
@@ -2199,8 +2267,8 @@ function renderStats(monthTx, ty, tm) {
             tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoneyCur(ctx.raw, savingsTrendCurrency)}` } }
           },
           scales: {
-            x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 }, color: '#8A8478' } },
-            y: { grid: { color: '#EDEAE3' }, ticks: { font: { family: 'Inter', size: 11 }, color: '#8A8478' } }
+            x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 12 }, color: themeVar('--ink-muted') } },
+            y: { grid: { color: themeVar('--border') }, ticks: { font: { family: 'Inter', size: 11 }, color: themeVar('--ink-muted') } }
           }
         }
       });
@@ -2219,8 +2287,8 @@ function openForm(type, existingTx) {
   document.getElementById('modalTitle').textContent = isEdit
     ? (type === 'income' ? t('editIncomeTitle') : t('editExpenseTitle'))
     : (type === 'income' ? t('newIncomeTitle') : t('newExpenseTitle'));
-  document.getElementById('modalTitle').style.color = type === 'income' ? '#7FA88F' : '#C97B5A';
-  document.getElementById('submitBtn').style.background = type === 'income' ? '#7FA88F' : '#C97B5A';
+  document.getElementById('modalTitle').style.color = type === 'income' ? 'var(--income)' : 'var(--expense)';
+  document.getElementById('submitBtn').style.background = type === 'income' ? 'var(--income)' : 'var(--expense)';
   document.getElementById('submitBtn').textContent = t('saveBtn');
   document.getElementById('amountInput').value = existingTx ? String(existingTx.amount).replace('.', ',') : '';
   document.getElementById('noteInput').value = existingTx ? (existingTx.note || '') : '';

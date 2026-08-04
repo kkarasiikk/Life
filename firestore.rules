@@ -1,7 +1,7 @@
 rules_version = '2';
 
 // Модель даних (за app.js):
-//   users/{uid}                       -- профіль: lang, currency,
+//   users/{uid}                       -- профіль: lang, currency, theme,
 //                                         categoriesIncome, categoriesExpense, ...
 //   users/{uid}/transactions/{id}     -- {type, amount, category, note, date}
 //   users/{uid}/savings/{id}          -- {type, amount, currency, note, date, goalId}
@@ -31,6 +31,7 @@ service cloud.firestore {
       function isValidProfile(d) {
         return (!('lang' in d) || d.lang is string) &&
                (!('currency' in d) || d.currency is string) &&
+               (!('theme' in d) || d.theme is string) &&
                (!('categoriesIncome' in d) || d.categoriesIncome is list) &&
                (!('categoriesExpense' in d) || d.categoriesExpense is list);
       }
