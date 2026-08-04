@@ -823,9 +823,9 @@ function applyStaticTranslations() {
   document.getElementById('settingsLangLabel').textContent = t('langLabel');
   document.getElementById('settingsCurrencyLabel').textContent = t('currencyLabel');
   document.getElementById('exportDataLabel').textContent = t('exportDataLabel');
-  document.getElementById('exportXlsxBtn').textContent = t('exportXlsxBtn');
+  document.getElementById('exportXlsxBtnLabel').textContent = t('exportXlsxBtn');
   document.getElementById('exportDataDesc').textContent = t('exportDataDesc');
-  document.getElementById('importCsvBtn').textContent = t('importCsvBtn');
+  document.getElementById('importCsvBtnLabel').textContent = t('importCsvBtn');
   document.getElementById('importDataDesc').textContent = t('importDataDesc');
   document.getElementById('searchInput').setAttribute('placeholder', t('searchPlaceholder'));
   document.getElementById('expenseCatManageLabel').textContent = t('expenseCatManageLabel');

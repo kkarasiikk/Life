@@ -239,7 +239,6 @@
   .modal-title{font-family:'Inter',sans-serif;font-size:18px;font-weight:700;}
   .close-btn{background:none;border:none;cursor:pointer;color:var(--ink-muted);}
   label.field-label{font-size:12px;color:var(--ink-muted);font-weight:500;display:block;margin-top:2px;}
-  .field-hint{font-size:11.5px;color:var(--ink-muted);margin-top:6px;line-height:1.4;}
   .amount-input{width:100%;font-family:'Inter',sans-serif;font-size:26px;font-weight:700;border:none;
     border-bottom:2px solid var(--border);padding:8px 0;margin-bottom:16px;outline:none;background:transparent;color:var(--ink);font-variant-numeric:tabular-nums;}
   .cat-picker{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;margin-bottom:16px;}
@@ -253,6 +252,17 @@
   .submit-btn{width:100%;margin-top:4px;padding:13px 0;border-radius:10px;border:none;cursor:pointer;color:#fff;
     font-size:15px;font-weight:600;font-family:'Inter',sans-serif;background:var(--accent);}
   .submit-btn:disabled{opacity:.55;cursor:default;}
+  .data-action-row{display:flex;flex-direction:column;gap:10px;margin-top:8px;margin-bottom:14px;}
+  .data-action-btn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 14px;
+    cursor:pointer;font-family:'Inter',sans-serif;transition:background-color .12s ease,border-color .12s ease;}
+  .data-action-btn:hover, .data-action-btn:focus-visible{border-color:var(--accent);background:var(--accent-light);}
+  .data-action-btn:active{transform:scale(.99);}
+  .data-action-icon{flex-shrink:0;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    background:var(--accent-light);color:var(--accent);}
+  .data-action-text{display:flex;flex-direction:column;gap:2px;min-width:0;}
+  .data-action-title{font-size:14px;font-weight:600;color:var(--ink);}
+  .data-action-sub{font-size:12px;color:var(--ink-muted);line-height:1.35;}
   .confirm-modal{position:fixed;inset:0;background:rgba(34,38,43,.32);display:none;align-items:center;justify-content:center;
     z-index:60;padding:20px;}
   .confirm-modal.show{display:flex;}
@@ -695,18 +705,34 @@
       <div class="modal-title" id="settingsTitle">Налаштування</div>
       <button class="close-btn" id="closeSettings" aria-label="Закрити"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
-    <label class="field-label" id="settingsThemeLabel">Тема</label>
-    <div class="cat-picker" id="themePicker"></div>
+    <label class="field-label" id="settingsCurrencyLabel">Валюта</label>
+    <div class="cat-picker" id="currencyPicker"></div>
     <label class="field-label" id="settingsLangLabel" style="margin-top:6px;">Мова</label>
     <div class="cat-picker" id="langPicker"></div>
-    <label class="field-label" id="settingsCurrencyLabel" style="margin-top:6px;">Валюта</label>
-    <div class="cat-picker" id="currencyPicker"></div>
     <label class="field-label" id="exportDataLabel" style="margin-top:14px;">Дані</label>
-    <button type="button" class="submit-btn" id="exportXlsxBtn">Експортувати в Excel (.xlsx)</button>
-    <div class="field-hint" id="exportDataDesc">Завантажить файл з усіма твоїми записами, категоріями, заощадженнями й нотатками.</div>
-    <input type="file" id="importCsvInput" accept=".csv,text/csv" style="display:none;">
-    <button type="button" class="submit-btn" id="importCsvBtn" style="background:var(--accent-light);color:var(--accent);margin-top:10px;">Імпортувати транзакції з CSV</button>
-    <div class="field-hint" id="importDataDesc">Колонки: дата (РРРР-ММ-ДД), тип (дохід/витрата), категорія, сума, нотатка.</div>
+    <div class="data-action-row">
+      <button type="button" class="data-action-btn" id="exportXlsxBtn">
+        <span class="data-action-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>
+        </span>
+        <span class="data-action-text">
+          <span class="data-action-title" id="exportXlsxBtnLabel">Експортувати в Excel (.xlsx)</span>
+          <span class="data-action-sub" id="exportDataDesc">Завантажить файл з усіма твоїми записами, категоріями, заощадженнями й нотатками.</span>
+        </span>
+      </button>
+      <input type="file" id="importCsvInput" accept=".csv,text/csv" style="display:none;">
+      <button type="button" class="data-action-btn" id="importCsvBtn">
+        <span class="data-action-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9"/><path d="M7 14l5-5 5 5"/><path d="M4 5h16"/></svg>
+        </span>
+        <span class="data-action-text">
+          <span class="data-action-title" id="importCsvBtnLabel">Імпортувати транзакції з CSV</span>
+          <span class="data-action-sub" id="importDataDesc">Колонки: дата (РРРР-ММ-ДД), тип (дохід/витрата), категорія, сума, нотатка.</span>
+        </span>
+      </button>
+    </div>
+    <label class="field-label" id="settingsThemeLabel" style="margin-top:14px;">Тема</label>
+    <div class="cat-picker" id="themePicker"></div>
   </div>
 </div>
 
