@@ -1249,12 +1249,6 @@ function deleteSavingRemote(id) {
   const uid = auth.currentUser.uid;
   return db.collection('users').doc(uid).collection('savings').doc(id).delete();
 }
-
-function saveCategoriesList(type, list) {
-  const uid = auth.currentUser.uid;
-  const field = type === 'income' ? 'categoriesIncome' : 'categoriesExpense';
-  return db.collection('users').doc(uid).set({ [field]: list }, { merge: true });
-}
 // ---- Обчислення на основі поточного місяця ----
 function getTargetDate() {
   const now = new Date();
